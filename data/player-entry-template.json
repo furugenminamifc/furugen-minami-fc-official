@@ -7,8 +7,9 @@
   "grade": "6年生",
   "position": "MF / FW",
   "dominantFoot": "右",
-  "profile": "プレースタイル・ひとこと紹介",
+  "profile": "プレースタイルやひとこと紹介",
   "photo": "images/players/u12-02.webp",
   "photoPosition": "center 35%",
+  "captain": false,
   "isPublished": true
 }

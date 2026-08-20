@@ -1439,3 +1439,124 @@ footer:before{
   font-size:11px;
   line-height:1.8;
 }
+
+
+/* ===== Ver.1.6.4 選手プロフィール表示 完成版 ===== */
+.player-grid-v164{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.player-card-v164{
+  position:relative;
+  overflow:hidden;
+  border-top:0;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(20,48,72,.09);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.player-card-v164:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 34px rgba(20,48,72,.14);
+}
+.player-photo-v164,
+.player-placeholder-v164{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky-soft) 0 36px,
+      #fff 36px 72px
+    );
+}
+.player-photo-v164 img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.player-photo-overlay{
+  position:absolute;
+  inset:auto 0 0;
+  height:44%;
+  background:linear-gradient(to top,rgba(35,50,60,.55),rgba(35,50,60,0));
+}
+.player-photo-number{
+  position:absolute;
+  left:14px;
+  bottom:12px;
+  color:#fff;
+  font-size:42px;
+  font-weight:900;
+  line-height:1;
+  text-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.player-placeholder-v164{
+  display:grid;
+  place-items:center;
+}
+.player-placeholder-number{
+  width:94px;
+  height:94px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--arg-maroon);
+  color:#fff;
+  font-size:38px;
+  font-weight:900;
+  box-shadow:0 10px 24px rgba(123,22,52,.18);
+}
+.captain-badge{
+  position:absolute;
+  right:12px;
+  top:12px;
+  background:var(--arg-maroon);
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  border-radius:999px;
+  padding:6px 9px;
+}
+.player-card-body-v164{
+  padding:18px 18px 20px;
+}
+.player-mainline{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.player-mainline h3{
+  margin:4px 0 2px;
+  color:var(--arg-maroon);
+  font-size:20px;
+}
+.player-card-v164 .player-grade{
+  flex:0 0 auto;
+}
+.player-card-v164 .player-tags{
+  margin-top:10px;
+}
+.player-card-v164 .player-profile{
+  min-height:0;
+}
+@media(max-width:1000px){
+  .player-grid-v164{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .player-grid-v164{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .player-grid-v164{grid-template-columns:1fr 1fr}
+  .player-card-body-v164{padding:13px}
+  .player-mainline h3{font-size:16px}
+  .player-photo-number{font-size:32px}
+  .player-placeholder-number{
+    width:72px;
+    height:72px;
+    font-size:30px;
+  }
+}
