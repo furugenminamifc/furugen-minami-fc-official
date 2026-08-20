@@ -10,7 +10,7 @@ function esc(value) {
 
 function makePlayerCard(item) {
   const card = document.createElement("article");
-  card.className = "player-card player-card-v167";
+  card.className = "player-card player-card-v169";
 
   const number = esc(item.number ?? "—");
   const name = esc(item.name || "氏名準備中");
@@ -25,23 +25,22 @@ function makePlayerCard(item) {
   const captain = item.captain === true;
 
   const media = photo
-    ? `<div class="player-photo player-photo-v167">
-         <img src="${esc(photo)}?v=1.6.8" alt="${name}" loading="lazy"
+    ? `<div class="player-photo player-photo-v169">
+         <img src="${esc(photo)}?v=1.6.9" alt="${name}" loading="lazy"
               style="object-position:${photoPosition};object-fit:${photoFit}"
               onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
          <div class="player-photo-overlay"></div>
          <span class="player-photo-number">${number}</span>
          ${captain ? `<span class="captain-badge">CAPTAIN</span>` : ""}
        </div>`
-    : `<div class="player-placeholder player-placeholder-v167">
+    : `<div class="player-placeholder player-placeholder-v169">
          <span class="player-placeholder-number">${number}</span>
-         <span class="player-placeholder-text">PHOTO</span>
          ${captain ? `<span class="captain-badge">CAPTAIN</span>` : ""}
        </div>`;
 
   card.innerHTML = `
     ${media}
-    <div class="player-card-body player-card-body-v167">
+    <div class="player-card-body player-card-body-v169">
       <div class="player-mainline">
         <div>
           <div class="player-number">#${number}</div>
@@ -80,7 +79,7 @@ function renderCategory(root, category, players) {
       </div>
       <span class="staff-count">${members.length}名</span>
     </div>
-    <div class="player-grid player-grid-v167"></div>
+    <div class="player-grid player-grid-v169"></div>
   `;
 
   const grid = section.querySelector(".player-grid");
@@ -106,7 +105,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6.8", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.9", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();
