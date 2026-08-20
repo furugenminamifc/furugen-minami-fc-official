@@ -57,3 +57,54 @@ footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center
 .year-page{padding:45px 0}.year-page .back{color:var(--aqua-dark);font-weight:800;font-size:13px}.year-head{background:linear-gradient(120deg,var(--maroon),#9f284a);color:#fff;border-radius:14px;padding:30px;margin:20px 0}.year-head h1{margin:0;font-size:38px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}.stat{border:1px solid var(--line);border-radius:8px;padding:18px;text-align:center}.stat b{display:block;font-size:25px;color:var(--maroon)}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.data-table th{background:#f5f9fb;color:var(--maroon)}
 @media(max-width:900px){nav{gap:10px}.quick{grid-template-columns:repeat(4,1fr)}.annual{grid-template-columns:1fr}.hero-visual{opacity:.55;width:75%}}
 @media(max-width:700px){.header-inner{padding:10px 0}.logo strong{font-size:19px}nav{display:none}.hero,.hero-inner{min-height:650px}.hero-copy{padding-top:40px;align-self:flex-start}.hero h1{font-size:42px}.hero p{font-size:14px}.hero-visual{width:100%;height:55%;right:-20%;opacity:.65}.news-match,.category-grid,.cards{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.quick a:nth-child(2n){border-right:0}.gallery{grid-template-columns:repeat(3,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.annual{padding:25px}.section{padding:40px 0}}
+
+
+/* ===== Ver.1.1 実エンブレム・全体写真 ===== */
+.emblem-img{
+  width:56px;height:64px;object-fit:contain;display:block;flex:0 0 auto;
+}
+.footer-emblem{
+  width:86px;height:96px;object-fit:contain;display:block;margin:0 auto 14px;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.18));
+}
+.hero{min-height:570px;background:#138fbd}
+.hero-inner{min-height:570px}
+.hero:before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(8,94,132,.94) 0%,rgba(11,130,171,.78) 38%,rgba(8,74,104,.18) 70%,rgba(0,0,0,.04) 100%);
+}
+.hero:after{
+  content:"";position:absolute;inset:auto 0 0;height:30%;z-index:1;
+  background:linear-gradient(transparent,rgba(5,85,112,.45));
+}
+.hero-copy{position:relative;z-index:3}
+.hero-photo{
+  position:absolute;z-index:0;inset:0 0 0 34%;
+  background-image:url("../images/team-2026.webp");
+  background-size:cover;background-position:center 47%;
+}
+.team-highlight{
+  background:linear-gradient(90deg,#f8fcfd,#eaf8fc);
+  border-bottom:1px solid var(--line);
+}
+.team-highlight-inner{
+  min-height:118px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding-top:24px;padding-bottom:24px;
+}
+.team-highlight h2{margin:4px 0;color:var(--maroon);font-size:25px}
+.team-highlight p{margin:0;color:var(--muted);font-size:13px}
+.mini-label{font-size:10px;letter-spacing:.15em;color:var(--aqua-dark);font-weight:900}
+@media(max-width:900px){
+  .hero-photo{inset:0 0 0 24%;background-position:center 50%}
+}
+@media(max-width:700px){
+  .emblem-img{width:48px;height:54px}
+  .hero,.hero-inner{min-height:690px}
+  .hero-photo{inset:260px -70px 0 -70px;background-size:cover;background-position:center center}
+  .hero:before{
+    background:linear-gradient(180deg,rgba(8,94,132,.98) 0%,rgba(11,130,171,.92) 38%,rgba(11,130,171,.35) 62%,rgba(0,0,0,.08) 100%);
+  }
+  .hero-copy{padding-top:34px;max-width:100%}
+  .team-highlight-inner{display:block}
+  .team-highlight .btn{margin-top:18px}
+}
