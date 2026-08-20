@@ -1,0 +1,59 @@
+
+:root{
+  --aqua:#20a9d8;--aqua-dark:#087da8;--maroon:#7c1532;--maroon-dark:#5b0d25;
+  --navy:#122b45;--sky:#eaf8fc;--line:#dce8ee;--white:#fff;--muted:#66798a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif;color:var(--navy);background:#fff}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.header-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.crest{width:52px;height:60px;background:var(--maroon);color:#fff;border-radius:12px 12px 22px 22px;display:grid;place-items:center;font-weight:900;line-height:.9;box-shadow:inset 0 0 0 3px #fff}
+.logo strong{font-size:24px}.logo small{display:block;font-size:9px;letter-spacing:.12em;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:18px;font-size:12px;font-weight:800}
+nav a:hover{color:var(--maroon)}
+.hero{min-height:540px;background:linear-gradient(120deg,#0795cf 0%,#65d1ed 55%,#dff9ff 100%);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(transparent,#087da855)}
+.hero-inner{position:relative;z-index:2;min-height:540px;display:flex;align-items:center}
+.hero-copy{max-width:620px;color:#fff}
+.hero-copy .eyebrow{letter-spacing:.2em;font-weight:900}
+.hero h1{font-size:clamp(42px,6vw,72px);line-height:1.12;margin:15px 0}
+.hero h1 em{font-style:normal;color:#ffe8ef}
+.hero p{font-size:18px;line-height:1.8}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.btn{display:inline-block;padding:13px 20px;border-radius:6px;font-weight:900}
+.btn.maroon{background:var(--maroon);color:#fff}.btn.white{background:#fff;color:var(--maroon)}.btn.aqua{background:var(--aqua);color:#fff}
+.hero-visual{position:absolute;right:-5%;bottom:0;width:56%;height:80%;background:radial-gradient(circle at 50% 55%,#fff8 0 7%,transparent 8%),linear-gradient(180deg,#ffffff00 0 45%,#1a9fbe 46% 100%);clip-path:polygon(20% 0,100% 10%,100% 100%,0 100%)}
+.hero-visual:after{content:"少年サッカー × 沖縄の海";position:absolute;right:10%;bottom:16%;color:#fff;font-weight:900;font-size:20px;letter-spacing:.08em}
+.section{padding:55px 0}
+.section-title{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}
+.section-title h2{margin:0;color:var(--maroon);letter-spacing:.08em;font-size:24px}
+.section-title span{font-size:12px;color:var(--muted);margin-left:10px;letter-spacing:0}
+.news-match{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.news{list-style:none;padding:0;margin:0}.news li{display:grid;grid-template-columns:90px 75px 1fr;gap:8px;padding:12px 0;border-bottom:1px solid #edf2f5;font-size:13px}
+.badge{font-size:10px;background:var(--sky);color:var(--aqua-dark);padding:4px 6px;border-radius:4px;text-align:center;font-weight:900}
+.match{border:1px solid var(--line);border-radius:10px;padding:22px;text-align:center}.match .tag{display:inline-block;background:var(--maroon);color:#fff;padding:5px 12px;border-radius:4px;font-weight:900}
+.teams{display:flex;justify-content:space-around;align-items:center;margin:22px 0;font-size:18px}.teams strong{font-size:26px;color:var(--maroon)}
+.quick{display:grid;grid-template-columns:repeat(7,1fr);background:#f3fbfe;border:1px solid #ccecf5;border-radius:12px;overflow:hidden}
+.quick a{text-align:center;padding:20px 8px;border-right:1px solid #d5eaf0}.quick a:last-child{border:0}
+.quick b,.quick small{display:block}.quick b{color:var(--maroon);font-size:12px;margin-top:7px}.quick small{color:var(--muted);font-size:9px;margin-top:5px}
+.icon{font-size:26px;color:var(--aqua-dark)}
+.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.category-card{border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;background:#fff}
+.category-photo{height:170px;background:linear-gradient(135deg,var(--aqua),#c8f5ff);position:relative}
+.category-photo:after{content:"FURUGEN MINAMI FC";position:absolute;left:18px;bottom:15px;color:#fff;font-weight:900;letter-spacing:.08em}
+.category-card .body{padding:18px}.category-card h3{margin:0;color:var(--maroon);font-size:26px}.category-card p{color:var(--muted);margin:5px 0 15px;font-size:12px}
+.category-card .links{display:flex;flex-wrap:wrap;gap:6px}.category-card .links a{font-size:10px;background:#f5f8fa;padding:7px 9px;border-radius:4px;color:#476174}
+.annual{background:var(--maroon);color:#fff;border-radius:14px;padding:35px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+.annual h2{font-size:32px;margin:8px 0}.annual p{line-height:1.8;color:#ffeef3}.annual .yearbox{background:#fff;color:var(--navy);border-radius:10px;padding:22px}
+select{width:100%;padding:12px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.info-card{border-radius:10px;padding:22px;background:#f4fbfd;border:1px solid #d9eef3}.info-card h3{color:var(--maroon);margin-top:0}.info-card p{color:var(--muted);font-size:13px;line-height:1.8}
+.gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.gallery div{aspect-ratio:1;border-radius:7px;background:linear-gradient(135deg,#0795cf,#dff9ff)}
+.cta{text-align:center;background:#eefafd;border-radius:14px;padding:50px 20px;margin-bottom:60px}
+footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center}footer h2{margin:15px 0 4px}footer p{font-size:12px;color:#ffdce6}
+.year-page{padding:45px 0}.year-page .back{color:var(--aqua-dark);font-weight:800;font-size:13px}.year-head{background:linear-gradient(120deg,var(--maroon),#9f284a);color:#fff;border-radius:14px;padding:30px;margin:20px 0}.year-head h1{margin:0;font-size:38px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}.stat{border:1px solid var(--line);border-radius:8px;padding:18px;text-align:center}.stat b{display:block;font-size:25px;color:var(--maroon)}.data-table{width:100%;border-collapse:collapse}.data-table th,.data-table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.data-table th{background:#f5f9fb;color:var(--maroon)}
+@media(max-width:900px){nav{gap:10px}.quick{grid-template-columns:repeat(4,1fr)}.annual{grid-template-columns:1fr}.hero-visual{opacity:.55;width:75%}}
+@media(max-width:700px){.header-inner{padding:10px 0}.logo strong{font-size:19px}nav{display:none}.hero,.hero-inner{min-height:650px}.hero-copy{padding-top:40px;align-self:flex-start}.hero h1{font-size:42px}.hero p{font-size:14px}.hero-visual{width:100%;height:55%;right:-20%;opacity:.65}.news-match,.category-grid,.cards{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.quick a:nth-child(2n){border-right:0}.gallery{grid-template-columns:repeat(3,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.annual{padding:25px}.section{padding:40px 0}}
