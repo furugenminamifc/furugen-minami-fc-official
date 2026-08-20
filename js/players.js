@@ -10,7 +10,7 @@ function esc(value) {
 
 function makePlayerCard(item) {
   const card = document.createElement("article");
-  card.className = "player-card player-card-v164";
+  card.className = "player-card player-card-v167";
 
   const number = esc(item.number ?? "—");
   const name = esc(item.name || "氏名準備中");
@@ -21,25 +21,27 @@ function makePlayerCard(item) {
   const profile = esc(item.profile || item.message || "");
   const photo = String(item.photo || "").trim();
   const photoPosition = esc(item.photoPosition || "center 35%");
+  const photoFit = esc(item.photoFit || "cover");
   const captain = item.captain === true;
 
   const media = photo
-    ? `<div class="player-photo player-photo-v164">
-         <img src="${esc(photo)}" alt="${name}" loading="lazy"
-              style="object-position:${photoPosition}"
+    ? `<div class="player-photo player-photo-v167">
+         <img src="${esc(photo)}?v=1.6.7" alt="${name}" loading="lazy"
+              style="object-position:${photoPosition};object-fit:${photoFit}"
               onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
          <div class="player-photo-overlay"></div>
          <span class="player-photo-number">${number}</span>
          ${captain ? `<span class="captain-badge">CAPTAIN</span>` : ""}
        </div>`
-    : `<div class="player-placeholder player-placeholder-v164">
+    : `<div class="player-placeholder player-placeholder-v167">
          <span class="player-placeholder-number">${number}</span>
+         <span class="player-placeholder-text">PHOTO</span>
          ${captain ? `<span class="captain-badge">CAPTAIN</span>` : ""}
        </div>`;
 
   card.innerHTML = `
     ${media}
-    <div class="player-card-body player-card-body-v164">
+    <div class="player-card-body player-card-body-v167">
       <div class="player-mainline">
         <div>
           <div class="player-number">#${number}</div>
@@ -78,16 +80,14 @@ function renderCategory(root, category, players) {
       </div>
       <span class="staff-count">${members.length}名</span>
     </div>
-    <div class="player-grid player-grid-v164"></div>
+    <div class="player-grid player-grid-v167"></div>
   `;
 
   const grid = section.querySelector(".player-grid");
-
   if (!members.length) {
     grid.innerHTML = `<div class="empty-state"><b>現在、公開中の選手登録はありません</b></div>`;
   } else {
     grid.dataset.count = String(members.length);
-
     if (members.length === 1) grid.classList.add("player-grid-count-1");
     else if (members.length === 2) grid.classList.add("player-grid-count-2");
     else if (members.length === 3) grid.classList.add("player-grid-count-3");
@@ -106,7 +106,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6.6", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.7", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();

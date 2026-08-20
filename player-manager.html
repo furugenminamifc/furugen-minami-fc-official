@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>選手データ作成ツール｜古堅南FC</title>
-<link rel="stylesheet" href="css/style.css?v=1.6.6">
+<link rel="stylesheet" href="css/style.css?v=1.6.7">
 <style>
 body{background:#f5f8fa}
 .manager-wrap{max-width:1100px;margin:40px auto;padding:0 20px}
@@ -41,7 +41,7 @@ pre{white-space:pre-wrap;background:#15212b;color:#eef7fb;padding:16px;border-ra
       <label>学年<input id="grade" placeholder="6年生"></label>
       <label>ポジション<input id="position" placeholder="MF / FW"></label>
       <label>利き足<select id="foot"><option value="">未設定</option><option>右</option><option>左</option><option>両</option></select></label>
-      <label>写真パス<input id="photo" placeholder="images/players/u12-01.webp"></label>
+      <label>写真パス<input id="photo" placeholder="images/players/u12-01.webp"></label><label>写真位置<input id="photoPosition" value="center 35%" placeholder="center 35%"></label>
       <label style="grid-column:1/-1">紹介文<textarea id="profile" rows="3" placeholder="プレースタイルやひとこと紹介"></textarea></label>
       <label>CAPTAIN<select id="captain"><option value="false">いいえ</option><option value="true">はい</option></select></label>
       <label>公開<select id="published"><option value="true">公開</option><option value="false">非公開</option></select></label>
@@ -106,7 +106,8 @@ $("addBtn").onclick=()=>{
     dominantFoot:$("foot").value,
     profile:$("profile").value.trim(),
     photo:$("photo").value.trim(),
-    photoPosition:"center 35%",
+    photoPosition:$("photoPosition").value.trim() || "center 35%",
+    photoFit:"cover",
     captain:$("captain").value==="true",
     isPublished:$("published").value==="true"
   });
