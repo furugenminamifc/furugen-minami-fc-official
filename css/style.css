@@ -657,3 +657,14 @@ footer:before{
     color:#2d9fd3 !important;
   }
 }
+
+/* ===== Ver.1.4.3 「成長する」白文字統一 ===== */
+/* HERO見出し内の強調語「成長」を他の文字と同じ白に統一 */
+.hero h1 em,
+.hero-copy h1 em{
+  color:#ffffff !important;
+  font-style:normal;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,.10),
+    0 2px 7px rgba(0,0,0,.16) !important;
+}
