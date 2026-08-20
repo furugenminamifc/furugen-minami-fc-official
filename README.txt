@@ -1,37 +1,42 @@
-古堅南FC 公式ホームページ Ver.1.5.2
+古堅南FC 公式ホームページ Ver.1.5.3
 ======================================
 
-■ Ver.1.5.2「スタッフ登録・写真対応版」
+■ Ver.1.5.3「実スタッフ登録・プロフィール完成版」
 
-スタッフページを、写真付きの実運用に対応させました。
+スタッフ紹介を、公式ホームページとして実運用できるプロフィール形式へ強化しました。
 
-■ 新機能
-- スタッフ写真対応
-- 氏名 / 役職 / 担当 / 資格 / メッセージ登録
-- photoPosition で写真の表示位置調整
-- isPublished で公開 / 非公開を切替
-- 画像がない場合は COACH / STAFF の仮表示
-- 写真読み込みエラー時もレイアウトを崩さない
-- data/staff-entry-template.json を追加
+■ 登録できる項目
+- 氏名
+- ふりがな
+- 役職
+- 担当カテゴリー
+- 資格
+- 経歴
+- メッセージ
+- 写真
+- 写真表示位置
+- SNSリンク
+- 公開 / 非公開
 
-■ 写真追加方法
-1. 画像を images/staff/ に入れる
-2. data/staff.json の photo に
-   "images/staff/ファイル名.webp"
-   と入力
-3. isPublished を true にする
+■ 写真追加
+images/staff/ に画像を追加して、
+data/staff.json の photo にパスを入力してください。
 
 ■ 例
 {
   "role": "コーチ",
   "name": "氏名",
+  "nameKana": "しめい",
   "category": "U-12",
   "license": "JFA公認D級コーチ",
+  "career": "指導歴など",
   "message": "メッセージ",
   "photo": "images/staff/coach-02.webp",
   "photoPosition": "center 35%",
+  "snsLabel": "Instagram",
+  "snsUrl": "",
   "isPublished": true
 }
 
 ■ GitHub
-「更新用ファイルのみ」ZIPを展開してアップロードしてください。
+更新用ZIPを展開してアップロードしてください。

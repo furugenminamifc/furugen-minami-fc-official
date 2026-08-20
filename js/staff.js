@@ -29,40 +29,51 @@ async function loadStaff() {
     grid.innerHTML = "";
 
     if (!staff.length) {
-      grid.innerHTML = `<div class="empty-state"><b>公開中のスタッフ情報はありません</b><p>data/staff.json で isPublished を true にしてください。</p></div>`;
+      grid.innerHTML = `<div class="empty-state"><b>公開中のスタッフ情報はありません</b><p>data/staff.json の isPublished を確認してください。</p></div>`;
       return;
     }
 
     staff.forEach(item => {
       const article = document.createElement("article");
-      article.className = "staff-card staff-card-v152";
+      article.className = "staff-profile-card";
 
       const role = esc(item.role || "");
       const name = esc(item.name || "氏名準備中");
+      const nameKana = esc(item.nameKana || "");
       const category = esc(item.category || "—");
       const license = esc(item.license || "—");
+      const career = esc(item.career || "");
       const message = esc(item.message || "");
       const photo = String(item.photo || "").trim();
       const position = esc(item.photoPosition || "center center");
+      const snsLabel = esc(item.snsLabel || "");
+      const snsUrl = esc(item.snsUrl || "");
 
       const media = photo
-        ? `<div class="staff-photo staff-photo-v152">
+        ? `<div class="staff-profile-photo">
              <img src="${esc(photo)}" alt="${name}" loading="lazy"
                   style="object-position:${position}"
-                  onerror="this.closest('.staff-photo').classList.add('photo-error');this.remove();">
+                  onerror="this.closest('.staff-profile-photo').classList.add('photo-error');this.remove();">
            </div>`
-        : `<div class="staff-avatar staff-avatar-v152">${fallbackLabel(item.role)}</div>`;
+        : `<div class="staff-profile-placeholder">${fallbackLabel(item.role)}</div>`;
+
+      const sns = snsUrl
+        ? `<a class="staff-sns" href="${snsUrl}" target="_blank" rel="noopener">${snsLabel || "SNS"} ↗</a>`
+        : "";
 
       article.innerHTML = `
         ${media}
-        <div class="staff-card-body">
+        <div class="staff-profile-body">
           <span class="staff-role">${role}</span>
           <h3>${name}</h3>
-          <dl class="staff-meta">
+          ${nameKana ? `<p class="staff-kana">${nameKana}</p>` : ""}
+          <dl class="staff-profile-meta">
             <div><dt>担当</dt><dd>${category}</dd></div>
             <div><dt>資格</dt><dd>${license}</dd></div>
+            ${career ? `<div><dt>経歴</dt><dd>${career}</dd></div>` : ""}
           </dl>
-          <p>${message}</p>
+          <p class="staff-message">${message}</p>
+          ${sns}
         </div>
       `;
       grid.appendChild(article);
