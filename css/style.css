@@ -1424,3 +1424,18 @@ footer:before{
     grid-template-columns:1fr;
   }
 }
+
+
+/* ===== Ver.1.6.3 選手紹介 公開画面整理版 ===== */
+#playerGroups{
+  margin-bottom:8px;
+}
+.player-category-section:last-child{
+  margin-bottom:0;
+}
+.players-public-note{
+  margin-top:18px;
+  color:#748899;
+  font-size:11px;
+  line-height:1.8;
+}
