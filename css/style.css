@@ -583,101 +583,62 @@ footer:before{
 }
 
 
-/* ===== Ver.1.4.2 HERO配色・バランス改善 ===== */
+/* ===== Ver.1.4.2 HEROライン・成長文字改善 ===== */
 
-/* アルゼンチン風ストライプを均一・軽やかに */
+/* 左端の縦エンジラインを完全削除 */
+.hero-inner:before{
+  display:none !important;
+  content:none !important;
+}
+
+/* 「成長」の文字をエンジではなく水色系アクセントに変更 */
+.hero h1 em{
+  color:#2d9fd3 !important;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.85),
+    0 2px 8px rgba(0,0,0,.10) !important;
+}
+
+/* HERO本文全体の文字は読みやすい白ベース */
+.hero-copy h1{
+  color:#ffffff !important;
+}
+
+/* 左側は水色＋白のストライプを主役に */
 .hero{
   background:
     repeating-linear-gradient(
       90deg,
-      #79c9e7 0 84px,
-      #f8fdff 84px 168px
+      rgba(116,199,232,.98) 0 86px,
+      rgba(255,255,255,.94) 86px 172px
     ) !important;
-  position:relative;
 }
 
-/* 左側の濃い青面をさらに軽くして、写真との境界を自然に */
+/* 文字可読性用の薄い青オーバーレイのみ */
 .hero:before{
   background:
     linear-gradient(
       90deg,
-      rgba(17,92,126,.50) 0%,
-      rgba(17,92,126,.36) 18%,
-      rgba(17,92,126,.20) 34%,
-      rgba(17,92,126,.08) 46%,
-      rgba(255,255,255,0) 62%
+      rgba(13,86,121,.72) 0%,
+      rgba(13,86,121,.46) 26%,
+      rgba(13,86,121,.16) 48%,
+      rgba(255,255,255,0) 72%
     ) !important;
-}
-
-/* 写真側の見え方を広くして、左右の余白感を軽減 */
-.hero-photo{
-  inset:0 3% 0 31% !important;
-  border-left:1px solid rgba(255,255,255,.45);
-  border-right:1px solid rgba(255,255,255,.45);
-}
-
-/* 左端のエンジ線を細く控えめに */
-.hero-inner:before{
-  width:4px !important;
-  background:rgba(123,22,52,.82) !important;
-}
-
-/* HERO文字を少し整理 */
-.hero-copy{
-  max-width:540px !important;
-  padding-left:14px;
-}
-.hero h1{
-  letter-spacing:.01em !important;
-  line-height:1.14 !important;
-}
-.hero-copy p{
-  max-width:420px;
-}
-
-/* 下部の白エリアとストライプのつながりを自然に */
-.team-highlight{
-  background:rgba(255,255,255,.95) !important;
-  border-top:1px solid rgba(116,199,232,.28);
-  border-bottom:1px solid rgba(123,22,52,.14);
-}
-
-/* NEWS前のストライプは淡く */
-.section.container{
-  background:rgba(255,255,255,.90);
-  border-radius:0;
-}
-
-/* CTAはエンジを維持 */
-.hero .btn.maroon{
-  background:var(--arg-maroon) !important;
-}
-.hero .btn.white{
-  background:rgba(255,255,255,.96) !important;
-}
-.hero .btn.aqua{
-  background:#6fc4e2 !important;
-  color:#15364d !important;
-}
-
-/* PCで写真と文字のバランスを調整 */
-@media(min-width:901px){
-  .hero-inner{
-    min-height:560px !important;
-  }
-  .hero-copy{
-    width:42%;
-  }
 }
 
 /* スマホ */
 @media(max-width:700px){
+  .hero-inner:before{
+    display:none !important;
+    content:none !important;
+  }
+
   .hero{
     background:
       repeating-linear-gradient(
         90deg,
-        #79c9e7 0 48px,
-        #f8fdff 48px 96px
+        rgba(116,199,232,.98) 0 42px,
+        rgba(255,255,255,.94) 42px 84px
       ) !important;
   }
 
@@ -685,26 +646,14 @@ footer:before{
     background:
       linear-gradient(
         180deg,
-        rgba(17,92,126,.68) 0%,
-        rgba(17,92,126,.46) 28%,
-        rgba(17,92,126,.18) 48%,
-        rgba(255,255,255,0) 64%
+        rgba(13,86,121,.78) 0%,
+        rgba(13,86,121,.50) 34%,
+        rgba(13,86,121,.18) 58%,
+        rgba(255,255,255,0) 100%
       ) !important;
   }
 
-  .hero-photo{
-    inset:270px -28px 0 -28px !important;
-    border-left:none;
-    border-right:none;
-  }
-
-  .hero-inner:before{
-    width:auto !important;
-    height:4px !important;
-  }
-
-  .hero-copy{
-    padding-left:0;
-    max-width:100% !important;
+  .hero h1 em{
+    color:#2d9fd3 !important;
   }
 }
