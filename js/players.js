@@ -26,7 +26,7 @@ function makePlayerCard(item) {
 
   const media = photo
     ? `<div class="player-photo player-photo-v169">
-         <img src="${esc(photo)}?v=1.7.4" alt="${name}" loading="lazy"
+         <img src="${esc(photo)}?v=1.8" alt="${name}" loading="lazy"
               style="object-position:${photoPosition};object-fit:${photoFit}"
               onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
          <div class="player-photo-overlay"></div>
@@ -105,13 +105,40 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.7.4.1", { cache: "no-store" });
-    if (!res.ok) throw new Error("players.json load failed");
+    let data;
+    let sourceLabel = "JSON";
 
-    const data = await res.json();
+    if (window.FurugenPublicData?.configured()) {
+      try {
+        const supabasePlayers = await window.FurugenPublicData.loadPlayers();
+        data = {
+          year: new Date().getFullYear(),
+          updated: new Date().toISOString().slice(0,10),
+          categories: [
+            {id:"U-12",label:"U-12",grade:"小学6年生・5年生"},
+            {id:"U-11",label:"U-11",grade:"小学5年生・4年生"},
+            {id:"U-10",label:"U-10",grade:"小学4年生・3年生"}
+          ],
+          players: supabasePlayers || []
+        };
+        sourceLabel = "Supabase";
+      } catch (supabaseError) {
+        console.warn("Supabase players load failed. JSON fallback.", supabaseError);
+      }
+    }
+
+    if (!data) {
+      const res = await fetch("data/players.json?v=1.8", { cache: "no-store" });
+      if (!res.ok) throw new Error("players.json load failed");
+      data = await res.json();
+    }
 
     if (year) year.textContent = `${data.year || "—"}年度`;
-    if (updated) updated.textContent = data.updated ? `最終更新：${data.updated}` : "";
+    if (updated) {
+      updated.textContent = data.updated
+        ? `最終更新：${data.updated}${sourceLabel === "Supabase" ? "・自動反映" : ""}`
+        : "";
+    }
 
     const categories = data.categories || [];
     const players = (data.players || []).filter(p => p.isPublished !== false);

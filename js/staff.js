@@ -115,13 +115,47 @@ async function loadStaff() {
   const updateText = document.querySelector("#staffUpdated");
 
   try {
-    // v=1.5.6 を付けて旧staff.jsonのキャッシュを確実に避ける
-    const res = await fetch("data/staff.json?v=1.5.6", { cache: "no-store" });
-    if (!res.ok) throw new Error("staff.json load failed");
-    const data = await res.json();
+    let data;
+    let sourceLabel = "JSON";
+
+    if (window.FurugenPublicData?.configured()) {
+      try {
+        const supabaseStaff = await window.FurugenPublicData.loadStaff();
+        data = {
+          year: new Date().getFullYear(),
+          updated: new Date().toISOString().slice(0,10),
+          staff: supabaseStaff || [],
+          teamOperations: {
+            eyebrow: "TEAM OPERATIONS",
+            title: "チーム運営",
+            name: "古堅南FC 保護者会",
+            description: "古堅南FCのチーム運営は、保護者会全員で協力して行っています。",
+            details: [
+              "大会・練習試合の運営サポート",
+              "会場準備・片付け",
+              "選手・チーム活動のサポート",
+              "保護者会全員で協力したチーム運営"
+            ]
+          }
+        };
+        sourceLabel = "Supabase";
+      } catch (supabaseError) {
+        console.warn("Supabase staff load failed. JSON fallback.", supabaseError);
+      }
+    }
+
+    if (!data) {
+      const res = await fetch("data/staff.json?v=1.8", { cache: "no-store" });
+      if (!res.ok) throw new Error("staff.json load failed");
+      data = await res.json();
+    }
 
     if (yearText) yearText.textContent = `${data.year || "—"}年度`;
-    if (updateText) updateText.textContent = data.updated ? `最終更新：${data.updated}` : "";
+    if (updateText) {
+      updateText.textContent = data.updated
+        ? `最終更新：${data.updated}${sourceLabel === "Supabase" ? "・自動反映" : ""}`
+        : "";
+    }
 
     const staff = (data.staff || []).filter(item => item.isPublished !== false);
     root.innerHTML = "";

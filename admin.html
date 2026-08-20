@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>サイト管理｜古堅南FC</title>
+<link rel="stylesheet" href="css/style.css?v=1.8">
+<style>
+body{margin:0;background:#f4f7f9;color:#243746;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+.admin-wrap{max-width:1180px;margin:0 auto;padding:20px}
+.admin-hero{background:linear-gradient(135deg,#dff3fb,#fff);border-left:6px solid #7b1634;border-radius:16px;padding:22px;margin-bottom:18px}
+.admin-hero h1{margin:3px 0 8px;color:#7b1634}
+.panel{background:#fff;border:1px solid #dbe4ea;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 8px 20px rgba(20,48,72,.05)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}
+label{font-weight:800;font-size:12px;color:#50687a}
+input,select,textarea{width:100%;box-sizing:border-box;padding:11px;border:1px solid #cad6df;border-radius:10px;font-size:16px;background:#fff}
+textarea{min-height:84px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:pointer}
+.primary{background:#7b1634;color:#fff}.secondary{background:#dff1f8;color:#285f79}.danger{background:#f7e8ed;color:#7b1634}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:#eef4f7;color:#496273}.tab.active{background:#7b1634;color:#fff}
+.notice{padding:12px;border-radius:10px;background:#fff8df;border:1px solid #ecd68a;color:#695b2b;line-height:1.7}
+.ok{padding:10px 12px;border-radius:10px;background:#edf8ee;color:#356d3d;display:none;margin-top:10px}
+.error{padding:10px 12px;border-radius:10px;background:#fff0f0;color:#8c2f2f;display:none;margin-top:10px}
+.list{display:grid;gap:9px;margin-top:14px}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:11px;border:1px solid #e0e6eb;border-radius:10px;background:#fbfdfe}
+.row b{color:#7b1634}.row small{color:#6d8190}.row button{padding:7px 10px}
+.photo-preview{width:190px;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:repeating-linear-gradient(90deg,#dff1f8 0 28px,#fff 28px 56px);display:grid;place-items:center;margin-top:8px}
+.photo-preview img{width:100%;height:100%;object-fit:cover;display:none}
+.hidden{display:none!important}
+.statusline{font-size:12px;color:#617887;margin-top:6px}
+@media(max-width:700px){.admin-wrap{padding:12px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.row{grid-template-columns:1fr auto}.row .delete{grid-column:2}}
+</style>
+</head>
+<body>
+<div class="admin-wrap">
+  <section class="admin-hero">
+    <span style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b1634">SITE ADMIN</span>
+    <h1>古堅南FC サイト管理</h1>
+    <p>Ver.1.8｜選手・スタッフをサイト内から登録し、写真もSupabaseへ保存するための管理画面です。</p>
+  </section>
+
+  <section id="setupPanel" class="panel">
+    <h2>Supabase接続</h2>
+    <div class="notice">
+      <b>初回だけ設定が必要です。</b><br>
+      <code>js/supabase-config.js</code> に Supabase Project URL と anon public key を入れ、
+      Supabase SQL Editorで <code>supabase/setup_v1.8.sql</code> を1回実行してください。
+    </div>
+    <div id="configStatus" class="statusline"></div>
+  </section>
+
+  <section id="loginPanel" class="panel">
+    <h2>管理者ログイン</h2>
+    <div class="grid">
+      <div class="field"><label>メールアドレス</label><input id="loginEmail" type="email" autocomplete="username"></div>
+      <div class="field"><label>パスワード</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+    </div>
+    <div class="actions">
+      <button id="loginBtn" class="primary">ログイン</button>
+      <button id="logoutBtn" class="secondary hidden">ログアウト</button>
+    </div>
+    <div id="loginOk" class="ok"></div>
+    <div id="loginError" class="error"></div>
+  </section>
+
+  <div id="adminArea" class="hidden">
+    <section class="panel">
+      <div class="tabs">
+        <button class="tab active" data-tab="players">選手登録</button>
+        <button class="tab" data-tab="staff">スタッフ・審判員登録</button>
+      </div>
+
+      <div id="playersTab">
+        <h2>選手登録</h2>
+        <div class="grid">
+          <div class="field"><label>カテゴリー</label><select id="pCategory"><option>U-12</option><option>U-11</option><option>U-10</option></select></div>
+          <div class="field"><label>背番号</label><input id="pNumber" type="number" min="1" max="99"></div>
+          <div class="field"><label>氏名</label><input id="pName"></div>
+          <div class="field"><label>ふりがな</label><input id="pKana"></div>
+          <div class="field"><label>学年</label><select id="pGrade"><option value="">未設定</option><option>6年生</option><option>5年生</option><option>4年生</option><option>3年生</option></select></div>
+          <div class="field"><label>ポジション</label><select id="pPosition"><option>FP</option><option>GP</option><option>FP / GP</option><option>DF</option><option>MF</option><option>FW</option><option>DF / MF</option><option>MF / FW</option></select></div>
+          <div class="field"><label>利き足</label><select id="pFoot"><option value="">未設定</option><option>右</option><option>左</option><option>両</option></select></div>
+          <div class="field"><label>CAPTAIN</label><select id="pCaptain"><option value="false">いいえ</option><option value="true">はい</option></select></div>
+          <div class="field full"><label>紹介文</label><textarea id="pProfile"></textarea></div>
+          <div class="field full"><label>写真</label><input id="pPhoto" type="file" accept="image/*"><div class="photo-preview"><img id="pPhotoPreview"><span id="pPhotoEmpty">写真プレビュー</span></div></div>
+          <div class="field"><label>写真位置</label><select id="pPhotoPosition"><option value="center 35%">標準</option><option value="center 25%">顔を少し上へ</option><option value="center 45%">顔を少し下へ</option><option value="center center">中央</option></select></div>
+          <div class="field"><label>公開設定</label><select id="pPublished"><option value="true">公開</option><option value="false">非公開</option></select></div>
+        </div>
+        <div class="actions">
+          <button id="savePlayerBtn" class="primary">選手を保存</button>
+          <button id="clearPlayerBtn" class="secondary">入力をクリア</button>
+        </div>
+        <div id="playerOk" class="ok"></div><div id="playerError" class="error"></div>
+        <div id="playerList" class="list"></div>
+      </div>
+
+      <div id="staffTab" class="hidden">
+        <h2>スタッフ・審判員登録</h2>
+        <div class="grid">
+          <div class="field"><label>区分</label><select id="sGroup"><option value="coaching">指導スタッフ</option><option value="referees">審判員</option></select></div>
+          <div class="field"><label>役職</label><input id="sRole" placeholder="例：コーチ / 審判員"></div>
+          <div class="field"><label>氏名</label><input id="sName"></div>
+          <div class="field"><label>ふりがな</label><input id="sKana"></div>
+          <div class="field"><label>担当</label><input id="sCategory" placeholder="例：U-12 / チーム全体"></div>
+          <div class="field"><label>資格</label><input id="sLicense" placeholder="例：JFA C級 / 4級審判員"></div>
+          <div class="field full"><label>経歴</label><textarea id="sCareer"></textarea></div>
+          <div class="field full"><label>メッセージ</label><textarea id="sMessage"></textarea></div>
+          <div class="field full"><label>写真</label><input id="sPhoto" type="file" accept="image/*"><div class="photo-preview"><img id="sPhotoPreview"><span id="sPhotoEmpty">写真プレビュー</span></div></div>
+          <div class="field"><label>写真位置</label><select id="sPhotoPosition"><option value="center 35%">標準</option><option value="center center">中央</option><option value="center 25%">上寄せ</option><option value="center 45%">下寄せ</option></select></div>
+          <div class="field"><label>公開設定</label><select id="sPublished"><option value="true">公開</option><option value="false">非公開</option></select></div>
+        </div>
+        <div class="actions">
+          <button id="saveStaffBtn" class="primary">スタッフを保存</button>
+          <button id="clearStaffBtn" class="secondary">入力をクリア</button>
+        </div>
+        <div id="staffOk" class="ok"></div><div id="staffError" class="error"></div>
+        <div id="staffList" class="list"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js?v=1.8"></script>
+<script src="js/admin.js?v=1.8"></script>
+</body>
+</html>
