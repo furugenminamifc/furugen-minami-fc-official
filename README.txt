@@ -1,40 +1,39 @@
-古堅南FC 公式ホームページ Ver.1.5.3
+古堅南FC 公式ホームページ Ver.1.5.4
 ======================================
 
-■ Ver.1.5.3「実スタッフ登録・プロフィール完成版」
+■ Ver.1.5.4「スタッフ・審判員プロフィール対応版」
 
-スタッフ紹介を、公式ホームページとして実運用できるプロフィール形式へ強化しました。
+スタッフページを以下の3グループで表示できるようにしました。
 
-■ 登録できる項目
-- 氏名
-- ふりがな
-- 役職
-- 担当カテゴリー
-- 資格
-- 経歴
-- メッセージ
-- 写真
-- 写真表示位置
-- SNSリンク
-- 公開 / 非公開
+- 指導スタッフ
+  - 代表・監督
+  - コーチ
 
-■ 写真追加
-images/staff/ に画像を追加して、
-data/staff.json の photo にパスを入力してください。
+- 運営スタッフ
+  - チームスタッフ
+  - 大会運営スタッフ
 
-■ 例
+- 審判員
+  - 3級審判員
+  - 4級審判員
+  - 協力審判員 など
+
+■ 登録方法
+data/staff.json の group に以下を指定します。
+
+"coaching"   指導スタッフ
+"operations" 運営スタッフ
+"referees"   審判員
+
+■ 審判員登録例
 {
-  "role": "コーチ",
+  "group": "referees",
+  "role": "審判員",
   "name": "氏名",
-  "nameKana": "しめい",
-  "category": "U-12",
-  "license": "JFA公認D級コーチ",
-  "career": "指導歴など",
-  "message": "メッセージ",
-  "photo": "images/staff/coach-02.webp",
-  "photoPosition": "center 35%",
-  "snsLabel": "Instagram",
-  "snsUrl": "",
+  "category": "審判担当",
+  "license": "JFA 4級審判員",
+  "career": "審判歴・担当大会など",
+  "photo": "images/staff/referee-01.webp",
   "isPublished": true
 }
 
