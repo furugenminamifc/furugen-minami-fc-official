@@ -1,0 +1,11 @@
+{
+  "id": "coach-02",
+  "role": "コーチ",
+  "name": "氏名",
+  "category": "U-12",
+  "license": "JFA公認D級コーチ など",
+  "message": "スタッフ紹介メッセージ",
+  "photo": "images/staff/coach-02.webp",
+  "photoPosition": "center center",
+  "isPublished": true
+}
