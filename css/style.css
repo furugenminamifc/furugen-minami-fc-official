@@ -1372,3 +1372,55 @@ footer:before{
   font-size:12px!important;
   line-height:1.8!important;
 }
+
+
+/* ===== Ver.1.6.2 実選手データ登録版 ===== */
+.player-register-panel{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:24px;
+  align-items:center;
+  background:rgba(255,255,255,.97);
+  border:1px solid var(--line);
+  border-left:6px solid var(--arg-maroon);
+  border-radius:12px;
+  padding:26px;
+  box-shadow:0 10px 24px rgba(20,48,72,.07);
+}
+.player-register-panel h2{
+  margin:4px 0 10px;
+  color:var(--arg-maroon);
+  font-size:28px;
+}
+.player-register-panel p{
+  margin:0;
+  color:#617588;
+  line-height:1.8;
+}
+.player-register-panel code{
+  background:#eef7fb;
+  padding:2px 5px;
+  border-radius:4px;
+}
+.player-register-steps{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.player-register-steps span{
+  background:var(--arg-sky-soft);
+  border-radius:8px;
+  padding:12px;
+  text-align:center;
+  color:#315f75;
+  font-size:11px;
+  font-weight:900;
+}
+@media(max-width:700px){
+  .player-register-panel{
+    grid-template-columns:1fr;
+  }
+  .player-register-steps{
+    grid-template-columns:1fr;
+  }
+}

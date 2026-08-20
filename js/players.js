@@ -85,7 +85,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6.1", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.2", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();

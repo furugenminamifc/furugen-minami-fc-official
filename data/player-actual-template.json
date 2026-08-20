@@ -1,0 +1,14 @@
+{
+  "id": "u12-actual-01",
+  "category": "U-12",
+  "number": 8,
+  "name": "選手名",
+  "nameKana": "せんしゅめい",
+  "grade": "6年生",
+  "position": "MF / FW",
+  "dominantFoot": "右",
+  "profile": "プレースタイルやひとこと紹介",
+  "photo": "images/players/u12-actual-01.webp",
+  "photoPosition": "center 35%",
+  "isPublished": true
+}
