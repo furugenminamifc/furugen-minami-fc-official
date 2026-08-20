@@ -498,3 +498,86 @@ footer:before{
       ) !important;
   }
 }
+
+
+/* ===== Ver.1.4.1 HERO左側のエンジ重なり改善 ===== */
+
+/* HERO全体はアルゼンチン風の水色＋白を主役に */
+.hero{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(116,199,232,.98) 0 18%,
+      rgba(255,255,255,.92) 18% 33%,
+      rgba(116,199,232,.88) 33% 100%
+    ) !important;
+}
+
+/* 左側に広く乗っていたエンジの面を廃止し、
+   文字の可読性用に薄い青系オーバーレイへ変更 */
+.hero:before{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17,92,126,.78) 0%,
+      rgba(17,92,126,.52) 26%,
+      rgba(17,92,126,.22) 46%,
+      rgba(255,255,255,.02) 72%,
+      rgba(255,255,255,0) 100%
+    ) !important;
+}
+
+/* エンジは面ではなく細いアクセントラインへ */
+.hero-inner:before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:0;
+  top:0;
+  bottom:0;
+  width:8px;
+  background:var(--arg-maroon);
+}
+
+/* 見出しの「成長」のみエンジを残す */
+.hero h1 em{
+  color:#ffd7e2 !important;
+}
+
+/* CTAは従来通りエンジをアクセントに */
+.hero .btn.maroon{
+  background:var(--arg-maroon) !important;
+}
+
+/* スマホも左面をエンジにしない */
+@media(max-width:700px){
+  .hero{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(116,199,232,.98) 0 35%,
+        rgba(255,255,255,.94) 35% 47%,
+        rgba(116,199,232,.88) 47% 100%
+      ) !important;
+  }
+
+  .hero:before{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(17,92,126,.86) 0%,
+        rgba(17,92,126,.60) 33%,
+        rgba(17,92,126,.22) 58%,
+        rgba(255,255,255,.02) 100%
+      ) !important;
+  }
+
+  .hero-inner:before{
+    left:0;
+    top:0;
+    right:0;
+    bottom:auto;
+    width:auto;
+    height:6px;
+  }
+}
