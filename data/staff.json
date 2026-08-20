@@ -63,15 +63,16 @@
       "isPublished": true
     }
   ],
-  "operations": {
-    "title": "運営",
+  "teamOperations": {
+    "eyebrow": "TEAM OPERATIONS",
+    "title": "チーム運営",
     "name": "古堅南FC 保護者会",
-    "description": "チーム運営は保護者会全員で協力して行っています。",
+    "description": "古堅南FCのチーム運営は、保護者会全員で協力して行っています。",
     "details": [
       "大会・練習試合の運営サポート",
       "会場準備・片付け",
-      "チーム活動のサポート",
-      "保護者同士で協力した運営"
+      "選手・チーム活動のサポート",
+      "保護者会全員で協力したチーム運営"
     ]
   }
 }

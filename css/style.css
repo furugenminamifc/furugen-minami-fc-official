@@ -1094,3 +1094,85 @@ footer:before{
     min-height:110px;
   }
 }
+
+
+/* ===== Ver.1.5.6 保護者会 チーム運営完全修正版 ===== */
+.team-operations-section{
+  margin:0 0 48px;
+}
+.team-operations-heading{
+  margin-bottom:16px;
+  padding-bottom:14px;
+  border-bottom:2px solid rgba(123,22,52,.18);
+}
+.team-operations-heading h2{
+  margin:4px 0 0;
+  color:var(--arg-maroon);
+  font-size:28px;
+}
+.team-operations-card{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:26px;
+  align-items:center;
+  padding:28px;
+  background:rgba(255,255,255,.97);
+  border:1px solid var(--line);
+  border-left:6px solid var(--arg-maroon);
+  border-radius:12px;
+  box-shadow:0 10px 24px rgba(20,48,72,.07);
+}
+.team-operations-badge{
+  min-height:145px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  color:var(--arg-maroon);
+  font-weight:900;
+  letter-spacing:.08em;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky-soft) 0 42px,
+      #fff 42px 84px
+    );
+  border:1px solid rgba(123,22,52,.12);
+}
+.team-operations-body h3{
+  margin:0 0 10px;
+  color:var(--arg-maroon);
+  font-size:30px;
+}
+.team-operations-lead{
+  margin:0 0 14px;
+  color:#53697b;
+  line-height:1.9;
+}
+.team-operations-list{
+  margin:0;
+  padding-left:18px;
+  color:#667b8d;
+  line-height:1.9;
+}
+.team-operations-list li::marker{
+  color:var(--arg-maroon);
+}
+
+/* 旧「運営スタッフ」表示がキャッシュ等で残っても画面に出さない */
+.staff-group-section[data-group="operations"],
+.operations-group{
+  display:none !important;
+}
+
+@media(max-width:700px){
+  .team-operations-card{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+  .team-operations-badge{
+    min-height:100px;
+  }
+  .team-operations-body h3{
+    font-size:24px;
+  }
+}

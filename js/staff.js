@@ -10,7 +10,7 @@ function esc(value) {
 
 function fallbackLabel(role) {
   if (/審判/.test(role || "")) return "REFEREE";
-  return /監督|コーチ/.test(role || "") ? "COACH" : "STAFF";
+  return "COACH";
 }
 
 function makeCard(item) {
@@ -59,74 +59,81 @@ function makeCard(item) {
   return article;
 }
 
+function renderProfileGroup(root, group, staff) {
+  const members = staff.filter(item => item.group === group.id);
+  const section = document.createElement("section");
+  section.className = "staff-group-section";
+
+  section.innerHTML = `
+    <div class="staff-group-heading">
+      <div>
+        <span class="eyebrow">${esc(group.id.toUpperCase())}</span>
+        <h2>${esc(group.label)}</h2>
+        <p>${esc(group.description || "")}</p>
+      </div>
+      <span class="staff-count">${members.length}名</span>
+    </div>
+    <div class="staff-profile-grid"></div>
+  `;
+
+  const grid = section.querySelector(".staff-profile-grid");
+  if (!members.length) {
+    grid.innerHTML = `<div class="empty-state"><b>現在、公開中の登録はありません</b></div>`;
+  } else {
+    members.forEach(item => grid.appendChild(makeCard(item)));
+  }
+  root.appendChild(section);
+}
+
+function renderTeamOperations(root, ops) {
+  if (!ops) return;
+  const section = document.createElement("section");
+  section.className = "team-operations-section";
+  section.innerHTML = `
+    <div class="team-operations-heading">
+      <span class="eyebrow">${esc(ops.eyebrow || "TEAM OPERATIONS")}</span>
+      <h2>${esc(ops.title || "チーム運営")}</h2>
+    </div>
+    <div class="team-operations-card">
+      <div class="team-operations-badge">PARENTS</div>
+      <div class="team-operations-body">
+        <h3>${esc(ops.name || "古堅南FC 保護者会")}</h3>
+        <p class="team-operations-lead">${esc(ops.description || "")}</p>
+        ${(ops.details || []).length ? `
+          <ul class="team-operations-list">
+            ${(ops.details || []).map(item => `<li>${esc(item)}</li>`).join("")}
+          </ul>` : ""}
+      </div>
+    </div>
+  `;
+  root.appendChild(section);
+}
+
 async function loadStaff() {
   const root = document.querySelector("#staffGroups");
   const yearText = document.querySelector("#staffYear");
   const updateText = document.querySelector("#staffUpdated");
 
   try {
-    const res = await fetch("data/staff.json", { cache: "no-store" });
+    // v=1.5.6 を付けて旧staff.jsonのキャッシュを確実に避ける
+    const res = await fetch("data/staff.json?v=1.5.6", { cache: "no-store" });
     if (!res.ok) throw new Error("staff.json load failed");
     const data = await res.json();
 
     if (yearText) yearText.textContent = `${data.year || "—"}年度`;
     if (updateText) updateText.textContent = data.updated ? `最終更新：${data.updated}` : "";
 
-    const groups = data.groups || [
-      {id:"coaching",label:"指導スタッフ"},
-      {id:"operations",label:"運営スタッフ"},
-      {id:"referees",label:"審判員"}
-    ];
     const staff = (data.staff || []).filter(item => item.isPublished !== false);
-
     root.innerHTML = "";
 
-    groups.forEach(group => {
-      const members = staff.filter(item => (item.group || "coaching") === group.id);
-      const section = document.createElement("section");
-      section.className = "staff-group-section";
+    // 表示順を固定：指導 → 保護者会運営 → 審判員
+    const coaching = {id:"coaching", label:"指導スタッフ", description:"代表・監督・コーチ"};
+    const referees = {id:"referees", label:"審判員", description:"チーム所属・協力審判員"};
 
-      section.innerHTML = `
-        <div class="staff-group-heading">
-          <div>
-            <span class="eyebrow">${esc(group.id.toUpperCase())}</span>
-            <h2>${esc(group.label)}</h2>
-            ${group.description ? `<p>${esc(group.description)}</p>` : ""}
-          </div>
-          <span class="staff-count">${members.length}名</span>
-        </div>
-        <div class="staff-profile-grid"></div>
-      `;
+    renderProfileGroup(root, coaching, staff);
+    renderTeamOperations(root, data.teamOperations);
+    renderProfileGroup(root, referees, staff);
 
-      const grid = section.querySelector(".staff-profile-grid");
-      if (!members.length) {
-        grid.innerHTML = `<div class="empty-state"><b>現在、公開中の登録はありません</b></div>`;
-      } else {
-        members.forEach(item => grid.appendChild(makeCard(item)));
-      }
-      root.appendChild(section);
-    });
-
-    if (data.operations) {
-      const ops = data.operations;
-      const opsSection = document.createElement("section");
-      opsSection.className = "parent-operations-section";
-      opsSection.innerHTML = `
-        <div class="parent-operations-card">
-          <div class="parent-operations-icon">PARENTS</div>
-          <div class="parent-operations-body">
-            <span class="eyebrow">${esc(ops.title || "運営")}</span>
-            <h2>${esc(ops.name || "古堅南FC 保護者会")}</h2>
-            <p class="parent-operations-lead">${esc(ops.description || "")}</p>
-            ${(ops.details || []).length ? `
-              <ul class="parent-operations-list">
-                ${(ops.details || []).map(item => `<li>${esc(item)}</li>`).join("")}
-              </ul>` : ""}
-          </div>
-        </div>
-      `;
-      root.appendChild(opsSection);
-    }
   } catch (e) {
     root.innerHTML = `<div class="empty-state"><b>スタッフ情報を読み込めませんでした</b><p>data/staff.json を確認してください。</p></div>`;
   }
