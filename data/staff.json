@@ -8,11 +8,6 @@
       "description": "代表・監督・コーチ"
     },
     {
-      "id": "operations",
-      "label": "運営スタッフ",
-      "description": "チーム運営・大会運営・サポート"
-    },
-    {
       "id": "referees",
       "label": "審判員",
       "description": "チーム所属・協力審判員"
@@ -52,22 +47,6 @@
       "isPublished": true
     },
     {
-      "id": "staff-01",
-      "group": "operations",
-      "role": "スタッフ",
-      "name": "氏名準備中",
-      "nameKana": "",
-      "category": "チーム運営",
-      "license": "",
-      "career": "",
-      "message": "大会運営、チームサポートなどの情報を掲載できます。",
-      "photo": "",
-      "photoPosition": "center center",
-      "snsLabel": "",
-      "snsUrl": "",
-      "isPublished": true
-    },
-    {
       "id": "referee-01",
       "group": "referees",
       "role": "審判員",
@@ -83,5 +62,16 @@
       "snsUrl": "",
       "isPublished": true
     }
-  ]
+  ],
+  "operations": {
+    "title": "運営",
+    "name": "古堅南FC 保護者会",
+    "description": "チーム運営は保護者会全員で協力して行っています。",
+    "details": [
+      "大会・練習試合の運営サポート",
+      "会場準備・片付け",
+      "チーム活動のサポート",
+      "保護者同士で協力した運営"
+    ]
+  }
 }

@@ -106,6 +106,27 @@ async function loadStaff() {
       }
       root.appendChild(section);
     });
+
+    if (data.operations) {
+      const ops = data.operations;
+      const opsSection = document.createElement("section");
+      opsSection.className = "parent-operations-section";
+      opsSection.innerHTML = `
+        <div class="parent-operations-card">
+          <div class="parent-operations-icon">PARENTS</div>
+          <div class="parent-operations-body">
+            <span class="eyebrow">${esc(ops.title || "運営")}</span>
+            <h2>${esc(ops.name || "古堅南FC 保護者会")}</h2>
+            <p class="parent-operations-lead">${esc(ops.description || "")}</p>
+            ${(ops.details || []).length ? `
+              <ul class="parent-operations-list">
+                ${(ops.details || []).map(item => `<li>${esc(item)}</li>`).join("")}
+              </ul>` : ""}
+          </div>
+        </div>
+      `;
+      root.appendChild(opsSection);
+    }
   } catch (e) {
     root.innerHTML = `<div class="empty-state"><b>スタッフ情報を読み込めませんでした</b><p>data/staff.json を確認してください。</p></div>`;
   }

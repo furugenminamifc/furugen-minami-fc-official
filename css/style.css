@@ -1033,3 +1033,64 @@ footer:before{
     align-items:flex-start;
   }
 }
+
+
+/* ===== Ver.1.5.5 保護者会運営表記 改善版 ===== */
+.parent-operations-section{
+  margin:8px 0 48px;
+}
+.parent-operations-card{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:24px;
+  align-items:center;
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--line);
+  border-left:6px solid var(--arg-maroon);
+  border-radius:12px;
+  padding:26px;
+  box-shadow:0 10px 24px rgba(20,48,72,.07);
+}
+.parent-operations-icon{
+  min-height:150px;
+  display:grid;
+  place-items:center;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky-soft) 0 42px,
+      #fff 42px 84px
+    );
+  color:var(--arg-maroon);
+  font-weight:900;
+  letter-spacing:.08em;
+  border-radius:10px;
+  border:1px solid rgba(123,22,52,.12);
+}
+.parent-operations-body h2{
+  margin:4px 0 10px;
+  color:var(--arg-maroon);
+  font-size:30px;
+}
+.parent-operations-lead{
+  color:#53697b;
+  line-height:1.9;
+  margin-bottom:16px;
+}
+.parent-operations-list{
+  margin:0;
+  padding-left:18px;
+  color:#667b8d;
+  line-height:1.9;
+}
+.parent-operations-list li::marker{
+  color:var(--arg-maroon);
+}
+@media(max-width:700px){
+  .parent-operations-card{
+    grid-template-columns:1fr;
+  }
+  .parent-operations-icon{
+    min-height:110px;
+  }
+}
