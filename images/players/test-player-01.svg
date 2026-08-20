@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
+<rect width="800" height="1000" fill="#dff1f8"/>
+<rect x="0" width="160" height="1000" fill="#ffffff"/>
+<rect x="320" width="160" height="1000" fill="#ffffff"/>
+<rect x="640" width="160" height="1000" fill="#ffffff"/>
+<circle cx="400" cy="410" r="115" fill="#7b1634"/>
+<text x="400" y="445" text-anchor="middle" font-size="110" font-family="Arial, sans-serif" font-weight="700" fill="#ffffff">8</text>
+<text x="400" y="620" text-anchor="middle" font-size="46" font-family="Arial, sans-serif" font-weight="700" fill="#7b1634">TEST PLAYER</text>
+<text x="400" y="685" text-anchor="middle" font-size="28" font-family="Arial, sans-serif" fill="#52697a">PHOTO CHECK</text>
+</svg>
