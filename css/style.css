@@ -246,3 +246,255 @@ footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center
   object-fit:contain !important;
   filter:drop-shadow(0 2px 5px rgba(0,0,0,.18)) !important;
 }
+
+
+/* ===== Ver.1.4 アルゼンチン風ストライプ × エンジ配色 ===== */
+:root{
+  --arg-sky:#74c7e8;
+  --arg-sky-soft:#dff5fc;
+  --arg-white:#ffffff;
+  --arg-maroon:#7b1634;
+  --arg-maroon-dark:#5e1027;
+  --arg-ink:#1f3144;
+}
+
+/* 全体背景：水色＋白の縦ストライプをCSSのみで表現 */
+body{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky-soft) 0 90px,
+      var(--arg-white) 90px 180px
+    );
+  color:var(--arg-ink);
+}
+
+/* コンテンツ面は白ベースで読みやすく */
+main,
+.site-shell,
+.section,
+.year-page{
+  background:transparent;
+}
+
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:4px solid var(--arg-maroon);
+  backdrop-filter:saturate(120%) blur(3px);
+}
+
+nav a:hover,
+.section-title h2,
+.category-card h3,
+.category-team-grid h3,
+.about h2,
+.join h2{
+  color:var(--arg-maroon);
+}
+
+/* HERO：水色・白・エンジの3色で統一 */
+.hero{
+  background:
+    linear-gradient(90deg,
+      rgba(116,199,232,.94) 0 20%,
+      rgba(255,255,255,.88) 20% 36%,
+      rgba(116,199,232,.84) 36% 100%);
+}
+.hero:before{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(94,16,39,.85) 0%,
+      rgba(94,16,39,.42) 28%,
+      rgba(116,199,232,.18) 60%,
+      rgba(255,255,255,.02) 100%
+    ) !important;
+}
+.hero-copy h1,
+.hero-copy p,
+.hero-copy .eyebrow{
+  text-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+.hero h1 em{
+  color:#ffdbe6;
+}
+
+/* ボタン */
+.btn.maroon,
+.category-main-link,
+.match .tag,
+.year-chip,
+.team-meta span{
+  background:var(--arg-maroon) !important;
+  color:#fff !important;
+}
+.btn.maroon:hover,
+.category-main-link:hover{
+  background:var(--arg-maroon-dark) !important;
+}
+.btn.aqua{
+  background:var(--arg-sky) !important;
+  color:#10314a !important;
+}
+.btn.white{
+  background:#fff !important;
+  color:var(--arg-maroon) !important;
+  border:1px solid rgba(123,22,52,.18);
+}
+
+/* セクション面 */
+.news-match,
+.quick,
+.category-card,
+.info-card,
+.match,
+.yearbox,
+.cta,
+.category-tabs,
+.category-team-section,
+.data-table,
+.team-highlight-inner{
+  background:rgba(255,255,255,.94);
+}
+
+/* QUICK メニュー */
+.quick{
+  border:2px solid rgba(116,199,232,.55);
+  box-shadow:0 8px 24px rgba(31,49,68,.06);
+}
+.quick a{
+  border-right:1px solid rgba(116,199,232,.35);
+}
+.quick b{
+  color:var(--arg-maroon);
+}
+
+/* カテゴリーカード */
+.category-card{
+  border:2px solid rgba(116,199,232,.45);
+  box-shadow:0 8px 20px rgba(31,49,68,.06);
+}
+.category-card .body{
+  background:#fff;
+}
+.category-topline span{
+  color:#5d7285;
+}
+
+/* 年度アーカイブ */
+.annual,
+.annual-v12{
+  background:
+    linear-gradient(
+      120deg,
+      var(--arg-maroon-dark) 0 48%,
+      var(--arg-maroon) 48% 62%,
+      var(--arg-sky) 62% 100%
+    ) !important;
+}
+.annual .yearbox{
+  background:#fff;
+}
+.archive-year-current{
+  color:var(--arg-maroon);
+}
+.archive-links a{
+  background:var(--arg-sky-soft);
+  border:1px solid rgba(116,199,232,.6);
+  color:var(--arg-maroon);
+}
+.archive-links a:hover{
+  background:var(--arg-maroon);
+  color:#fff;
+}
+
+/* カテゴリー詳細ページのタブ */
+.category-tabs{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(116,199,232,.18) 0 56px,
+      rgba(255,255,255,.94) 56px 112px
+    );
+  border:1px solid rgba(123,22,52,.22);
+}
+.category-tabs a{
+  border:1px solid rgba(123,22,52,.20);
+  color:var(--arg-maroon);
+}
+.category-tabs a:hover{
+  background:var(--arg-maroon);
+  color:#fff;
+}
+
+/* 表 */
+.data-table th{
+  background:var(--arg-sky-soft);
+  color:var(--arg-maroon);
+}
+.data-table td,
+.data-table th{
+  border-bottom:1px solid rgba(116,199,232,.28);
+}
+
+/* ギャラリー */
+.gallery div{
+  background:linear-gradient(135deg,var(--arg-sky),#fff);
+  border:1px solid rgba(123,22,52,.10);
+}
+
+/* フッター */
+footer{
+  background:
+    linear-gradient(
+      90deg,
+      var(--arg-maroon-dark) 0 58%,
+      var(--arg-maroon) 58% 100%
+    ) !important;
+  border-top:6px solid var(--arg-sky);
+}
+footer:before{
+  content:"";
+  display:block;
+  height:8px;
+  margin:-45px 0 28px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky) 0 60px,
+      #fff 60px 120px
+    );
+}
+
+/* スマホではストライプ幅を狭く */
+@media(max-width:700px){
+  body{
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--arg-sky-soft) 0 42px,
+        #fff 42px 84px
+      );
+  }
+
+  .hero{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(116,199,232,.95) 0 36%,
+        rgba(255,255,255,.92) 36% 48%,
+        rgba(116,199,232,.86) 48% 100%
+      );
+  }
+
+  .hero:before{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(94,16,39,.88) 0%,
+        rgba(94,16,39,.50) 34%,
+        rgba(116,199,232,.15) 60%,
+        rgba(255,255,255,.01) 100%
+      ) !important;
+  }
+}
