@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>実選手1名登録確認｜古堅南FC</title>
+<link rel="stylesheet" href="css/style.css?v=1.7.3">
+<style>
+body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:24px}
+.card{background:#fff;border:1px solid #dbe4ea;border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 8px 20px rgba(20,48,72,.06)}
+h1,h2{color:#7b1634}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-weight:800;font-size:12px;color:#4f6576}
+input,select,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cad6df;border-radius:10px;font-size:16px;background:#fff}
+textarea{min-height:90px}
+.photo-preview{width:240px;aspect-ratio:4/5;border-radius:14px;overflow:hidden;border:1px solid #d9e2e8;background:repeating-linear-gradient(90deg,#dff1f8 0 34px,#fff 34px 68px);display:grid;place-items:center;margin:auto}
+.photo-preview img{width:100%;height:100%;object-fit:cover;display:none}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:900;cursor:pointer}
+.primary{background:#7b1634;color:#fff}.secondary{background:#dff1f8;color:#285f79}
+pre{white-space:pre-wrap;background:#15212b;color:#eef7fb;padding:16px;border-radius:12px;overflow:auto}
+.notice{background:#fff8df;border:1px solid #ecd68a;border-radius:12px;padding:14px;line-height:1.75}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="card">
+    <span style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b1634">ONE PLAYER CHECK</span>
+    <h1>実選手1名登録・写真表示確認</h1>
+    <p>まず1名だけ登録し、写真・氏名・背番号・カテゴリー・ポジションが正しく表示されるか確認するための専用画面です。</p>
+  </section>
+
+  <section class="card">
+    <div class="notice">
+      写真はこの画面で選んでプレビューできます。実際の公開時は、その写真を
+      <b>images/players/</b> にアップロードし、この画面で作成した
+      <b>players.json</b> を <b>data/players.json</b> と入れ替えます。
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>1名分の選手情報</h2>
+    <div class="grid">
+      <div class="field">
+        <label>カテゴリー</label>
+        <select id="category"><option>U-12</option><option>U-11</option><option>U-10</option></select>
+      </div>
+      <div class="field">
+        <label>背番号</label>
+        <input id="number" type="number" value="8" min="1" max="99">
+      </div>
+      <div class="field">
+        <label>氏名</label>
+        <input id="name" placeholder="選手名">
+      </div>
+      <div class="field">
+        <label>ふりがな</label>
+        <input id="nameKana" placeholder="せんしゅめい">
+      </div>
+      <div class="field">
+        <label>学年</label>
+        <select id="grade"><option>6年生</option><option>5年生</option><option>4年生</option><option>3年生</option></select>
+      </div>
+      <div class="field">
+        <label>ポジション</label>
+        <select id="position"><option>FP</option><option>GP</option><option>FP / GP</option><option>DF</option><option>MF</option><option>FW</option><option>DF / MF</option><option>MF / FW</option></select>
+      </div>
+      <div class="field">
+        <label>利き足</label>
+        <select id="foot"><option value="">未設定</option><option>右</option><option>左</option><option>両</option></select>
+      </div>
+      <div class="field">
+        <label>写真ファイル名</label>
+        <input id="photoName" value="player-01.webp">
+      </div>
+      <div class="field full">
+        <label>写真を選ぶ（プレビュー確認用）</label>
+        <input id="photoFile" type="file" accept="image/*">
+      </div>
+      <div class="field full">
+        <div class="photo-preview">
+          <img id="previewImg" alt="選手写真プレビュー">
+          <span id="emptyPhoto">写真プレビュー</span>
+        </div>
+      </div>
+      <div class="field full">
+        <label>紹介文</label>
+        <textarea id="profile" placeholder="ひとこと紹介"></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="makeBtn">1名用 players.json を作成</button>
+      <button class="secondary" id="saveBtn">players.json を保存</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>作成結果</h2>
+    <pre id="output"></pre>
+  </section>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function buildData(){
+  const category = $("category").value;
+  const number = Number($("number").value || 0);
+  const photoName = $("photoName").value.trim();
+
+  return {
+    year: 2026,
+    updated: new Date().toISOString().slice(0,10),
+    categories: [
+      {id:"U-12",label:"U-12",grade:"小学6年生・5年生"},
+      {id:"U-11",label:"U-11",grade:"小学5年生・4年生"},
+      {id:"U-10",label:"U-10",grade:"小学4年生・3年生"}
+    ],
+    players: [{
+      id: `${category.toLowerCase()}-${String(number).padStart(2,"0")}-01`,
+      category,
+      number,
+      name: $("name").value.trim() || "氏名準備中",
+      nameKana: $("nameKana").value.trim(),
+      grade: $("grade").value,
+      position: $("position").value,
+      dominantFoot: $("foot").value,
+      profile: $("profile").value.trim(),
+      photo: photoName ? `images/players/${photoName}` : "",
+      photoPosition: "center 35%",
+      photoFit: "cover",
+      captain: false,
+      isPublished: true
+    }]
+  };
+}
+
+function refresh(){
+  $("output").textContent = JSON.stringify(buildData(), null, 2);
+}
+["category","number","name","nameKana","grade","position","foot","photoName","profile"].forEach(id=>{
+  $(id).addEventListener("input",refresh);
+  $(id).addEventListener("change",refresh);
+});
+
+$("photoFile").addEventListener("change", e=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  $("photoName").value = file.name;
+  $("previewImg").src = URL.createObjectURL(file);
+  $("previewImg").style.display = "block";
+  $("emptyPhoto").style.display = "none";
+  refresh();
+});
+
+$("makeBtn").onclick=refresh;
+
+$("saveBtn").onclick=()=>{
+  const blob = new Blob([JSON.stringify(buildData(),null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="players.json";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+};
+
+refresh();
+</script>
+</body>
+</html>
