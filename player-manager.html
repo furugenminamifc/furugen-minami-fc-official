@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>選手かんたん入力｜古堅南FC</title>
-<link rel="stylesheet" href="css/style.css?v=1.6.9">
+<title>選手登録・写真アップロード実運用｜古堅南FC</title>
+<link rel="stylesheet" href="css/style.css?v=1.7">
 <style>
 body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
 .easy-wrap{max-width:1100px;margin:0 auto;padding:24px}
@@ -54,9 +54,19 @@ body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMa
 <body>
 <div class="easy-wrap">
   <section class="easy-hero">
-    <span style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b1634">PLAYER EASY ENTRY</span>
-    <h1>選手かんたん入力</h1>
-    <p>難しいJSON編集をしなくても、必要項目を入力して「選手を追加」を押すだけでデータを作れます。</p>
+    <span style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b1634">PLAYER OPERATIONS</span>
+    <h1>選手登録・写真アップロード実運用</h1>
+    <p>選手情報を入力し、写真ファイル名を指定して、公開用 players.json を作成できます。実際の運用手順に合わせた入力画面です。</p>
+  </section>
+
+  
+  <section class="easy-card">
+    <div class="step-title"><span class="step-num">0</span><h2>実運用の流れ</h2></div>
+    <div class="notice">
+      ① 選手写真を準備 → ② GitHubの <b>images/players/</b> にアップロード →
+      ③ この画面で選手情報を入力 → ④ <b>players.json</b> を保存 →
+      ⑤ GitHubの <b>data/players.json</b> と入れ替え → ⑥ Commit changes で公開反映。
+    </div>
   </section>
 
   <section class="easy-card">
@@ -132,7 +142,9 @@ body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMa
       <div class="easy-field full">
         <label>写真ファイル名</label>
         <input id="photoName" placeholder="例：u12-08-taro.webp">
-        <div class="photo-help">写真をGitHubの <b>images/players/</b> フォルダへアップロードしたあと、ここにファイル名だけ入力します。</div>
+        <input id="photoLocal" type="file" accept="image/*" style="margin-top:8px">
+        <div id="photoPreviewBox" style="margin-top:10px;display:none"><img id="photoPreviewImg" alt="写真プレビュー" style="max-width:180px;border-radius:10px;border:1px solid #d9e1e7"></div>
+        <div class="photo-help">写真をGitHubの <b>images/players/</b> フォルダへアップロードしたあと、ここにはファイル名だけ入力します。例：u12-08-taro.webp</div>
       </div>
 
       <div class="easy-field">
@@ -160,8 +172,8 @@ body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMa
     </div>
 
     <div class="easy-actions">
-      <button class="easy-btn primary" id="addBtn">この選手を追加</button>
-      <button class="easy-btn secondary" id="clearBtn">入力をクリア</button>
+      <button class="easy-btn primary" id="addBtn">登録リストへ追加</button>
+      <button class="easy-btn secondary" id="clearBtn">次の選手を入力</button>
     </div>
     <div id="status" class="status">追加しました。</div>
   </section>
@@ -175,10 +187,10 @@ body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMa
   <section class="easy-card">
     <div class="step-title"><span class="step-num">3</span><h2>players.json を作成</h2></div>
     <div class="notice">
-      全員入力したら「players.jsonを保存」を押してください。そのファイルをGitHubの <b>data/players.json</b> と入れ替えれば反映できます。
+      全員入力したら「公開用 players.json を保存」を押してください。そのファイルをGitHubの <b>data/players.json</b> と入れ替えれば反映できます。
     </div>
     <div class="easy-actions">
-      <button class="easy-btn primary" id="downloadBtn">players.jsonを保存</button>
+      <button class="easy-btn primary" id="downloadBtn">公開用 players.json を保存</button>
       <button class="easy-btn secondary" id="copyBtn">JSONをコピー</button>
       <button class="easy-btn warn" id="resetBtn">全員クリア</button>
     </div>
@@ -189,6 +201,15 @@ body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMa
 <script>
 const players = [];
 const $ = id => document.getElementById(id);
+
+$("photoLocal").addEventListener("change", e=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  $("photoName").value = file.name;
+  const url = URL.createObjectURL(file);
+  $("photoPreviewImg").src = url;
+  $("photoPreviewBox").style.display = "block";
+});
 
 function uid(category, number, index){
   return `${category.toLowerCase()}-${String(number).padStart(2,"0")}-${String(index+1).padStart(2,"0")}`;
@@ -280,6 +301,9 @@ $("clearBtn").onclick=()=>{
   $("captain").value="false";
   $("published").value="true";
   $("photoPosition").value="center 35%";
+  $("photoLocal").value="";
+  $("photoPreviewBox").style.display="none";
+  $("photoPreviewImg").src="";
 };
 
 $("copyBtn").onclick=async()=>{
