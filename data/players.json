@@ -1,0 +1,56 @@
+{
+  "year": 2026,
+  "updated": "2026-08-20",
+  "categories": [
+    {
+      "id": "U-12",
+      "label": "U-12",
+      "grade": "小学6年生・5年生"
+    },
+    {
+      "id": "U-11",
+      "label": "U-11",
+      "grade": "小学5年生・4年生"
+    },
+    {
+      "id": "U-10",
+      "label": "U-10",
+      "grade": "小学4年生・3年生"
+    }
+  ],
+  "players": [
+    {
+      "id": "u12-01",
+      "category": "U-12",
+      "number": 8,
+      "name": "氏名準備中",
+      "position": "FP",
+      "photo": "",
+      "photoPosition": "center 35%",
+      "message": "",
+      "isPublished": true
+    },
+    {
+      "id": "u11-01",
+      "category": "U-11",
+      "number": 8,
+      "name": "氏名準備中",
+      "position": "FP",
+      "photo": "",
+      "photoPosition": "center 35%",
+      "message": "",
+      "isPublished": true
+    },
+    {
+      "id": "u10-01",
+      "category": "U-10",
+      "number": 8,
+      "name": "氏名準備中",
+      "position": "FP",
+      "photo": "",
+      "photoPosition": "center 35%",
+      "message": "",
+      "isPublished": true
+    }
+  ]
+}

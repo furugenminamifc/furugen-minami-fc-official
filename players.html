@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>選手紹介｜古堅南FC</title>
-<meta name="description" content="U-12・U-11・U-10のカテゴリー情報を年度別に公開します。">
-<link rel="stylesheet" href="css/style.css?v=1.5">
+<meta name="description" content="古堅南FC U-12・U-11・U-10の選手紹介ページです。">
+<link rel="stylesheet" href="css/style.css?v=1.6">
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
     <nav class="main-nav">
       <a href="index.html">HOME</a>
       <a href="about.html">古堅南FCについて</a>
-      <a href="players.html">選手紹介</a>
+      <a href="players.html" class="current">選手紹介</a>
       <a href="staff.html">スタッフ</a>
       <a href="matches.html">試合・大会</a>
       <a href="results.html">試合結果</a>
@@ -29,30 +29,46 @@
     </nav>
   </div>
 </header>
+
 <main>
   <section class="subhero">
     <div class="container">
-      <span class="eyebrow">PLAYERS / CATEGORY</span>
+      <span class="eyebrow">PLAYERS</span>
       <h1>選手紹介</h1>
-      <p>U-12・U-11・U-10のカテゴリー情報を年度別に公開します。</p>
+      <p>U-12・U-11・U-10の選手を年度ごとに紹介します。</p>
     </div>
   </section>
-  
-<section class="page-section container">
-  <div class="section-title"><h2>CATEGORY <span>カテゴリー</span></h2><span>2026年度</span></div>
-  <div class="category-grid category-grid-v12">
-    <article class="category-card category-card-v12"><div class="category-photo category-photo-real"><img src="images/team-2026.webp" alt="U-12"><span class="year-chip">2026</span></div><div class="body"><h3>U-12</h3><p>小学6年生・5年生</p><a class="category-main-link" href="category.html?category=U-12&year=2026">U-12を見る ›</a></div></article>
-    <article class="category-card category-card-v12"><div class="category-photo category-photo-real"><img src="images/team-2026.webp" alt="U-11"><span class="year-chip">2026</span></div><div class="body"><h3>U-11</h3><p>小学5年生・4年生</p><a class="category-main-link" href="category.html?category=U-11&year=2026">U-11を見る ›</a></div></article>
-    <article class="category-card category-card-v12"><div class="category-photo category-photo-real"><img src="images/team-2026.webp" alt="U-10"><span class="year-chip">2026</span></div><div class="body"><h3>U-10</h3><p>小学4年生・3年生</p><a class="category-main-link" href="category.html?category=U-10&year=2026">U-10を見る ›</a></div></article>
-  </div>
-</section>
+
+  <section class="page-section container">
+    <div class="section-title">
+      <h2>PLAYERS <span id="playerYear">2026年度</span></h2>
+      <span id="playerUpdated">選手名・背番号・ポジション・写真を登録できます</span>
+    </div>
+
+    <div class="player-tabs" id="playerTabs"></div>
+    <div id="playerGroups"></div>
+  </section>
+
+  <section class="page-section container">
+    <div class="staff-note">
+      <h2>選手登録方法</h2>
+      <div class="staff-howto">
+        <div><b>1</b><span>写真を <code>images/players/</code> に追加</span></div>
+        <div><b>2</b><span><code>data/players.json</code> に選手情報を入力</span></div>
+        <div><b>3</b><span>category を U-12 / U-11 / U-10 から指定</span></div>
+        <div><b>4</b><span><code>isPublished: true</code> で公開</span></div>
+      </div>
+      <p>写真がない選手は、背番号入りの仮カードで表示されます。</p>
+    </div>
+  </section>
 </main>
+
 <footer id="contact">
   <div class="container">
     <img class="footer-emblem" src="images/furugen-emblem-transparent-v2.webp?v=1.3.2" alt="古堅南FC エンブレム">
     <h2>古堅南FC</h2>
     <p>FURUGEN MINAMI FOOTBALL CLUB｜沖縄県読谷村</p>
-    <p class="footer-version">Official Website Ver.1.5</p>
+    <p class="footer-version">Official Website Ver.1.6</p>
     <div class="footer-links">
       <a href="about.html">チームについて</a>
       <a href="matches.html">試合・大会</a>
@@ -61,6 +77,8 @@
     </div>
   </div>
 </footer>
-<script src="js/site.js?v=1.5"></script>
+
+<script src="js/site.js?v=1.6"></script>
+<script src="js/players.js?v=1.6"></script>
 </body>
 </html>

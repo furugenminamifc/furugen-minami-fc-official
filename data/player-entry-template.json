@@ -1,0 +1,11 @@
+{
+  "id": "u12-02",
+  "category": "U-12",
+  "number": 10,
+  "name": "氏名",
+  "position": "MF / FW",
+  "photo": "images/players/u12-02.webp",
+  "photoPosition": "center 35%",
+  "message": "ひとことメッセージ",
+  "isPublished": true
+}

@@ -1176,3 +1176,143 @@ footer:before{
     font-size:24px;
   }
 }
+
+
+/* ===== Ver.1.6 選手紹介 実用化版 ===== */
+.player-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:0 0 28px;
+}
+.player-tab{
+  border:1px solid rgba(123,22,52,.20);
+  background:#fff;
+  color:var(--arg-maroon);
+  padding:11px 20px;
+  border-radius:999px;
+  font-weight:900;
+  cursor:pointer;
+}
+.player-tab.active,
+.player-tab:hover{
+  background:var(--arg-maroon);
+  color:#fff;
+}
+.player-category-section{
+  margin-bottom:48px;
+}
+.player-category-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:2px solid rgba(123,22,52,.18);
+}
+.player-category-heading h2{
+  margin:4px 0 2px;
+  color:var(--arg-maroon);
+  font-size:30px;
+}
+.player-category-heading p{
+  margin:0;
+  color:#748899;
+  font-size:12px;
+}
+.player-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.player-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-top:5px solid var(--arg-maroon);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 24px rgba(20,48,72,.07);
+}
+.player-photo,
+.player-placeholder{
+  width:100%;
+  aspect-ratio:4/5;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--arg-sky-soft) 0 36px,
+      #fff 36px 72px
+    );
+}
+.player-photo{overflow:hidden}
+.player-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.player-photo.photo-error::after{
+  content:"PHOTO";
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  color:var(--arg-maroon);
+  font-weight:900;
+}
+.player-placeholder{
+  display:grid;
+  place-items:center;
+}
+.player-placeholder span{
+  width:84px;
+  height:84px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--arg-maroon);
+  color:#fff;
+  font-size:34px;
+  font-weight:900;
+}
+.player-card-body{
+  padding:18px;
+}
+.player-number{
+  color:#7690a2;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.player-card-body h3{
+  margin:5px 0 8px;
+  color:var(--arg-maroon);
+  font-size:20px;
+}
+.player-position{
+  display:inline-block;
+  padding:5px 9px;
+  background:var(--arg-sky-soft);
+  color:#285f79;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+}
+.player-card-body p{
+  margin:10px 0 0;
+  color:#667b8d;
+  line-height:1.7;
+  font-size:12px;
+}
+@media(max-width:1000px){
+  .player-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:800px){
+  .player-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .player-grid{grid-template-columns:1fr 1fr}
+  .player-card-body{padding:14px}
+  .player-card-body h3{font-size:17px}
+}

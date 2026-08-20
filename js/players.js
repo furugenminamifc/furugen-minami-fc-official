@@ -1,0 +1,127 @@
+
+function esc(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function makePlayerCard(item) {
+  const card = document.createElement("article");
+  card.className = "player-card";
+
+  const number = esc(item.number ?? "—");
+  const name = esc(item.name || "氏名準備中");
+  const position = esc(item.position || "—");
+  const photo = String(item.photo || "").trim();
+  const photoPosition = esc(item.photoPosition || "center 35%");
+  const message = esc(item.message || "");
+
+  const media = photo
+    ? `<div class="player-photo">
+         <img src="${esc(photo)}" alt="${name}" loading="lazy"
+              style="object-position:${photoPosition}"
+              onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
+       </div>`
+    : `<div class="player-placeholder"><span>${number}</span></div>`;
+
+  card.innerHTML = `
+    ${media}
+    <div class="player-card-body">
+      <div class="player-number">#${number}</div>
+      <h3>${name}</h3>
+      <span class="player-position">${position}</span>
+      ${message ? `<p>${message}</p>` : ""}
+    </div>
+  `;
+
+  return card;
+}
+
+function renderCategory(root, category, players) {
+  const members = players.filter(p => p.category === category.id);
+
+  const section = document.createElement("section");
+  section.className = "player-category-section";
+  section.dataset.category = category.id;
+
+  section.innerHTML = `
+    <div class="player-category-heading">
+      <div>
+        <span class="eyebrow">${esc(category.id)}</span>
+        <h2>${esc(category.label)}</h2>
+        <p>${esc(category.grade || "")}</p>
+      </div>
+      <span class="staff-count">${members.length}名</span>
+    </div>
+    <div class="player-grid"></div>
+  `;
+
+  const grid = section.querySelector(".player-grid");
+  if (!members.length) {
+    grid.innerHTML = `<div class="empty-state"><b>現在、公開中の選手登録はありません</b></div>`;
+  } else {
+    members.forEach(item => grid.appendChild(makePlayerCard(item)));
+  }
+
+  root.appendChild(section);
+}
+
+async function loadPlayers() {
+  const root = document.querySelector("#playerGroups");
+  const tabs = document.querySelector("#playerTabs");
+  const year = document.querySelector("#playerYear");
+  const updated = document.querySelector("#playerUpdated");
+
+  try {
+    const res = await fetch("data/players.json?v=1.6", { cache: "no-store" });
+    if (!res.ok) throw new Error("players.json load failed");
+
+    const data = await res.json();
+
+    if (year) year.textContent = `${data.year || "—"}年度`;
+    if (updated) updated.textContent = data.updated ? `最終更新：${data.updated}` : "";
+
+    const categories = data.categories || [];
+    const players = (data.players || []).filter(p => p.isPublished !== false);
+
+    root.innerHTML = "";
+    tabs.innerHTML = "";
+
+    categories.forEach((category, index) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "player-tab";
+      btn.textContent = category.label;
+      btn.dataset.target = category.id;
+      if (index === 0) btn.classList.add("active");
+      tabs.appendChild(btn);
+
+      renderCategory(root, category, players);
+    });
+
+    const sections = [...root.querySelectorAll(".player-category-section")];
+    sections.forEach((section, index) => {
+      section.hidden = index !== 0;
+    });
+
+    tabs.addEventListener("click", e => {
+      const btn = e.target.closest(".player-tab");
+      if (!btn) return;
+
+      tabs.querySelectorAll(".player-tab").forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+
+      sections.forEach(section => {
+        section.hidden = section.dataset.category !== btn.dataset.target;
+      });
+    });
+
+  } catch (e) {
+    root.innerHTML = `<div class="empty-state"><b>選手情報を読み込めませんでした</b><p>data/players.json を確認してください。</p></div>`;
+  }
+}
+
+loadPlayers();
