@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>スタッフ｜古堅南FC</title>
-<meta name="description" content="古堅南FCを支えるスタッフを紹介します。">
-<link rel="stylesheet" href="css/style.css?v=1.5">
+<meta name="description" content="古堅南FCを支える代表・監督・コーチ・スタッフを紹介します。">
+<link rel="stylesheet" href="css/style.css?v=1.5.1">
 </head>
 <body>
 <header>
@@ -19,7 +19,7 @@
       <a href="index.html">HOME</a>
       <a href="about.html">古堅南FCについて</a>
       <a href="players.html">選手紹介</a>
-      <a href="staff.html">スタッフ</a>
+      <a href="staff.html" class="current">スタッフ</a>
       <a href="matches.html">試合・大会</a>
       <a href="results.html">試合結果</a>
       <a href="gallery.html">ギャラリー</a>
@@ -29,30 +29,41 @@
     </nav>
   </div>
 </header>
+
 <main>
   <section class="subhero">
     <div class="container">
       <span class="eyebrow">STAFF</span>
       <h1>スタッフ</h1>
-      <p>古堅南FCを支えるスタッフを紹介します。</p>
+      <p>古堅南FCを支える代表・監督・コーチ・スタッフを紹介します。</p>
     </div>
   </section>
-  
-<section class="page-section container">
-  <div class="section-title"><h2>STAFF <span>スタッフ</span></h2></div>
-  <div class="staff-grid">
-    <article class="staff-card"><div class="staff-avatar">COACH</div><h3>代表・監督</h3><p>氏名・プロフィールは公開内容が決まり次第追加できます。</p></article>
-    <article class="staff-card"><div class="staff-avatar">COACH</div><h3>コーチ</h3><p>担当カテゴリー・資格・メッセージなどを掲載できます。</p></article>
-    <article class="staff-card"><div class="staff-avatar">STAFF</div><h3>スタッフ</h3><p>チーム運営を支えるスタッフ情報を掲載できます。</p></article>
-  </div>
-</section>
+
+  <section class="page-section container">
+    <div class="section-title">
+      <h2>STAFF <span>2026年度</span></h2>
+      <span>写真・氏名・担当を後から追加できます</span>
+    </div>
+
+    <div id="staffGrid" class="staff-grid staff-grid-v151">
+      <article class="staff-card"><div class="staff-avatar">STAFF</div><h3>読み込み中</h3><p>スタッフ情報を読み込んでいます。</p></article>
+    </div>
+  </section>
+
+  <section class="page-section container">
+    <div class="staff-note">
+      <h2>公開データについて</h2>
+      <p>スタッフ情報は <code>data/staff.json</code> を編集するだけで更新できます。写真を追加する場合は <code>images/staff/</code> に入れて、JSONの <code>photo</code> にファイル名を指定します。</p>
+    </div>
+  </section>
 </main>
+
 <footer id="contact">
   <div class="container">
     <img class="footer-emblem" src="images/furugen-emblem-transparent-v2.webp?v=1.3.2" alt="古堅南FC エンブレム">
     <h2>古堅南FC</h2>
     <p>FURUGEN MINAMI FOOTBALL CLUB｜沖縄県読谷村</p>
-    <p class="footer-version">Official Website Ver.1.5</p>
+    <p class="footer-version">Official Website Ver.1.5.1.1</p>
     <div class="footer-links">
       <a href="about.html">チームについて</a>
       <a href="matches.html">試合・大会</a>
@@ -61,6 +72,8 @@
     </div>
   </div>
 </footer>
-<script src="js/site.js?v=1.5"></script>
+
+<script src="js/site.js?v=1.5.1"></script>
+<script src="js/staff.js?v=1.5.1"></script>
 </body>
 </html>
