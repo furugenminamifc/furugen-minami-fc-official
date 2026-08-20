@@ -213,3 +213,20 @@ footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center
   .category-team-grid{grid-template-columns:1fr}
   .category-team-photo,.category-team-photo img{min-height:230px}
 }
+
+
+/* ===== Ver.1.3.1 エンブレム透過・白枠改善 ===== */
+.emblem-img,
+.footer-emblem{
+  background:transparent !important;
+  box-shadow:none !important;
+  border:none !important;
+  filter:none !important;
+}
+.emblem-img{
+  object-fit:contain !important;
+}
+.footer-emblem{
+  object-fit:contain !important;
+  filter:drop-shadow(0 3px 7px rgba(0,0,0,.16)) !important;
+}
