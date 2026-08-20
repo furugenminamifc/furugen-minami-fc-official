@@ -26,7 +26,7 @@ function makePlayerCard(item) {
 
   const media = photo
     ? `<div class="player-photo player-photo-v167">
-         <img src="${esc(photo)}?v=1.6.7" alt="${name}" loading="lazy"
+         <img src="${esc(photo)}?v=1.6.8" alt="${name}" loading="lazy"
               style="object-position:${photoPosition};object-fit:${photoFit}"
               onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
          <div class="player-photo-overlay"></div>
@@ -106,7 +106,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6.7", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.8", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();

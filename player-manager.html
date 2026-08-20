@@ -3,86 +3,199 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>選手データ作成ツール｜古堅南FC</title>
-<link rel="stylesheet" href="css/style.css?v=1.6.7">
+<title>選手かんたん入力｜古堅南FC</title>
+<link rel="stylesheet" href="css/style.css?v=1.6.8">
 <style>
-body{background:#f5f8fa}
-.manager-wrap{max-width:1100px;margin:40px auto;padding:0 20px}
-.manager-card{background:#fff;border:1px solid #d9e1e7;border-radius:14px;padding:24px;margin-bottom:20px}
-.manager-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.manager-grid label{font-size:12px;font-weight:800;color:#52697a}
-.manager-grid input,.manager-grid select,.manager-grid textarea{
- width:100%;box-sizing:border-box;margin-top:6px;padding:10px;border:1px solid #ccd7df;border-radius:8px
+body{margin:0;background:#f5f8fa;color:#273b4a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+.easy-wrap{max-width:1100px;margin:0 auto;padding:24px}
+.easy-hero{background:linear-gradient(135deg,#dff3fb,#fff);border-left:6px solid #7b1634;border-radius:16px;padding:24px;margin-bottom:18px}
+.easy-hero h1{margin:4px 0 8px;color:#7b1634;font-size:30px}
+.easy-hero p{margin:0;color:#5d7181;line-height:1.8}
+.easy-card{background:#fff;border:1px solid #d9e1e7;border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 8px 20px rgba(20,48,72,.06)}
+.step-title{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.step-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#7b1634;color:#fff;font-weight:900}
+.step-title h2{margin:0;color:#7b1634;font-size:22px}
+.easy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.easy-field{display:flex;flex-direction:column;gap:6px}
+.easy-field.full{grid-column:1/-1}
+.easy-field label{font-weight:800;font-size:12px;color:#4e6576}
+.easy-field input,.easy-field select,.easy-field textarea{
+  width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd7df;border-radius:10px;
+  font-size:16px;background:#fff
 }
-.manager-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.manager-actions button{border:0;border-radius:8px;padding:11px 16px;font-weight:800;cursor:pointer}
-.primary{background:#7b1634;color:white}.secondary{background:#dff0f7;color:#285f79}
-#playerList{display:grid;gap:10px}
-.player-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid #e0e6eb;border-radius:10px;padding:12px}
+.easy-field textarea{min-height:92px;resize:vertical}
+.photo-help{font-size:11px;color:#728697;line-height:1.6}
+.easy-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.easy-btn{border:0;border-radius:10px;padding:12px 18px;font-weight:900;cursor:pointer;font-size:14px}
+.primary{background:#7b1634;color:#fff}
+.secondary{background:#dff1f8;color:#285f79}
+.warn{background:#f7edf1;color:#7b1634}
+.player-list{display:grid;gap:10px}
+.player-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid #e0e6eb;border-radius:12px;padding:12px;background:#fbfdfe}
+.player-row b{color:#7b1634}
 .player-row small{color:#6f8291}
-pre{white-space:pre-wrap;background:#15212b;color:#eef7fb;padding:16px;border-radius:10px;overflow:auto}
-@media(max-width:700px){.manager-grid{grid-template-columns:1fr}.player-row{grid-template-columns:1fr}}
+.player-row button{border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.status{margin-top:12px;padding:10px 12px;border-radius:8px;background:#edf8ee;color:#356d3d;display:none}
+.output-box{white-space:pre-wrap;background:#15212b;color:#eef7fb;padding:16px;border-radius:12px;overflow:auto;max-height:360px;font-size:12px}
+.notice{background:#fff8df;border:1px solid #ecd68a;border-radius:12px;padding:14px;color:#6a5b2b;line-height:1.7}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:14px}
+.preview-card{border:1px solid #dfe6eb;border-radius:12px;overflow:hidden;background:#fff}
+.preview-photo{aspect-ratio:4/5;display:grid;place-items:center;background:repeating-linear-gradient(90deg,#dff1f8 0 32px,#fff 32px 64px);color:#7b1634;font-weight:900;font-size:32px}
+.preview-body{padding:10px}
+.preview-body h3{margin:2px 0 4px;color:#7b1634;font-size:15px}
+.preview-body small{color:#718696}
+@media(max-width:700px){
+  .easy-wrap{padding:14px}
+  .easy-grid{grid-template-columns:1fr}
+  .easy-field.full{grid-column:auto}
+}
 </style>
 </head>
 <body>
-<div class="manager-wrap">
-  <div class="manager-card">
-    <span class="eyebrow">PLAYER DATA TOOL</span>
-    <h1>選手データ作成ツール</h1>
-    <p>この画面で選手情報を入力し、完成したJSONをコピーして <code>data/players.json</code> に反映できます。</p>
-  </div>
+<div class="easy-wrap">
+  <section class="easy-hero">
+    <span style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#7b1634">PLAYER EASY ENTRY</span>
+    <h1>選手かんたん入力</h1>
+    <p>難しいJSON編集をしなくても、必要項目を入力して「選手を追加」を押すだけでデータを作れます。</p>
+  </section>
 
-  <div class="manager-card">
-    <div class="manager-grid">
-      <label>カテゴリー<select id="category"><option>U-12</option><option>U-11</option><option>U-10</option></select></label>
-      <label>背番号<input id="number" type="number" min="1" max="99" value="8"></label>
-      <label>氏名<input id="name" placeholder="氏名"></label>
-      <label>ふりがな<input id="nameKana" placeholder="しめい"></label>
-      <label>学年<input id="grade" placeholder="6年生"></label>
-      <label>ポジション<input id="position" placeholder="MF / FW"></label>
-      <label>利き足<select id="foot"><option value="">未設定</option><option>右</option><option>左</option><option>両</option></select></label>
-      <label>写真パス<input id="photo" placeholder="images/players/u12-01.webp"></label><label>写真位置<input id="photoPosition" value="center 35%" placeholder="center 35%"></label>
-      <label style="grid-column:1/-1">紹介文<textarea id="profile" rows="3" placeholder="プレースタイルやひとこと紹介"></textarea></label>
-      <label>CAPTAIN<select id="captain"><option value="false">いいえ</option><option value="true">はい</option></select></label>
-      <label>公開<select id="published"><option value="true">公開</option><option value="false">非公開</option></select></label>
-    </div>
-    <div class="manager-actions">
-      <button class="primary" id="addBtn">選手を追加</button>
-      <button class="secondary" id="clearBtn">入力をクリア</button>
-    </div>
-  </div>
+  <section class="easy-card">
+    <div class="step-title"><span class="step-num">1</span><h2>選手情報を入力</h2></div>
+    <div class="easy-grid">
+      <div class="easy-field">
+        <label>カテゴリー</label>
+        <select id="category">
+          <option value="U-12">U-12</option>
+          <option value="U-11">U-11</option>
+          <option value="U-10">U-10</option>
+        </select>
+      </div>
 
-  <div class="manager-card">
-    <h2>登録中の選手</h2>
-    <div id="playerList"></div>
-  </div>
+      <div class="easy-field">
+        <label>背番号</label>
+        <input id="number" type="number" min="1" max="99" value="8">
+      </div>
 
-  <div class="manager-card">
-    <h2>完成JSON</h2>
-    <div class="manager-actions">
-      <button class="primary" id="copyBtn">JSONをコピー</button>
-      <button class="secondary" id="downloadBtn">players.jsonを保存</button>
+      <div class="easy-field">
+        <label>氏名</label>
+        <input id="name" placeholder="例：古堅 太郎">
+      </div>
+
+      <div class="easy-field">
+        <label>ふりがな</label>
+        <input id="nameKana" placeholder="例：ふるげん たろう">
+      </div>
+
+      <div class="easy-field">
+        <label>学年</label>
+        <select id="grade">
+          <option value="">選択してください</option>
+          <option>6年生</option>
+          <option>5年生</option>
+          <option>4年生</option>
+          <option>3年生</option>
+        </select>
+      </div>
+
+      <div class="easy-field">
+        <label>ポジション</label>
+        <select id="position">
+          <option value="FP">FP</option>
+          <option value="GP">GP</option>
+          <option value="FP / GP">FP / GP</option>
+          <option value="DF">DF</option>
+          <option value="MF">MF</option>
+          <option value="FW">FW</option>
+          <option value="DF / MF">DF / MF</option>
+          <option value="MF / FW">MF / FW</option>
+        </select>
+      </div>
+
+      <div class="easy-field">
+        <label>利き足</label>
+        <select id="foot">
+          <option value="">未設定</option>
+          <option value="右">右</option>
+          <option value="左">左</option>
+          <option value="両">両</option>
+        </select>
+      </div>
+
+      <div class="easy-field">
+        <label>CAPTAIN</label>
+        <select id="captain">
+          <option value="false">いいえ</option>
+          <option value="true">はい</option>
+        </select>
+      </div>
+
+      <div class="easy-field full">
+        <label>写真ファイル名</label>
+        <input id="photoName" placeholder="例：u12-08-taro.webp">
+        <div class="photo-help">写真をGitHubの <b>images/players/</b> フォルダへアップロードしたあと、ここにファイル名だけ入力します。</div>
+      </div>
+
+      <div class="easy-field">
+        <label>写真の位置</label>
+        <select id="photoPosition">
+          <option value="center 35%">標準</option>
+          <option value="center 25%">顔を少し上へ</option>
+          <option value="center 45%">顔を少し下へ</option>
+          <option value="center center">中央</option>
+        </select>
+      </div>
+
+      <div class="easy-field">
+        <label>公開設定</label>
+        <select id="published">
+          <option value="true">公開する</option>
+          <option value="false">まだ公開しない</option>
+        </select>
+      </div>
+
+      <div class="easy-field full">
+        <label>ひとこと紹介</label>
+        <textarea id="profile" placeholder="例：ドリブルとパスが得意。チームのために全力でプレーします。"></textarea>
+      </div>
     </div>
-    <pre id="jsonPreview"></pre>
-  </div>
+
+    <div class="easy-actions">
+      <button class="easy-btn primary" id="addBtn">この選手を追加</button>
+      <button class="easy-btn secondary" id="clearBtn">入力をクリア</button>
+    </div>
+    <div id="status" class="status">追加しました。</div>
+  </section>
+
+  <section class="easy-card">
+    <div class="step-title"><span class="step-num">2</span><h2>登録中の選手を確認</h2></div>
+    <div id="playerList" class="player-list"></div>
+    <div id="preview" class="preview-grid"></div>
+  </section>
+
+  <section class="easy-card">
+    <div class="step-title"><span class="step-num">3</span><h2>players.json を作成</h2></div>
+    <div class="notice">
+      全員入力したら「players.jsonを保存」を押してください。そのファイルをGitHubの <b>data/players.json</b> と入れ替えれば反映できます。
+    </div>
+    <div class="easy-actions">
+      <button class="easy-btn primary" id="downloadBtn">players.jsonを保存</button>
+      <button class="easy-btn secondary" id="copyBtn">JSONをコピー</button>
+      <button class="easy-btn warn" id="resetBtn">全員クリア</button>
+    </div>
+    <pre id="jsonPreview" class="output-box"></pre>
+  </section>
 </div>
 
 <script>
 const players = [];
 const $ = id => document.getElementById(id);
 
-function render(){
-  const list = $("playerList");
-  list.innerHTML = "";
-  players.sort((a,b)=> a.category.localeCompare(b.category) || Number(a.number)-Number(b.number));
-  players.forEach((p,i)=>{
-    const row = document.createElement("div");
-    row.className = "player-row";
-    row.innerHTML = `<div><b>${p.category} #${p.number} ${p.name || "氏名未入力"}</b><br><small>${p.grade || ""} ${p.position || ""}</small></div><button data-i="${i}">削除</button>`;
-    row.querySelector("button").onclick=()=>{players.splice(i,1);render();};
-    list.appendChild(row);
-  });
-  const output = {
+function uid(category, number, index){
+  return `${category.toLowerCase()}-${String(number).padStart(2,"0")}-${String(index+1).padStart(2,"0")}`;
+}
+
+function buildOutput(){
+  return {
     year: 2026,
     updated: new Date().toISOString().slice(0,10),
     categories: [
@@ -92,43 +205,104 @@ function render(){
     ],
     players
   };
-  $("jsonPreview").textContent = JSON.stringify(output,null,2);
 }
+
+function render(){
+  const list = $("playerList");
+  const preview = $("preview");
+  list.innerHTML = "";
+  preview.innerHTML = "";
+
+  players.sort((a,b)=> a.category.localeCompare(b.category) || Number(a.number)-Number(b.number));
+
+  players.forEach((p,i)=>{
+    const row = document.createElement("div");
+    row.className = "player-row";
+    row.innerHTML = `
+      <div>
+        <b>${p.category} #${p.number} ${p.name || "氏名未入力"}</b><br>
+        <small>${p.grade || ""} ${p.position || ""} ${p.dominantFoot ? "・"+p.dominantFoot+"利き" : ""}</small>
+      </div>
+      <button data-i="${i}">削除</button>
+    `;
+    row.querySelector("button").onclick=()=>{players.splice(i,1);render();};
+    list.appendChild(row);
+
+    const card = document.createElement("div");
+    card.className = "preview-card";
+    card.innerHTML = `
+      <div class="preview-photo">${p.photo ? "PHOTO" : p.number}</div>
+      <div class="preview-body">
+        <small>#${p.number} ${p.category}</small>
+        <h3>${p.name || "氏名未入力"}</h3>
+        <small>${p.grade || ""} ${p.position || ""}</small>
+      </div>
+    `;
+    preview.appendChild(card);
+  });
+
+  $("jsonPreview").textContent = JSON.stringify(buildOutput(), null, 2);
+}
+
 $("addBtn").onclick=()=>{
+  const category = $("category").value;
+  const number = Number($("number").value || 0);
+  const photoName = $("photoName").value.trim();
+
   players.push({
-    id: `${$("category").value.toLowerCase()}-${String(players.length+1).padStart(2,"0")}`,
-    category:$("category").value,
-    number:Number($("number").value || 0),
+    id: uid(category, number, players.length),
+    category,
+    number,
     name:$("name").value.trim(),
     nameKana:$("nameKana").value.trim(),
-    grade:$("grade").value.trim(),
-    position:$("position").value.trim(),
+    grade:$("grade").value,
+    position:$("position").value,
     dominantFoot:$("foot").value,
     profile:$("profile").value.trim(),
-    photo:$("photo").value.trim(),
-    photoPosition:$("photoPosition").value.trim() || "center 35%",
+    photo: photoName ? `images/players/${photoName}` : "",
+    photoPosition:$("photoPosition").value,
     photoFit:"cover",
     captain:$("captain").value==="true",
     isPublished:$("published").value==="true"
   });
+
   render();
+  $("status").style.display = "block";
+  setTimeout(()=>$("status").style.display="none",1800);
 };
+
 $("clearBtn").onclick=()=>{
-  ["name","nameKana","grade","position","photo","profile"].forEach(id=>$(id).value="");
+  ["name","nameKana","photoName","profile"].forEach(id=>$(id).value="");
   $("number").value=8;
+  $("grade").value="";
+  $("position").value="FP";
+  $("foot").value="";
+  $("captain").value="false";
+  $("published").value="true";
+  $("photoPosition").value="center 35%";
 };
+
 $("copyBtn").onclick=async()=>{
   await navigator.clipboard.writeText($("jsonPreview").textContent);
   alert("JSONをコピーしました");
 };
+
 $("downloadBtn").onclick=()=>{
   const blob = new Blob([$("jsonPreview").textContent],{type:"application/json"});
   const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);
   a.download="players.json";
   a.click();
-  URL.revokeObjectURL(a.href);
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
 };
+
+$("resetBtn").onclick=()=>{
+  if(confirm("登録中の選手を全員クリアしますか？")){
+    players.length=0;
+    render();
+  }
+};
+
 render();
 </script>
 </body>
