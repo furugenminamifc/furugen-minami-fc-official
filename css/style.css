@@ -108,3 +108,41 @@ footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center
   .team-highlight-inner{display:block}
   .team-highlight .btn{margin-top:18px}
 }
+
+
+/* ===== Ver.1.1.1 トップ画面表示完全修正版 ===== */
+.emblem-img{
+  width:56px !important;
+  height:64px !important;
+  max-width:56px !important;
+  max-height:64px !important;
+  object-fit:contain !important;
+}
+.footer-emblem{
+  width:86px !important;
+  height:96px !important;
+  max-width:86px !important;
+  max-height:96px !important;
+  object-fit:contain !important;
+}
+.hero-photo{
+  overflow:hidden;
+}
+.hero-photo img{
+  width:100% !important;
+  height:100% !important;
+  max-width:none !important;
+  object-fit:cover !important;
+  object-position:center 47% !important;
+}
+@media(max-width:700px){
+  .emblem-img{
+    width:48px !important;
+    height:54px !important;
+    max-width:48px !important;
+    max-height:54px !important;
+  }
+  .hero-photo img{
+    object-position:center center !important;
+  }
+}
