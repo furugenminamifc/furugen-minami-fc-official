@@ -28,7 +28,11 @@
       "photo": "",
       "photoPosition": "center 35%",
       "message": "",
-      "isPublished": true
+      "isPublished": true,
+      "nameKana": "",
+      "grade": "",
+      "dominantFoot": "",
+      "profile": ""
     },
     {
       "id": "u11-01",
@@ -39,7 +43,11 @@
       "photo": "",
       "photoPosition": "center 35%",
       "message": "",
-      "isPublished": true
+      "isPublished": true,
+      "nameKana": "",
+      "grade": "",
+      "dominantFoot": "",
+      "profile": ""
     },
     {
       "id": "u10-01",
@@ -50,7 +58,11 @@
       "photo": "",
       "photoPosition": "center 35%",
       "message": "",
-      "isPublished": true
+      "isPublished": true,
+      "nameKana": "",
+      "grade": "",
+      "dominantFoot": "",
+      "profile": ""
     }
   ]
 }

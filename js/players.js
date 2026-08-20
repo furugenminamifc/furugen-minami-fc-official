@@ -10,33 +10,42 @@ function esc(value) {
 
 function makePlayerCard(item) {
   const card = document.createElement("article");
-  card.className = "player-card";
+  card.className = "player-card player-card-v161";
 
   const number = esc(item.number ?? "—");
   const name = esc(item.name || "氏名準備中");
+  const nameKana = esc(item.nameKana || "");
+  const grade = esc(item.grade || "");
   const position = esc(item.position || "—");
+  const foot = esc(item.dominantFoot || "");
+  const profile = esc(item.profile || item.message || "");
   const photo = String(item.photo || "").trim();
   const photoPosition = esc(item.photoPosition || "center 35%");
-  const message = esc(item.message || "");
 
   const media = photo
-    ? `<div class="player-photo">
+    ? `<div class="player-photo player-photo-v161">
          <img src="${esc(photo)}" alt="${name}" loading="lazy"
               style="object-position:${photoPosition}"
               onerror="this.closest('.player-photo').classList.add('photo-error');this.remove();">
        </div>`
-    : `<div class="player-placeholder"><span>${number}</span></div>`;
+    : `<div class="player-placeholder player-placeholder-v161"><span>${number}</span></div>`;
 
   card.innerHTML = `
     ${media}
     <div class="player-card-body">
-      <div class="player-number">#${number}</div>
+      <div class="player-card-topline">
+        <div class="player-number">#${number}</div>
+        ${grade ? `<span class="player-grade">${grade}</span>` : ""}
+      </div>
       <h3>${name}</h3>
-      <span class="player-position">${position}</span>
-      ${message ? `<p>${message}</p>` : ""}
+      ${nameKana ? `<p class="player-kana">${nameKana}</p>` : ""}
+      <div class="player-tags">
+        <span class="player-position">${position}</span>
+        ${foot ? `<span class="player-foot">${foot}利き</span>` : ""}
+      </div>
+      ${profile ? `<p class="player-profile">${profile}</p>` : ""}
     </div>
   `;
-
   return card;
 }
 
@@ -76,7 +85,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.1", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();
@@ -103,9 +112,7 @@ async function loadPlayers() {
     });
 
     const sections = [...root.querySelectorAll(".player-category-section")];
-    sections.forEach((section, index) => {
-      section.hidden = index !== 0;
-    });
+    sections.forEach((section, index) => section.hidden = index !== 0);
 
     tabs.addEventListener("click", e => {
       const btn = e.target.closest(".player-tab");

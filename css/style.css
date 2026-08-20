@@ -1316,3 +1316,59 @@ footer:before{
   .player-card-body{padding:14px}
   .player-card-body h3{font-size:17px}
 }
+
+
+/* ===== Ver.1.6.1 実選手登録・写真対応版 ===== */
+.player-card-v161{
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.player-card-v161:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(20,48,72,.12);
+}
+.player-photo-v161,
+.player-placeholder-v161{
+  aspect-ratio:4/5;
+}
+.player-card-topline{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.player-grade{
+  font-size:10px;
+  font-weight:900;
+  color:var(--arg-maroon);
+  background:#f7edf1;
+  padding:4px 8px;
+  border-radius:999px;
+}
+.player-kana{
+  margin:0 0 10px!important;
+  color:#8193a1!important;
+  font-size:10px!important;
+  letter-spacing:.06em;
+}
+.player-tags{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.player-foot{
+  display:inline-block;
+  padding:5px 9px;
+  background:#f3f5f7;
+  color:#526a7b;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+}
+.player-profile{
+  margin:12px 0 0!important;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  color:#63798b!important;
+  font-size:12px!important;
+  line-height:1.8!important;
+}
