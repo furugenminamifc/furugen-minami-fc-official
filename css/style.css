@@ -146,3 +146,34 @@ footer{background:var(--maroon-dark);color:#fff;padding:45px 0;text-align:center
     object-position:center center !important;
   }
 }
+
+
+/* ===== Ver.1.2 カテゴリー・年度アーカイブ強化 ===== */
+.category-grid-v12{align-items:stretch}
+.category-card-v12{transition:transform .18s ease,box-shadow .18s ease}
+.category-card-v12:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(16,43,69,.10)}
+.category-photo-real{height:190px;overflow:hidden;background:#dff5fb}
+.category-photo-real img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+.category-photo-u11 img{object-position:center 50%}
+.category-photo-u10 img{object-position:center 58%}
+.category-photo-real:after{display:none}
+.year-chip{
+  position:absolute;top:12px;right:12px;background:var(--maroon);color:#fff;
+  font-size:10px;font-weight:900;padding:5px 9px;border-radius:999px;letter-spacing:.08em
+}
+.category-topline{display:flex;align-items:end;justify-content:space-between;gap:12px}
+.category-topline span{font-size:11px;color:var(--muted);font-weight:800}
+.category-main-link{
+  display:block;background:var(--maroon);color:#fff!important;text-align:center;
+  border-radius:6px;padding:11px 12px;font-size:12px!important;font-weight:900
+}
+.annual-v12 .yearbox{min-width:0}
+.archive-year-current{font-size:30px;color:var(--maroon);font-weight:900;margin:12px 0}
+.archive-links{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}
+.archive-links a{background:#f2f8fb;border:1px solid var(--line);border-radius:6px;padding:10px;text-align:center;color:var(--aqua-dark);font-weight:900;font-size:12px}
+.archive-links a:hover{background:var(--aqua);color:#fff}
+.achievement-item{padding:12px 14px;border:1px solid var(--line);border-radius:7px;margin-bottom:8px;background:#fff}
+@media(max-width:700px){
+  .category-photo-real{height:210px}
+  .archive-links{grid-template-columns:1fr}
+}
