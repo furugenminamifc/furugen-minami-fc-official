@@ -42,7 +42,14 @@ async function initCategoryPage() {
 
   try {
     const data = await getJSON(`data/${year}/${normalizeCategoryFilename(category)}.json`);
-    document.querySelector("#categoryIntro").textContent = data.intro || `${catMeta.label}の活動紹介です。`;
+    document.querySelector("#categoryIntro").textContent = data.intro || `${catMeta.label}の活動紹介です.`;
+    document.querySelector("#categoryTeamText").textContent = data.intro || `${catMeta.label}の活動紹介です。`;
+    document.querySelector("#categoryTeamName").textContent = `古堅南FC ${catMeta.label}`;
+    document.querySelector("#categoryYearBadge").textContent = `${year}年度`;
+    document.querySelector("#categoryGradeBadge").textContent = catMeta.grades;
+    if (data.heroImage) {
+      document.querySelector("#categoryHeroImage").src = data.heroImage;
+    }
 
     const stats = {
       players: data.players?.length || 0,
@@ -56,6 +63,7 @@ async function initCategoryPage() {
     document.querySelector("#statAchievements").textContent = stats.achievements || "—";
 
     renderPlayers(data.players || []);
+    renderSchedule(data.schedule || []);
     renderMatches(data.matches || data.results || []);
     renderAchievements(data.achievements || []);
   } catch (e) {
@@ -101,3 +109,19 @@ function renderAchievements(items) {
 }
 
 initCategoryPage().catch(console.error);
+
+
+function renderSchedule(items) {
+  const tbody = document.querySelector("#scheduleBody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  if (!items.length) {
+    tbody.innerHTML = `<tr><td>—</td><td>試合予定準備中</td><td>—</td><td>—</td></tr>`;
+    return;
+  }
+  items.forEach(m => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${m.date ?? "—"}</td><td>${m.competition ?? m.name ?? "—"}</td><td>${m.opponent ?? "—"}</td><td>${m.venue ?? "—"}</td>`;
+    tbody.appendChild(tr);
+  });
+}

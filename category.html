@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>古堅南FC カテゴリー</title><link rel="stylesheet" href="css/style.css?v=1.2">
+<title>古堅南FC カテゴリー</title><link rel="stylesheet" href="css/style.css?v=1.3">
 </head>
 <body>
 <header><div class="container header-inner"><a class="logo" href="index.html"><img class="emblem-img" src="images/furugen-emblem.webp?v=1.1.1" alt="古堅南FC エンブレム" width="56" height="64" style="width:56px;height:64px;object-fit:contain;display:block;"><div><strong>古堅南FC</strong><small>FURUGEN MINAMI FOOTBALL CLUB</small></div></a><nav><a href="index.html">HOME</a><a href="index.html#categories">カテゴリー</a><a href="index.html#matches">試合・大会</a><a href="index.html#gallery">ギャラリー</a><a href="index.html#join">入団案内</a></nav></div></header>
@@ -12,11 +12,44 @@
 <div class="section-title"><h2>年度を選択</h2></div>
 <select id="yearSelect"><option>2026年度</option><option>2025年度（準備中）</option><option>2024年度（準備中）</option></select>
 <div class="stats"><div class="stat"><small>選手数</small><b id="statPlayers">—</b></div><div class="stat"><small>試合数</small><b id="statMatches">—</b></div><div class="stat"><small>勝利</small><b id="statWins">—</b></div><div class="stat"><small>大会成績</small><b id="statAchievements">—</b></div></div>
-<section class="section"><div class="section-title"><h2>選手紹介</h2></div><p>2026年度の選手データをここに追加できます。</p><table class="data-table"><thead><tr><th>背番号</th><th>名前</th><th>ポジション</th></tr></thead><tbody id="playersBody"><tr><td>—</td><td>選手データ準備中</td><td>—</td></tr></tbody></table></section>
-<section class="section"><div class="section-title"><h2>試合結果</h2></div><table class="data-table"><thead><tr><th>日付</th><th>大会・試合</th><th>対戦相手</th><th>結果</th></tr></thead><tbody id="matchesBody"><tr><td>—</td><td>試合データ準備中</td><td>—</td><td>—</td></tr></tbody></table></section>
-<section class="section"><div class="section-title"><h2>大会成績</h2></div><div id="achievementsList"><p>大会成績は準備中です。</p></div></section>
-<section class="section"><div class="section-title"><h2>ギャラリー</h2></div><div class="gallery"><div></div><div></div><div></div></div></section>
+
+<nav class="category-tabs" aria-label="カテゴリー内メニュー">
+  <a href="#team">チーム紹介</a>
+  <a href="#playersSection">選手紹介</a>
+  <a href="#scheduleSection">試合予定</a>
+  <a href="#resultsSection">試合結果</a>
+  <a href="#achievementsSection">大会成績</a>
+  <a href="#gallerySection">ギャラリー</a>
+</nav>
+
+<section class="section category-team-section" id="team">
+  <div class="section-title"><h2>チーム紹介</h2></div>
+  <div class="category-team-grid">
+    <div class="category-team-photo">
+      <img id="categoryHeroImage" src="images/team-2026.webp?v=1.3" alt="古堅南FC チーム写真">
+    </div>
+    <div>
+      <h3 id="categoryTeamName">古堅南FC</h3>
+      <p id="categoryTeamText">カテゴリー紹介を読み込んでいます。</p>
+      <div class="team-meta">
+        <span id="categoryYearBadge">2026年度</span>
+        <span id="categoryGradeBadge">対象学年</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="playersSection"><div class="section-title"><h2>選手紹介</h2></div><p>2026年度の選手データをここに追加できます。</p><table class="data-table"><thead><tr><th>背番号</th><th>名前</th><th>ポジション</th></tr></thead><tbody id="playersBody"><tr><td>—</td><td>選手データ準備中</td><td>—</td></tr></tbody></table></section>
+<section class="section" id="scheduleSection">
+  <div class="section-title"><h2>試合予定</h2></div>
+  <table class="data-table">
+    <thead><tr><th>日付</th><th>大会・試合</th><th>対戦相手</th><th>会場</th></tr></thead>
+    <tbody id="scheduleBody"><tr><td>—</td><td>試合予定準備中</td><td>—</td><td>—</td></tr></tbody>
+  </table>
+</section>
+<section class="section" id="resultsSection"><div class="section-title"><h2>試合結果</h2></div><table class="data-table"><thead><tr><th>日付</th><th>大会・試合</th><th>対戦相手</th><th>結果</th></tr></thead><tbody id="matchesBody"><tr><td>—</td><td>試合データ準備中</td><td>—</td><td>—</td></tr></tbody></table></section>
+<section class="section" id="achievementsSection"><div class="section-title"><h2>大会成績</h2></div><div id="achievementsList"><p>大会成績は準備中です。</p></div></section>
+<section class="section" id="gallerySection"><div class="section-title"><h2>ギャラリー</h2></div><div class="gallery"><div></div><div></div><div></div></div></section>
 </main>
 <footer><div class="container"><img class="footer-emblem" src="images/furugen-emblem.webp?v=1.1.1" alt="古堅南FC エンブレム" width="86" height="96" style="width:86px;height:96px;object-fit:contain;display:block;margin:0 auto 14px;"><h2>古堅南FC</h2><small>FURUGEN MINAMI FOOTBALL CLUB</small></div></footer>
-<script src="js/category.js?v=1.2"></script>
+<script src="js/category.js?v=1.3"></script>
 </body></html>
