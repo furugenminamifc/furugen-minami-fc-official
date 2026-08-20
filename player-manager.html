@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>選手データ作成ツール｜古堅南FC</title>
+<link rel="stylesheet" href="css/style.css?v=1.6.6">
+<style>
+body{background:#f5f8fa}
+.manager-wrap{max-width:1100px;margin:40px auto;padding:0 20px}
+.manager-card{background:#fff;border:1px solid #d9e1e7;border-radius:14px;padding:24px;margin-bottom:20px}
+.manager-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.manager-grid label{font-size:12px;font-weight:800;color:#52697a}
+.manager-grid input,.manager-grid select,.manager-grid textarea{
+ width:100%;box-sizing:border-box;margin-top:6px;padding:10px;border:1px solid #ccd7df;border-radius:8px
+}
+.manager-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.manager-actions button{border:0;border-radius:8px;padding:11px 16px;font-weight:800;cursor:pointer}
+.primary{background:#7b1634;color:white}.secondary{background:#dff0f7;color:#285f79}
+#playerList{display:grid;gap:10px}
+.player-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid #e0e6eb;border-radius:10px;padding:12px}
+.player-row small{color:#6f8291}
+pre{white-space:pre-wrap;background:#15212b;color:#eef7fb;padding:16px;border-radius:10px;overflow:auto}
+@media(max-width:700px){.manager-grid{grid-template-columns:1fr}.player-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="manager-wrap">
+  <div class="manager-card">
+    <span class="eyebrow">PLAYER DATA TOOL</span>
+    <h1>選手データ作成ツール</h1>
+    <p>この画面で選手情報を入力し、完成したJSONをコピーして <code>data/players.json</code> に反映できます。</p>
+  </div>
+
+  <div class="manager-card">
+    <div class="manager-grid">
+      <label>カテゴリー<select id="category"><option>U-12</option><option>U-11</option><option>U-10</option></select></label>
+      <label>背番号<input id="number" type="number" min="1" max="99" value="8"></label>
+      <label>氏名<input id="name" placeholder="氏名"></label>
+      <label>ふりがな<input id="nameKana" placeholder="しめい"></label>
+      <label>学年<input id="grade" placeholder="6年生"></label>
+      <label>ポジション<input id="position" placeholder="MF / FW"></label>
+      <label>利き足<select id="foot"><option value="">未設定</option><option>右</option><option>左</option><option>両</option></select></label>
+      <label>写真パス<input id="photo" placeholder="images/players/u12-01.webp"></label>
+      <label style="grid-column:1/-1">紹介文<textarea id="profile" rows="3" placeholder="プレースタイルやひとこと紹介"></textarea></label>
+      <label>CAPTAIN<select id="captain"><option value="false">いいえ</option><option value="true">はい</option></select></label>
+      <label>公開<select id="published"><option value="true">公開</option><option value="false">非公開</option></select></label>
+    </div>
+    <div class="manager-actions">
+      <button class="primary" id="addBtn">選手を追加</button>
+      <button class="secondary" id="clearBtn">入力をクリア</button>
+    </div>
+  </div>
+
+  <div class="manager-card">
+    <h2>登録中の選手</h2>
+    <div id="playerList"></div>
+  </div>
+
+  <div class="manager-card">
+    <h2>完成JSON</h2>
+    <div class="manager-actions">
+      <button class="primary" id="copyBtn">JSONをコピー</button>
+      <button class="secondary" id="downloadBtn">players.jsonを保存</button>
+    </div>
+    <pre id="jsonPreview"></pre>
+  </div>
+</div>
+
+<script>
+const players = [];
+const $ = id => document.getElementById(id);
+
+function render(){
+  const list = $("playerList");
+  list.innerHTML = "";
+  players.sort((a,b)=> a.category.localeCompare(b.category) || Number(a.number)-Number(b.number));
+  players.forEach((p,i)=>{
+    const row = document.createElement("div");
+    row.className = "player-row";
+    row.innerHTML = `<div><b>${p.category} #${p.number} ${p.name || "氏名未入力"}</b><br><small>${p.grade || ""} ${p.position || ""}</small></div><button data-i="${i}">削除</button>`;
+    row.querySelector("button").onclick=()=>{players.splice(i,1);render();};
+    list.appendChild(row);
+  });
+  const output = {
+    year: 2026,
+    updated: new Date().toISOString().slice(0,10),
+    categories: [
+      {id:"U-12",label:"U-12",grade:"小学6年生・5年生"},
+      {id:"U-11",label:"U-11",grade:"小学5年生・4年生"},
+      {id:"U-10",label:"U-10",grade:"小学4年生・3年生"}
+    ],
+    players
+  };
+  $("jsonPreview").textContent = JSON.stringify(output,null,2);
+}
+$("addBtn").onclick=()=>{
+  players.push({
+    id: `${$("category").value.toLowerCase()}-${String(players.length+1).padStart(2,"0")}`,
+    category:$("category").value,
+    number:Number($("number").value || 0),
+    name:$("name").value.trim(),
+    nameKana:$("nameKana").value.trim(),
+    grade:$("grade").value.trim(),
+    position:$("position").value.trim(),
+    dominantFoot:$("foot").value,
+    profile:$("profile").value.trim(),
+    photo:$("photo").value.trim(),
+    photoPosition:"center 35%",
+    captain:$("captain").value==="true",
+    isPublished:$("published").value==="true"
+  });
+  render();
+};
+$("clearBtn").onclick=()=>{
+  ["name","nameKana","grade","position","photo","profile"].forEach(id=>$(id).value="");
+  $("number").value=8;
+};
+$("copyBtn").onclick=async()=>{
+  await navigator.clipboard.writeText($("jsonPreview").textContent);
+  alert("JSONをコピーしました");
+};
+$("downloadBtn").onclick=()=>{
+  const blob = new Blob([$("jsonPreview").textContent],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="players.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+render();
+</script>
+</body>
+</html>
