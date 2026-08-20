@@ -1560,3 +1560,82 @@ footer:before{
     font-size:30px;
   }
 }
+
+
+/* ===== Ver.1.6.5 選手カード自動レイアウト・中央配置版 ===== */
+.player-grid-v164{
+  width:100%;
+  margin-inline:auto;
+}
+
+/* 1名：中央に1枚 */
+.player-grid-v164.player-grid-count-1{
+  grid-template-columns:minmax(220px, 300px);
+  justify-content:center;
+}
+
+/* 2名：中央に2枚 */
+.player-grid-v164.player-grid-count-2{
+  grid-template-columns:repeat(2,minmax(220px,300px));
+  justify-content:center;
+}
+
+/* 3名：中央に3枚 */
+.player-grid-v164.player-grid-count-3{
+  grid-template-columns:repeat(3,minmax(220px,300px));
+  justify-content:center;
+}
+
+/* 4名以上：画面幅に応じて自動折返し */
+.player-grid-v164.player-grid-count-many{
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  justify-content:center;
+}
+
+/* カードの最大横幅を揃える */
+.player-grid-v164 .player-card-v164{
+  width:100%;
+  max-width:300px;
+  justify-self:center;
+}
+
+/* カテゴリー表示全体も視線を中央へ */
+.player-category-section{
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* 余白バランス */
+.player-category-heading{
+  margin-bottom:24px;
+}
+
+@media(max-width:760px){
+  .player-grid-v164.player-grid-count-1{
+    grid-template-columns:minmax(200px, 280px);
+  }
+
+  .player-grid-v164.player-grid-count-2,
+  .player-grid-v164.player-grid-count-3,
+  .player-grid-v164.player-grid-count-many{
+    grid-template-columns:repeat(2,minmax(150px,1fr));
+  }
+
+  .player-grid-v164 .player-card-v164{
+    max-width:none;
+  }
+}
+
+@media(max-width:480px){
+  .player-grid-v164.player-grid-count-1{
+    grid-template-columns:minmax(190px, 260px);
+  }
+
+  .player-grid-v164.player-grid-count-2,
+  .player-grid-v164.player-grid-count-3,
+  .player-grid-v164.player-grid-count-many{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+}

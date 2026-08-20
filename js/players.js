@@ -82,9 +82,17 @@ function renderCategory(root, category, players) {
   `;
 
   const grid = section.querySelector(".player-grid");
+
   if (!members.length) {
     grid.innerHTML = `<div class="empty-state"><b>現在、公開中の選手登録はありません</b></div>`;
   } else {
+    grid.dataset.count = String(members.length);
+
+    if (members.length === 1) grid.classList.add("player-grid-count-1");
+    else if (members.length === 2) grid.classList.add("player-grid-count-2");
+    else if (members.length === 3) grid.classList.add("player-grid-count-3");
+    else grid.classList.add("player-grid-count-many");
+
     members.forEach(item => grid.appendChild(makePlayerCard(item)));
   }
 
@@ -98,7 +106,7 @@ async function loadPlayers() {
   const updated = document.querySelector("#playerUpdated");
 
   try {
-    const res = await fetch("data/players.json?v=1.6.4", { cache: "no-store" });
+    const res = await fetch("data/players.json?v=1.6.5", { cache: "no-store" });
     if (!res.ok) throw new Error("players.json load failed");
 
     const data = await res.json();
