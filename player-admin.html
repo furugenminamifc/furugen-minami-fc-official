@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#7A1D2D">
+<title>選手登録・写真かんたん更新｜古堅南FC</title>
+<meta name="description" content="古堅南FC Ver.2.5 選手登録・写真かんたん更新画面。">
+<link rel="stylesheet" href="css/site-v22.css?v=2.5">
+</head><body>
+<header class="site-header">
+<div class="site-header-inner">
+<a class="brand" href="index.html">
+<picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
+<img src="images/furugen-emblem-displayfix.png" alt="古堅南FC エンブレム"></picture>
+<span><strong>古堅南FC</strong><small>FURUGEN MINAMI FOOTBALL CLUB</small></span>
+</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button>
+<nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
+</div></header>
+<main>
+<section class="admin-hero"><div class="wrap">
+<p class="eyebrow light">ADMIN / PLAYER UPDATE</p>
+<h1>選手登録・写真かんたん更新</h1>
+<p class="admin-note">名前・カテゴリー・背番号・学年・ポジション・利き足・プロフィールを、画面から入力できます。写真も選ぶだけでプレビューできます。最後に「更新データを書き出す」で、GitHubへ入れ替えるファイルを作成します。</p>
+</div></section>
+
+<section class="admin-wrap"><div class="wrap">
+<div class="admin-grid">
+  <aside class="admin-panel">
+    <div class="admin-toolbar">
+      <button class="admin-btn" id="newPlayerBtn">＋ 新しい選手</button>
+      <button class="admin-btn light" id="reloadBtn">元データ読込</button>
+    </div>
+    <input class="admin-search" id="searchBox" type="search" placeholder="名前・背番号・カテゴリーで検索">
+    <div class="admin-list" id="playerList"></div>
+  </aside>
+
+  <section class="admin-editor">
+    <div class="photo-editor">
+      <div class="photo-preview" id="photoPreview"><div class="empty"><b>⚽</b>PLAYER PHOTO</div></div>
+      <div>
+        <div class="form-field">
+          <label>選手写真を選ぶ</label>
+          <input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp">
+        </div>
+        <div class="photo-help">
+          写真を選ぶと、この画面でプレビューできます。<br>
+          書き出し時に推奨ファイル名も表示します。<br>
+          <b>写真データそのものはGitHubへ自動送信されません。</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-field"><label>名前</label><input id="name" placeholder="例：伊佐 環希"></div>
+      <div class="form-field"><label>ふりがな</label><input id="nameKana" placeholder="例：いさ たまき"></div>
+      <div class="form-field"><label>カテゴリー</label><select id="category"><option>U-12</option><option>U-11</option><option>U-10</option></select></div>
+      <div class="form-field"><label>背番号</label><input id="number" type="number" min="0" max="99" placeholder="2"></div>
+      <div class="form-field"><label>学年</label><select id="grade"><option>6年生</option><option>5年生</option><option>4年生</option><option>3年生</option></select></div>
+      <div class="form-field"><label>ポジション</label><select id="position"><option>FP</option><option>GP</option><option>FP・GP</option></select></div>
+      <div class="form-field"><label>利き足</label><select id="dominantFoot"><option>右</option><option>左</option><option>両足</option><option>未設定</option></select></div>
+      <div class="form-field"><label>ニックネーム</label><input id="nickname" placeholder="任意"></div>
+      <div class="form-field"><label>身長</label><input id="height" placeholder="例：145cm"></div>
+      <div class="form-field"><label>好きな選手</label><input id="favoritePlayer" placeholder="任意"></div>
+      <div class="form-field full"><label>得意なプレー</label><input id="strength" placeholder="例：ドリブル突破、1対1"></div>
+      <div class="form-field full"><label>今季の目標</label><input id="goal" placeholder="例：10得点を目指す"></div>
+      <div class="form-field full"><label>プロフィール・紹介文</label><textarea id="profile" placeholder="選手紹介ページに表示する文章"></textarea></div>
+    </div>
+
+    <div class="admin-toolbar" style="margin-top:20px">
+      <button class="admin-btn" id="saveBtn">この選手を保存</button>
+      <button class="admin-btn danger" id="deleteBtn">選手を削除</button>
+    </div>
+
+    <div class="export-box">
+      <h3>更新データを書き出す</h3>
+      <p>編集が終わったら、下のボタンで新しい <b>players.json</b> を作成できます。ダウンロードしたファイルをホームページの <b>data</b> フォルダへ上書きすれば、選手一覧とプロフィールへ反映されます。</p>
+      <button class="admin-btn alt" id="exportBtn">players.json を書き出す</button>
+      <div class="file-stack" id="photoFileGuide"></div>
+    </div>
+
+    <div class="admin-warning">
+      <b>重要：</b> GitHub Pagesは静的ホームページなので、この管理画面からGitHubへ直接保存はできません。<br>
+      Ver.2.5では「入力 → players.jsonを書き出す → GitHubフォルダへ上書き」の3段階に簡単化しています。
+    </div>
+  </section>
+</div>
+</div></section>
+</main>
+<footer class="site-footer">
+<div class="wrap footer-inner">
+<picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
+<img class="footer-emblem" src="images/furugen-emblem-displayfix.png" alt="古堅南FC エンブレム"></picture>
+<strong>古堅南FC</strong>
+<span>FURUGEN MINAMI FOOTBALL CLUB｜沖縄県読谷村</span>
+<small>Official Website Ver.2.5</small>
+<nav><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
+<small>© 2026 古堅南FC All Rights Reserved.</small>
+</div></footer>
+<div class="status-toast" id="toast"></div>
+<script src="js/player-admin-v25.js?v=2.5"></script>
+</body></html>

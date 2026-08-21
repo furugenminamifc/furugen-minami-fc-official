@@ -1,5 +1,5 @@
 
-const PLAYER_DATA_URL = "data/players.json?v=2.4";
+const PLAYER_DATA_URL = "data/players.json?v=2.5";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function photoMarkup(p){
   if(!p.photo) return "";

@@ -1,5 +1,5 @@
 
-const DATA_URL="data/players.json?v=2.4";
+const DATA_URL="data/players.json?v=2.5";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function pCard(p){return `<article class="v23-player-card"><a class="v24-card-link" href="player-profile.html?id=${encodeURIComponent(p.id)}"><div class="v23-photo">
 ${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.photoPosition||"center center")};object-fit:${esc(p.photoFit||"cover")}" onerror="this.style.display='none';this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`:""}
