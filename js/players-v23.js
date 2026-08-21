@@ -1,40 +1,39 @@
 
-const PLAYER_DATA_URL = "data/players.json?v=2.3";
+const PLAYER_DATA_URL = "data/players.json?v=2.4";
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
 function photoMarkup(p){
-  if(p.photo){
-    return `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy"
-      style="object-position:${esc(p.photoPosition || "center center")};object-fit:${esc(p.photoFit || "cover")}"
-      onerror="this.remove();this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`;
-  }
-  return "";
+  if(!p.photo) return "";
+  return `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy"
+    style="object-position:${esc(p.photoPosition || "center center")};object-fit:${esc(p.photoFit || "cover")}"
+    onerror="this.style.display='none';this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`;
 }
 function playerCard(p){
   const n = p.number ?? "—";
   return `<article class="v23-player-card">
-    <div class="v23-photo">
-      ${photoMarkup(p)}
-      <div class="v23-photo-placeholder" style="${p.photo ? "display:none" : ""}">
-        <div class="ball">⚽</div><span>PLAYER PHOTO</span><small>写真はあとから追加できます</small>
+    <a class="v24-card-link" href="player-profile.html?id=${encodeURIComponent(p.id)}">
+      <div class="v23-photo">
+        ${photoMarkup(p)}
+        <div class="v23-photo-placeholder" style="${p.photo ? "display:none" : ""}">
+          <div class="ball">⚽</div><span>PLAYER PHOTO</span><small>写真はあとから追加できます</small>
+        </div>
+        <span class="v23-number">#${esc(n)}</span>
       </div>
-      <span class="v23-number">#${esc(n)}</span>
-    </div>
-    <div class="v23-player-body">
-      <span class="player-num">${esc(p.category || "")}</span>
-      <h3>${esc(p.name || "選手名準備中")}</h3>
-      <div class="v23-kana">${esc(p.nameKana || "")}</div>
-      <div class="v23-meta">
-        <span>${esc(p.grade || "")}</span><span>${esc(p.position || "")}</span><span>利き足 ${esc(p.dominantFoot || "—")}</span>
+      <div class="v23-player-body">
+        <span class="player-num">${esc(p.category || "")}</span>
+        <h3>${esc(p.name || "選手名準備中")}</h3>
+        <div class="v23-kana">${esc(p.nameKana || "")}</div>
+        <div class="v23-meta">
+          <span>${esc(p.grade || "")}</span><span>${esc(p.position || "")}</span><span>利き足 ${esc(p.dominantFoot || "—")}</span>
+        </div>
+        <span class="v24-profile-btn">プロフィールを見る →</span>
       </div>
-    </div>
+    </a>
   </article>`;
 }
 function emptyCard(cat){
   return `<div class="empty-category"><strong>${esc(cat)} 選手情報を追加できます</strong>
     <span>data/players.json に選手を追加すると、この場所へ自動表示されます。</span></div>`;
 }
-
 fetch(PLAYER_DATA_URL).then(r=>r.json()).then(data=>{
   const cats = Object.fromEntries((data.categories || []).map(c=>[c.id,c]));
   let active = new URLSearchParams(location.search).get("category")?.toUpperCase() || "U-12";

@@ -1,10 +1,10 @@
 
-const DATA_URL="data/players.json?v=2.3";
+const DATA_URL="data/players.json?v=2.4";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-function pCard(p){return `<article class="v23-player-card"><div class="v23-photo">
-${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.photoPosition||"center center")};object-fit:${esc(p.photoFit||"cover")}" onerror="this.remove();this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`:""}
+function pCard(p){return `<article class="v23-player-card"><a class="v24-card-link" href="player-profile.html?id=${encodeURIComponent(p.id)}"><div class="v23-photo">
+${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.photoPosition||"center center")};object-fit:${esc(p.photoFit||"cover")}" onerror="this.style.display='none';this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`:""}
 <div class="v23-photo-placeholder" style="${p.photo?"display:none":""}"><div class="ball">⚽</div><span>PLAYER PHOTO</span><small>写真はあとから追加できます</small></div>
-<span class="v23-number">#${esc(p.number??"—")}</span></div><div class="v23-player-body"><span class="player-num">${esc(p.category||"")}</span><h3>${esc(p.name||"選手名準備中")}</h3><div class="v23-kana">${esc(p.nameKana||"")}</div><div class="v23-meta"><span>${esc(p.grade||"")}</span><span>${esc(p.position||"")}</span></div></div></article>`}
+<span class="v23-number">#${esc(p.number??"—")}</span></div><div class="v23-player-body"><span class="player-num">${esc(p.category||"")}</span><h3>${esc(p.name||"選手名準備中")}</h3><div class="v23-kana">${esc(p.nameKana||"")}</div><div class="v23-meta"><span>${esc(p.grade||"")}</span><span>${esc(p.position||"")}</span></div><span class="v24-profile-btn">プロフィールを見る →</span></div></a></article>`}
 fetch(DATA_URL).then(r=>r.json()).then(data=>{
  const cats=Object.fromEntries((data.categories||[]).map(c=>[c.id,c]));
  let q=(new URLSearchParams(location.search).get("category")||"u-12").toUpperCase();

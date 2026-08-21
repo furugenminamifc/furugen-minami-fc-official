@@ -1,0 +1,17 @@
+Ver.2.4 選手写真フォルダ
+
+ここへ選手写真を入れます。
+例:
+u12-02-isa-tamaki.jpg
+
+そのあと data/players.json の対象選手の
+"photo": ""
+を
+"photo": "images/players/u12-02-isa-tamaki.jpg"
+へ変更してください。
+
+推奨:
+・JPEG または WebP
+・縦写真
+・顔が中央〜やや上
+・ファイル名は半角英数字

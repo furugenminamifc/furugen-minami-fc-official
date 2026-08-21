@@ -2,8 +2,8 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#7A1D2D">
-<title>カテゴリー紹介｜古堅南FC</title>
-<meta name="description" content="古堅南FC U-12・U-11・U-10カテゴリー別の2026年度ページ。">
+<title>選手プロフィール｜古堅南FC</title>
+<meta name="description" content="古堅南FC 選手プロフィール。">
 <link rel="stylesheet" href="css/site-v22.css?v=2.4">
 </head><body class="v23-page">
 <header class="site-header">
@@ -17,29 +17,42 @@
 <nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 </div></header>
 <main>
-<section class="players-hero"><div class="wrap">
-<p class="eyebrow light">CATEGORY / YEARLY DATA</p>
-<h1 id="heroCategory">U-12</h1>
-<p id="heroLead">2026年度のカテゴリー情報・選手・試合への入口です。</p>
-<div class="year-badge">● 2026年度 アーカイブ</div>
+<section class="profile-hero"><div class="wrap profile-layout">
+  <div class="profile-photo-card">
+    <div class="profile-photo-wrap" id="profilePhotoWrap">
+      <div class="profile-photo-fallback" id="photoFallback"><div class="ball">⚽</div><strong>PLAYER PHOTO</strong><small>写真登録後に自動表示</small></div>
+      <span class="profile-number" id="profileNumber">#—</span>
+    </div>
+    <div class="profile-photo-caption">古堅南FC Official Player Profile</div>
+  </div>
+  <div class="profile-main">
+    <p class="eyebrow light" id="profileCategory">PLAYER</p>
+    <h1 id="profileName">選手プロフィール</h1>
+    <div class="profile-kana" id="profileKana"></div>
+    <div class="profile-tags" id="profileTags"></div>
+  </div>
 </div></section>
 
-<section class="section"><div class="wrap">
-<div class="category-selector" id="categorySelector">
-<button type="button" data-cat="U-12"><span>CATEGORY</span><strong>U-12</strong><small>小学6年生・5年生</small></button>
-<button type="button" data-cat="U-11"><span>CATEGORY</span><strong>U-11</strong><small>小学5年生・4年生</small></button>
-<button type="button" data-cat="U-10"><span>CATEGORY</span><strong>U-10</strong><small>小学4年生・3年生</small></button>
-</div>
-
-<div class="category-feature">
-<div class="category-feature-photo"><img src="images/team-2026.webp" alt="古堅南FC 2026年度チーム写真"></div>
-<div><p class="eyebrow">2026 TEAM</p><h2 id="categoryTitle">U-12</h2><p id="categoryGrades" class="muted"></p><p id="categoryMessage" class="muted"></p>
-<div class="category-stats"><div class="category-stat"><strong id="playerCount">0</strong><small>登録選手</small></div><div class="category-stat"><strong>2026</strong><small>年度</small></div><div class="category-stat"><strong>ACTIVE</strong><small>公開状態</small></div></div>
-<div class="actions" style="margin-top:22px"><a id="playersLink" class="btn maroon" href="players.html">このカテゴリーの選手</a><a class="btn sky" href="matches.html">試合予定</a><a class="btn outline" href="results.html">試合結果</a></div>
-</div></div>
-
-<div class="section-head"><div><p class="eyebrow">MEMBERS</p><h2>カテゴリー選手</h2></div></div>
-<div id="playerGrid" class="v23-player-grid"></div>
+<section class="profile-content"><div class="wrap">
+  <div class="profile-info-grid" id="profileInfo"></div>
+  <div class="profile-story">
+    <p class="eyebrow">PLAYER MESSAGE</p>
+    <h2>プロフィール</h2>
+    <p id="profileText" class="profile-empty">プロフィール情報は準備中です。</p>
+  </div>
+  <div class="profile-story">
+    <p class="eyebrow">GOAL</p>
+    <h2>目標・得意なプレー</h2>
+    <p id="profileGoal" class="profile-empty">目標や得意なプレーは、あとから追加できます。</p>
+  </div>
+  <div class="photo-guide">
+    <strong>📷 選手写真の追加方法</strong>
+    <span>写真を <b>images/players/</b> に入れて、data/players.json の <b>photo</b> にファイル名を設定すると、選手一覧とプロフィールの両方へ自動反映されます。</span>
+  </div>
+  <div class="profile-actions">
+    <a class="btn maroon" id="backPlayers" href="players.html">← 選手一覧へ戻る</a>
+    <a class="btn outline" href="index.html">HOMEへ</a>
+  </div>
 </div></section>
 </main>
 <footer class="site-footer">
@@ -55,5 +68,5 @@
 <script>
 (()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(b&&n)b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
 </script>
-<script src="js/category-v23.js?v=2.3"></script>
+<script src="js/player-profile-v24.js?v=2.4"></script>
 </body></html>
