@@ -3,9 +3,9 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#7A1D2D">
 <title>選手紹介｜古堅南FC</title>
-<meta name="description" content="古堅南FC U-12・U-11・U-10の選手紹介。">
-<link rel="stylesheet" href="css/site-v22.css?v=2.2">
-</head><body>
+<meta name="description" content="古堅南FC 2026年度 U-12・U-11・U-10 選手紹介。カテゴリーごとに見やすく掲載します。">
+<link rel="stylesheet" href="css/site-v22.css?v=2.3">
+</head><body class="v23-page">
 <header class="site-header">
 <div class="site-header-inner">
 <a class="brand" href="index.html">
@@ -16,22 +16,44 @@
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button>
 <nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a class="is-active" href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 </div></header>
-<main><section class="subhero"><div class="wrap"><p class="eyebrow light">PLAYERS</p><h1>選手紹介</h1><p>U-12・U-11・U-10の選手を年度ごとに紹介します。</p></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">PLAYERS 2026</p><h2>2026年度 選手</h2><p class="muted">現在公開中の選手情報を掲載しています。</p></div></div><div class="player-grid"><article class="player-card"><div class="player-photo">PLAYER PHOTO</div><div class="player-info"><span class="player-num">#2 / U-12</span><h3>伊佐　環希</h3><small>いさ　たまき</small><div class="meta"><span>6年生</span><span>FP</span><span>利き足 右</span></div></div></article></div>
-<div class="notice" style="margin-top:24px">選手写真は、掲載用の写真データが揃い次第追加できます。現在は壊れた画像を表示しない安全な構成です。</div></div></section></main>
+<main>
+<section class="players-hero"><div class="wrap">
+<p class="eyebrow light">PLAYERS / 2026</p>
+<h1>選手紹介</h1>
+<p>U-12・U-11・U-10の選手をカテゴリーごとに紹介します。毎年度、選手データと写真を入れ替えるだけで更新できる構成です。</p>
+<div class="year-badge">● 2026年度 現役選手</div>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="category-selector" id="categorySelector">
+<button type="button" class="is-active" data-cat="U-12"><span>CATEGORY</span><strong>U-12</strong><small>小学6年生・5年生</small></button>
+<button type="button" data-cat="U-11"><span>CATEGORY</span><strong>U-11</strong><small>小学5年生・4年生</small></button>
+<button type="button" data-cat="U-10"><span>CATEGORY</span><strong>U-10</strong><small>小学4年生・3年生</small></button>
+</div>
+<div class="category-summary">
+<div><p class="eyebrow">2026 TEAM</p><h2 id="categoryTitle">U-12</h2><p id="categoryDescription" class="muted">小学6年生・5年生</p><p id="categoryMessage" class="muted"></p></div>
+<div class="category-count"><strong id="categoryCount">0</strong><small>PLAYERS</small></div>
+</div>
+<div id="playerGrid" class="v23-player-grid"></div>
+</div></section>
+
+<section class="year-archive-strip"><div class="wrap year-archive-inner">
+<div><p class="eyebrow">YEARLY ARCHIVE</p><strong>2026年度 カテゴリー</strong></div>
+<div class="archive-cats"><a href="category.html?category=u-12">U-12 年度ページ</a><a href="category.html?category=u-11">U-11 年度ページ</a><a href="category.html?category=u-10">U-10 年度ページ</a></div>
+</div></section>
+</main>
 <footer class="site-footer">
 <div class="wrap footer-inner">
 <picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
 <img class="footer-emblem" src="images/furugen-emblem-displayfix.png" alt="古堅南FC エンブレム"></picture>
 <strong>古堅南FC</strong>
 <span>FURUGEN MINAMI FOOTBALL CLUB｜沖縄県読谷村</span>
-<small>Official Website Ver.2.2</small>
+<small>Official Website Ver.2.3</small>
 <nav><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 <small>© 2026 古堅南FC All Rights Reserved.</small>
 </div></footer>
 <script>
-(()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(!b||!n)return;
-b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
+(()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(b&&n)b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
 </script>
-
+<script src="js/players-v23.js?v=2.3"></script>
 </body></html>

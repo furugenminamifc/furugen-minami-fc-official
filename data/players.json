@@ -1,21 +1,27 @@
 {
   "year": 2026,
-  "updated": "2026-08-20",
+  "updated": "2026-08-21",
   "categories": [
     {
       "id": "U-12",
       "label": "U-12",
-      "grade": "小学6年生・5年生"
+      "grade": "小学6年生・5年生",
+      "accent": "navy",
+      "message": "最高学年として、仲間と声を掛け合いながらチームを引っ張ります。"
     },
     {
       "id": "U-11",
       "label": "U-11",
-      "grade": "小学5年生・4年生"
+      "grade": "小学5年生・4年生",
+      "accent": "maroon",
+      "message": "次のステージを見据え、技術と判断力を磨いていきます。"
     },
     {
       "id": "U-10",
       "label": "U-10",
-      "grade": "小学4年生・3年生"
+      "grade": "小学4年生・3年生",
+      "accent": "teal",
+      "message": "サッカーを思い切り楽しみながら、基礎とチャレンジする力を育てます。"
     }
   ],
   "players": [
@@ -35,5 +41,6 @@
       "captain": false,
       "isPublished": true
     }
-  ]
+  ],
+  "version": "2.3"
 }
