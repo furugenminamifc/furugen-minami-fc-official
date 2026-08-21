@@ -32,3 +32,29 @@
   .v21-feature-grid{grid-template-columns:1fr}
   .v21-feature-card{min-height:230px;padding:26px}
 }
+
+/* ===== Ver.2.1.1 Emblem display fix ===== */
+.v2-emblem{
+  width:56px;
+  height:auto;
+  max-height:66px;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+}
+.v2-footer-emblem{
+  width:82px;
+  height:auto;
+  max-height:104px;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  margin-bottom:12px;
+}
+@media(max-width:760px){
+  .v2-emblem{
+    width:46px;
+    height:auto;
+    max-height:55px;
+  }
+}
