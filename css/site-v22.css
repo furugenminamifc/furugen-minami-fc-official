@@ -143,3 +143,10 @@
 .file-stack{display:grid;gap:8px;margin-top:10px}
 .file-stack code{display:block;padding:8px 10px;border-radius:10px;background:#eef3f5;color:#243e4a;font-size:11px}
 @media(max-width:900px){.admin-grid{grid-template-columns:1fr}.admin-panel{position:static}.photo-editor{grid-template-columns:1fr}.photo-preview{max-width:280px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}}
+
+
+/* ===== Ver.2.5.1 Photo Save Improvement ===== */
+.photo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.photo-state{margin-top:10px;padding:10px 12px;border-radius:12px;background:#eef8f2;border:1px solid #cde5d5;color:#315f42;font-size:12px;line-height:1.6}
+.photo-state.warn{background:#fff4df;border-color:#efd6a7;color:#73521d}
+.photo-state strong{font-weight:900}
