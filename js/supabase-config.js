@@ -2,7 +2,7 @@
 // Supabaseの Project URL と anon public key を入力してください。
 // ※ service_role key は絶対にここへ入れないでください。
 window.FURUGEN_SUPABASE = {
-  url: "YOUR_SUPABASE_URL",
-  anonKey: "YOUR_SUPABASE_ANON_KEY",
-  storageBucket: "site-media"
+  url: "=https://lxpfdmyodldctdvfzjgw.supabase.co  anonKey: "",
+  storageBucket: "member-photos"
 };
+sb_publishable_sJ8UlKYktXsFLwBWd3P7WA_kwwO9QNE
