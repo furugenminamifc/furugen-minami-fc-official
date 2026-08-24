@@ -173,3 +173,12 @@
   padding:14px 20px!important;
   line-height:1.2!important;
 }
+/* ===== JOIN US 見出し調整 ===== */
+.cta h2{
+  font-size:clamp(24px,3.2vw,38px) !important;
+  line-height:1.35 !important;
+  letter-spacing:.02em !important;
+  max-width:420px !important;
+  word-break:keep-all !important;
+  overflow-wrap:normal !important;
+}
