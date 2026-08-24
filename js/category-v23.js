@@ -5,7 +5,20 @@ function pCard(p){return `<article class="v23-player-card"><a class="v24-card-li
 ${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.photoPosition||"center center")};object-fit:${esc(p.photoFit||"cover")}" onerror="this.style.display='none';this.parentElement.querySelector('.v23-photo-placeholder').style.display='flex'">`:""}
 <div class="v23-photo-placeholder" style="${p.photo?"display:none":""}"><div class="ball">⚽</div><span>PLAYER PHOTO</span><small>写真はあとから追加できます</small></div>
 <span class="v23-number">#${esc(p.number??"—")}</span></div><div class="v23-player-body"><span class="player-num">${esc(p.category||"")}</span><h3>${esc(p.name||"選手名準備中")}</h3><div class="v23-kana">${esc(p.nameKana||"")}</div><div class="v23-meta"><span>${esc(p.grade||"")}</span><span>${esc(p.position||"")}</span></div><span class="v24-profile-btn">プロフィールを見る →</span></div></a></article>`}
-fetch(DATA_URL).then(r=>r.json()).then(data=>{
+(async()=>{
+  const data = await fetch(DATA_URL).then(r=>r.json());
+
+  try{
+    if(window.FurugenPublicData?.configured?.()){
+      const livePlayers = await window.FurugenPublicData.loadPlayers();
+
+      if(Array.isArray(livePlayers) && livePlayers.length){
+        data.players = livePlayers;
+      }
+    }
+  }catch(e){
+    console.warn("Supabase players fallback to JSON:", e);
+  }
  const cats=Object.fromEntries((data.categories||[]).map(c=>[c.id,c]));
  let q=(new URLSearchParams(location.search).get("category")||"u-12").toUpperCase();
  if(!cats[q])q="U-12";
@@ -24,4 +37,4 @@ fetch(DATA_URL).then(r=>r.json()).then(data=>{
  };
  document.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>render(b.dataset.cat)));
  render(q);
-});
+})();
