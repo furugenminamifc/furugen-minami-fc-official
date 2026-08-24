@@ -151,3 +151,25 @@
 .photo-state.warn{background:#fff4df;border-color:#efd6a7;color:#73521d}
 .photo-state strong{font-weight:900}
 .cta h2{color:#243e4a!important;text-shadow:none!important;opacity:1!important}
+.cta h2{
+  font-size:clamp(28px,4vw,42px)!important;
+  line-height:1.35!important;
+  letter-spacing:.02em!important;
+  max-width:100%!important;
+}
+
+.cta-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:12px!important;
+  align-items:center!important;
+}
+
+.cta-actions .btn{
+  width:auto!important;
+  min-width:150px!important;
+  white-space:nowrap!important;
+  writing-mode:horizontal-tb!important;
+  padding:14px 20px!important;
+  line-height:1.2!important;
+}
