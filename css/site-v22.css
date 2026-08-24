@@ -27,7 +27,7 @@
 .players-hero h1{font-size:clamp(38px,6vw,64px);margin:0 0 12px}
 .players-hero p{max-width:720px;line-height:1.8;color:rgba(255,255,255,.86)}
 .year-badge{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.13);font-size:12px;font-weight:900;letter-spacing:.08em}
-.category-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0}
+.category-selector{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:34px 0}
 .category-selector button{appearance:none;border:0;cursor:pointer;text-align:left;padding:22px;border-radius:20px;color:#fff;box-shadow:0 10px 30px rgba(15,42,68,.12);transition:.2s}
 .category-selector button:hover{transform:translateY(-3px)}
 .category-selector button[data-cat="U-12"]{background:linear-gradient(145deg,#0F2A44,#275d85)}
