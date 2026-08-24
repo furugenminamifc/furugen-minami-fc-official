@@ -34,7 +34,18 @@ function emptyCard(cat){
   return `<div class="empty-category"><strong>${esc(cat)} 選手情報を追加できます</strong>
     <span>data/players.json に選手を追加すると、この場所へ自動表示されます。</span></div>`;
 }
-fetch(PLAYER_DATA_URL).then(r=>r.json()).then(data=>{
+fetch(PLAYER_DATA_URL).then(r=>r.json()).then(async data=>{
+  try{
+  if(window.FurugenPublicData?.configured()){
+    const livePlayers = await window.FurugenPublicData.loadPlayers();
+
+    if(Array.isArray(livePlayers) && livePlayers.length){
+      data.players = livePlayers;
+    }
+  }
+}catch(e){
+  console.warn("Supabase players fallback to JSON:", e);
+}
   const cats = Object.fromEntries((data.categories || []).map(c=>[c.id,c]));
   let active = new URLSearchParams(location.search).get("category")?.toUpperCase() || "U-12";
   if(!cats[active]) active="U-12";
