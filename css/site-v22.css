@@ -426,3 +426,10 @@
   color:#fff !important;
   border-color:#8fc63f !important;
 }
+/* ===== U-9 年度ページタブ 強制黄緑 ===== */
+.year-archive-strip .archive-cats a[href*="category=u-9"]{
+  background:#8fc63f !important;
+  color:#fff !important;
+  border-color:#8fc63f !important;
+  opacity:1 !important;
+}
