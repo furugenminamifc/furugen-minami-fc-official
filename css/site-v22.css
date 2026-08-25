@@ -239,3 +239,24 @@
   align-items:center !important;
   justify-content:center !important;
 }
+/* ===== カテゴリーカード 4列表示 ===== */
+
+.category-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:16px !important;
+  align-items:stretch !important;
+}
+
+.category-grid .cat-card{
+  width:100% !important;
+  min-width:0 !important;
+}
+
+/* スマホは2列 × 2段 */
+@media (max-width:760px){
+  .category-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    gap:12px !important;
+  }
+}
