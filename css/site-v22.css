@@ -343,3 +343,28 @@
   background:linear-gradient(135deg,#9ccc4a 0%,#689f38 100%) !important;
   color:#fff !important;
 }
+/* ===== 選手カード 背番号バッジ カテゴリー色分け ===== */
+
+/* U-12：水色 */
+.v23-player-card[data-category="U-12"] .v23-number{
+  background:#55b9dc !important;
+  color:#fff !important;
+}
+
+/* U-11：エンジ */
+.v23-player-card[data-category="U-11"] .v23-number{
+  background:#a72d4d !important;
+  color:#fff !important;
+}
+
+/* U-10：赤 */
+.v23-player-card[data-category="U-10"] .v23-number{
+  background:#e74c3c !important;
+  color:#fff !important;
+}
+
+/* U-9：黄緑 */
+.v23-player-card[data-category="U-9"] .v23-number{
+  background:#8fc63f !important;
+  color:#fff !important;
+}
