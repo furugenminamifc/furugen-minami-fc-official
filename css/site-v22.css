@@ -433,3 +433,28 @@
   border-color:#8fc63f !important;
   opacity:1 !important;
 }
+/* ===== YEARLY ARCHIVE 4カテゴリー色 ===== */
+
+.year-archive-strip .archive-cats a[href*="category=u-12"]{
+  background:#55b9dc !important;
+  color:#fff !important;
+  border-color:#55b9dc !important;
+}
+
+.year-archive-strip .archive-cats a[href*="category=u-11"]{
+  background:#a72d4d !important;
+  color:#fff !important;
+  border-color:#a72d4d !important;
+}
+
+.year-archive-strip .archive-cats a[href*="category=u-10"]{
+  background:#e74c3c !important;
+  color:#fff !important;
+  border-color:#e74c3c !important;
+}
+
+.year-archive-strip .archive-cats a[href*="category=u-9"]{
+  background:#8fc63f !important;
+  color:#fff !important;
+  border-color:#8fc63f !important;
+}
