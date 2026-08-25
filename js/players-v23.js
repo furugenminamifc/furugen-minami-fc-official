@@ -9,7 +9,7 @@ function photoMarkup(p){
 }
 function playerCard(p){
   const n = p.number ?? "—";
-  return `<article class="v23-player-card">
+  return `<article class="v23-player-card" data-category="${esc(p.category || '')}">
     <a class="v24-card-link" href="player-profile.html?id=${encodeURIComponent(p.id)}">
       <div class="v23-photo">
         ${photoMarkup(p)}
