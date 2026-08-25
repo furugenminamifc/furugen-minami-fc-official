@@ -297,3 +297,28 @@
     #689f38 100%
   ) !important;
 }
+/* ===== 年度アーカイブ カテゴリー色分け ===== */
+
+/* U-12：水色 */
+.archive-grid a:nth-of-type(1){
+  background:#55b9dc !important;
+  color:#fff !important;
+}
+
+/* U-11：エンジ */
+.archive-grid a:nth-of-type(2){
+  background:#a72d4d !important;
+  color:#fff !important;
+}
+
+/* U-10：赤 */
+.archive-grid a:nth-of-type(3){
+  background:#e74c3c !important;
+  color:#fff !important;
+}
+
+/* U-9：黄緑 */
+.archive-grid a:nth-of-type(4){
+  background:#8fc63f !important;
+  color:#fff !important;
+}
