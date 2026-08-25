@@ -368,3 +368,36 @@
   background:#8fc63f !important;
   color:#fff !important;
 }
+/* ===== チーム理念カード ===== */
+
+.philosophy-card{
+  position:relative;
+  overflow:hidden;
+  border-left:6px solid #7a1d2d !important;
+  background:linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f3fbff 55%,
+    #e5f6fc 100%
+  ) !important;
+  box-shadow:0 14px 32px rgba(15,42,68,.12);
+}
+
+.philosophy-card .eyebrow{
+  color:#7a1d2d !important;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+
+.philosophy-card h3{
+  color:#17324a !important;
+  font-size:26px;
+  margin-bottom:18px;
+}
+
+.philosophy-card .muted{
+  color:#34495e !important;
+  font-size:16px;
+  line-height:2;
+  font-weight:600;
+}
