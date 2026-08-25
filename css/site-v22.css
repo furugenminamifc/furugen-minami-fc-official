@@ -322,3 +322,24 @@
   background:#8fc63f !important;
   color:#fff !important;
 }
+/* ===== 選手紹介ページ カテゴリー4色統一 ===== */
+
+.category-selector button[data-cat="U-12"]{
+  background:linear-gradient(135deg,#55b9dc 0%,#3498c5 100%) !important;
+  color:#fff !important;
+}
+
+.category-selector button[data-cat="U-11"]{
+  background:linear-gradient(135deg,#a72d4d 0%,#7a1d2d 100%) !important;
+  color:#fff !important;
+}
+
+.category-selector button[data-cat="U-10"]{
+  background:linear-gradient(135deg,#e74c3c 0%,#c62828 100%) !important;
+  color:#fff !important;
+}
+
+.category-selector button[data-cat="U-9"]{
+  background:linear-gradient(135deg,#9ccc4a 0%,#689f38 100%) !important;
+  color:#fff !important;
+}
