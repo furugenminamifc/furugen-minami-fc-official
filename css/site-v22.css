@@ -217,3 +217,25 @@
     max-width: 100% !important;
   }
 }
+/* ===== JOIN US 左右バランス最終調整 ===== */
+
+.cta-grid{
+  align-items:center !important;
+}
+
+.cta .muted{
+  margin-top:18px !important;
+}
+
+.cta-actions{
+  align-self:center !important;
+  margin-top:18px !important;
+  gap:12px !important;
+}
+
+.cta-actions .btn{
+  min-height:54px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
