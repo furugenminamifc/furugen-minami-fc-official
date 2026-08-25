@@ -260,3 +260,40 @@
     gap:12px !important;
   }
 }
+/* ===== カテゴリーカード 4色 最終調整 ===== */
+
+/* U-12：水色 */
+.category-grid .cat-card:nth-child(1){
+  background:linear-gradient(
+    135deg,
+    #55b9dc 0%,
+    #3498c5 100%
+  ) !important;
+}
+
+/* U-11：エンジ */
+.category-grid .cat-card:nth-child(2){
+  background:linear-gradient(
+    135deg,
+    #a72d4d 0%,
+    #7a1d2d 100%
+  ) !important;
+}
+
+/* U-10：赤色 */
+.category-grid .cat-card:nth-child(3){
+  background:linear-gradient(
+    135deg,
+    #e74c3c 0%,
+    #c62828 100%
+  ) !important;
+}
+
+/* U-9：黄緑 */
+.category-grid .cat-card:nth-child(4){
+  background:linear-gradient(
+    135deg,
+    #9ccc4a 0%,
+    #689f38 100%
+  ) !important;
+}
