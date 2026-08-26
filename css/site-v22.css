@@ -563,3 +563,33 @@
     grid-template-columns:1fr;
   }
 }
+.staff-group-heading{
+  margin-bottom:18px;
+}
+
+.staff-profile-grid{
+  align-items:start;
+}
+
+.staff-profile-card{
+  max-width:320px;
+}
+
+.staff-profile-body{
+  min-height:150px;
+}
+
+.staff-profile-body h3{
+  font-size:22px;
+  line-height:1.35;
+}
+
+.staff-message{
+  margin-top:12px;
+  line-height:1.7;
+}
+
+/* 1名だけでもカードを大きく見せる */
+.staff-profile-grid:has(.staff-profile-card:only-child){
+  grid-template-columns:minmax(260px,320px);
+}
