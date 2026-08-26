@@ -164,9 +164,9 @@ async function loadStaff() {
     const coaching = {id:"coaching", label:"指導スタッフ", description:"代表・監督・コーチ"};
     const referees = {id:"referees", label:"審判員", description:"チーム所属・協力審判員"};
 
-    renderProfileGroup(root, coaching, staff);
-    renderTeamOperations(root, data.teamOperations);
-    renderProfileGroup(root, referees, staff);
+renderProfileGroup(root, coaching, staff);
+renderProfileGroup(root, referees, staff);
+renderTeamOperations(root, data.teamOperations);
 
   } catch (e) {
     root.innerHTML = `<div class="empty-state"><b>スタッフ情報を読み込めませんでした</b><p>data/staff.json を確認してください。</p></div>`;
