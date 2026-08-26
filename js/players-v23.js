@@ -57,7 +57,16 @@ fetch(PLAYER_DATA_URL).then(r=>r.json()).then(async data=>{
     document.getElementById("categoryTitle").textContent=cat;
     document.getElementById("categoryDescription").textContent=c.grade||"";
     document.getElementById("categoryMessage").textContent=c.message||"";
-    const players=(data.players||[]).filter(p=>p.isPublished!==false && p.category===cat);
+    const players=(data.players||[])
+  .filter(p=>p.isPublished!==false && p.category===cat)
+  .sort((a,b)=>{
+    const na=Number(a.number);
+    const nb=Number(b.number);
+    if(Number.isNaN(na) && Number.isNaN(nb)) return 0;
+    if(Number.isNaN(na)) return 1;
+    if(Number.isNaN(nb)) return -1;
+    return na-nb;
+  });
     document.getElementById("categoryCount").textContent=players.length;
     grid.innerHTML=players.length?players.map(playerCard).join(""):emptyCard(cat);
     history.replaceState(null,"",`?category=${encodeURIComponent(cat.toLowerCase())}`);
