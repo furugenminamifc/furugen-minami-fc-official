@@ -1056,3 +1056,105 @@
     font-size: 27px;
   }
 }
+/* =========================================
+   PLAYER MOBILE 2 COLUMN OPTIMIZE
+   選手紹介・スマホ2列カード最適化版
+   ========================================= */
+
+@media (max-width: 760px){
+
+  /* 選手一覧を2列 */
+  .player-grid{
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    width: 100%;
+  }
+
+  /* 選手カード */
+  .player-card{
+    width: 100% !important;
+    min-width: 0 !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+  }
+
+  /* 選手写真 */
+  .player-card img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* カード本文 */
+  .player-card-body{
+    padding: 12px 10px 14px !important;
+  }
+
+  /* U-12など */
+  .player-category{
+    font-size: 11px !important;
+    margin-bottom: 4px;
+  }
+
+  /* 名前 */
+  .player-card h3{
+    font-size: 18px !important;
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+
+  /* 背番号 */
+  .player-number{
+    font-size: 16px !important;
+  }
+
+  /* FP・利き足などのタグ */
+  .player-tags{
+    gap: 5px !important;
+    flex-wrap: wrap;
+  }
+
+  .player-tags span{
+    font-size: 10px !important;
+    padding: 5px 7px !important;
+  }
+
+  /* プロフィールボタン */
+  .player-card a,
+  .player-profile-button{
+    font-size: 11px !important;
+    padding: 9px 10px !important;
+    white-space: nowrap;
+  }
+}
+
+
+/* 小さいiPhoneでも2列維持 */
+@media (max-width: 390px){
+
+  .player-grid{
+    gap: 8px !important;
+  }
+
+  .player-card-body{
+    padding: 10px 8px 12px !important;
+  }
+
+  .player-card h3{
+    font-size: 16px !important;
+  }
+
+  .player-tags span{
+    font-size: 9px !important;
+    padding: 4px 6px !important;
+  }
+
+  .player-card a,
+  .player-profile-button{
+    font-size: 10px !important;
+    padding: 8px 7px !important;
+  }
+}
