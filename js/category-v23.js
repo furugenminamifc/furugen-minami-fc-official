@@ -23,7 +23,17 @@ ${p.photo?`<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy" style=
  let q=(new URLSearchParams(location.search).get("category")||"u-12").toUpperCase();
  if(!cats[q])q="U-12";
  const render=cat=>{
-  const c=cats[cat]||{}, ps=(data.players||[]).filter(p=>p.isPublished!==false&&p.category===cat);
+const c=cats[cat]||{},
+  ps=(data.players||[])
+    .filter(p=>p.isPublished!==false && p.category===cat)
+    .sort((a,b)=>{
+      const na=Number(a.number);
+      const nb=Number(b.number);
+      if(Number.isNaN(na) && Number.isNaN(nb)) return 0;
+      if(Number.isNaN(na)) return 1;
+      if(Number.isNaN(nb)) return -1;
+      return na-nb;
+    });
   document.querySelectorAll("[data-cat]").forEach(b=>b.classList.toggle("is-active",b.dataset.cat===cat));
   document.getElementById("heroCategory").textContent=cat+"｜2026";
   document.getElementById("heroLead").textContent=(c.grade||"")+"のカテゴリー情報・選手・試合への入口です。";
