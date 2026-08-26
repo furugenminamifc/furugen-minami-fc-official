@@ -453,29 +453,36 @@
   border-color:#e74c3c !important;
 }
 
-.year-archive-strip .archive-cats a[href*="category=u-9"]{
-  background:#8fc63f !important;
-  color:#fff !important;
-  border-color:#8fc63f !important;
-}
-.archive-cats a[href="category.html?category=u-9"]{
-  background:#8fc63f !important;
-  color:#fff !important;
-  border:1px solid #8fc63f !important;
-  border-radius:999px !important;
-  padding:8px 14px !important;
+/* ===== 2026 YEARLY ARCHIVE 新統一版 ===== */
+
+.year-archive-strip .archive-cats a{
   display:inline-block !important;
-}
-/* ===== U-9 年度ページ 最終修正 ===== */
-.year-archive-strip .archive-cats a[href="category.html?category=u-9"]{
-  background:#8fc63f !important;
-  color:#fff !important;
-  border:1px solid #8fc63f !important;
-  border-radius:999px !important;
   padding:8px 14px !important;
-  display:inline-block !important;
+  border-radius:999px !important;
+  color:#fff !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
   pointer-events:auto !important;
   position:relative !important;
-  z-index:10 !important;
-  cursor:pointer !important;
+  z-index:20 !important;
+}
+
+.year-archive-strip .archive-cats .archive-u12{
+  background:#55b9dc !important;
+  border:1px solid #55b9dc !important;
+}
+
+.year-archive-strip .archive-cats .archive-u11{
+  background:#a72d4d !important;
+  border:1px solid #a72d4d !important;
+}
+
+.year-archive-strip .archive-cats .archive-u10{
+  background:#e74c3c !important;
+  border:1px solid #e74c3c !important;
+}
+
+.year-archive-strip .archive-cats .archive-u9{
+  background:#8fc63f !important;
+  border:1px solid #8fc63f !important;
 }
