@@ -28,7 +28,7 @@
       "photoPosition": "center 35%",
       "snsLabel": "",
       "snsUrl": "",
-      "isPublished": true
+      "isPublished": false
     },
     {
       "id": "coach-01",
@@ -44,7 +44,7 @@
       "photoPosition": "center 35%",
       "snsLabel": "",
       "snsUrl": "",
-      "isPublished": true
+      "isPublished": false
     },
     {
       "id": "referee-01",
@@ -60,7 +60,7 @@
       "photoPosition": "center center",
       "snsLabel": "",
       "snsUrl": "",
-      "isPublished": true
+      "isPublished": false
     }
   ],
   "teamOperations": {
