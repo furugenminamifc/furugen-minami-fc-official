@@ -4,5 +4,5 @@
 window.FURUGEN_SUPABASE = {
   url: "https://frdohizjmjzutizlswue.supabase.co",
   anonKey: "sb_publishable_vczyuoAxBVYblDoaCr3NVg_26i7Jn8E",
-  storageBucket: "member-photos"
+  storageBucket: "site-media"
 };
