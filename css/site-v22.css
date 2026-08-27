@@ -1317,10 +1317,10 @@
   #playerGrid .v23-player-card .v23-number{
     position: absolute !important;
 
-    top: 6px !important;
-    left: 6px !important;
-    right: auto !important;
-    bottom: auto !important;
+    top: auto !important;
+left: 6px !important;
+right: auto !important;
+bottom: 6px !important;
 
     min-width: 0 !important;
     width: auto !important;
