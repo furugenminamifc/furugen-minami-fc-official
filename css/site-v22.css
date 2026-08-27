@@ -1340,3 +1340,11 @@ bottom: 6px !important;
     margin: 0 !important;
   }
 }
+/* ===== スマホ版：選手名を少し小さく ===== */
+@media (max-width: 760px){
+
+  #playerGrid .v23-player-card h3{
+    font-size: 16px !important;
+  }
+
+}
