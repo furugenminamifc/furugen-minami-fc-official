@@ -1261,3 +1261,35 @@
   }
 
 }
+/* ===== スマホ版：背番号を写真左上へ移動 ===== */
+@media (max-width: 760px){
+
+  #playerGrid .v23-player-card{
+    position: relative !important;
+  }
+
+  #playerGrid .v23-photo{
+    position: relative !important;
+  }
+
+  #playerGrid .v23-number{
+    position: absolute !important;
+
+    top: 10px !important;
+    left: 10px !important;
+
+    width: auto !important;
+    min-width: 42px !important;
+    height: auto !important;
+
+    padding: 7px 9px !important;
+
+    font-size: 14px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+
+    border-radius: 10px !important;
+
+    z-index: 5 !important;
+  }
+}
