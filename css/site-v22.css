@@ -1223,3 +1223,68 @@
     white-space: nowrap !important;
   }
 }
+/* =========================================
+   選手紹介 スマホ2列 細部調整
+   背番号・プロフィールボタン
+   ========================================= */
+
+@media (max-width: 760px){
+
+  /* カードから中身が飛び出さないようにする */
+  #playerGrid.v23-player-grid .player-card{
+    overflow: hidden !important;
+    min-width: 0 !important;
+  }
+
+  /* 背番号バッジをスマホ2列用に縮小 */
+  #playerGrid.v23-player-grid .player-number,
+  #playerGrid.v23-player-grid .number-badge,
+  #playerGrid.v23-player-grid .player-number-badge{
+    width: 62px !important;
+    height: 62px !important;
+    min-width: 62px !important;
+    min-height: 62px !important;
+
+    font-size: 28px !important;
+    line-height: 1 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 18px !important;
+    padding: 0 !important;
+  }
+
+  /* プロフィールボタン */
+  #playerGrid.v23-player-grid .profile-button,
+  #playerGrid.v23-player-grid .profile-link,
+  #playerGrid.v23-player-grid a[href*="player-profile"]{
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 10px 5px !important;
+    margin: 10px 0 0 !important;
+
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+
+  /* カード本文の左右余白を少し縮める */
+  #playerGrid.v23-player-grid .player-card-body{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    box-sizing: border-box !important;
+  }
+}
