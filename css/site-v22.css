@@ -1300,3 +1300,43 @@
     z-index: 10 !important;
   }
 }
+/* =========================================
+   スマホ版 選手カード最終調整
+   背番号を写真左上へ固定
+   ========================================= */
+@media (max-width: 760px){
+
+  /* 写真エリアを背番号配置の基準にする */
+  #playerGrid .v23-player-card .v23-photo,
+  #playerGrid .v23-player-card .v24-photo,
+  #playerGrid .v23-player-card .player-photo{
+    position: relative !important;
+  }
+
+  /* 背番号バッジ */
+  #playerGrid .v23-player-card .v23-number{
+    position: absolute !important;
+
+    top: 6px !important;
+    left: 6px !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+
+    padding: 5px 8px !important;
+
+    font-size: 11px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+
+    border-radius: 8px !important;
+
+    z-index: 5 !important;
+
+    transform: none !important;
+    margin: 0 !important;
+  }
+}
