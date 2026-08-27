@@ -1223,3 +1223,30 @@
     white-space: nowrap !important;
   }
 }
+/* ===== 選手カード：スマホ版 プロフィールボタン修正 ===== */
+@media (max-width: 760px){
+
+  #playerGrid .v24-profile-btn{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    width:auto !important;
+    max-width:100% !important;
+    min-width:0 !important;
+
+    margin:12px 0 0 !important;
+    padding:10px 8px !important;
+
+    box-sizing:border-box !important;
+
+    font-size:11px !important;
+    line-height:1.2 !important;
+    font-weight:700 !important;
+
+    white-space:nowrap !important;
+    overflow:hidden !important;
+
+    border-radius:999px !important;
+  }
+}
