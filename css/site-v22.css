@@ -1261,12 +1261,8 @@
   }
 
 }
-/* ===== スマホ版：背番号を写真左上へ移動 ===== */
+/* ===== スマホ版：背番号 左上・小型完成版 ===== */
 @media (max-width: 760px){
-
-  #playerGrid .v23-player-card{
-    position: relative !important;
-  }
 
   #playerGrid .v23-photo{
     position: relative !important;
@@ -1275,21 +1271,32 @@
   #playerGrid .v23-number{
     position: absolute !important;
 
-    top: 10px !important;
-    left: 10px !important;
+    top: 8px !important;
+    left: 8px !important;
+    right: auto !important;
+    bottom: auto !important;
 
     width: auto !important;
-    min-width: 42px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
     height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
 
-    padding: 7px 9px !important;
+    padding: 6px 8px !important;
+    margin: 0 !important;
 
-    font-size: 14px !important;
+    font-size: 12px !important;
     line-height: 1 !important;
     font-weight: 800 !important;
 
-    border-radius: 10px !important;
+    border-radius: 8px !important;
 
-    z-index: 5 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 10 !important;
   }
 }
