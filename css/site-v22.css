@@ -1340,30 +1340,3 @@ bottom: 6px !important;
     margin: 0 !important;
   }
 }
-/* ===== スマホ版：プロフィールボタン幅調整 ===== */
-@media (max-width: 760px){
-
-  #playerGrid .v23-player-card .v24-profile-btn,
-  #playerGrid .v23-player-card .profile-button,
-  #playerGrid .v23-player-card .profile-link,
-  #playerGrid .v23-player-card a[href*="player-profile"]{
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    box-sizing: border-box !important;
-
-    padding: 10px 6px !important;
-    margin: 12px 0 0 !important;
-
-    font-size: 11px !important;
-    line-height: 1.2 !important;
-    white-space: nowrap !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    overflow: hidden !important;
-  }
-}
