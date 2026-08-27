@@ -1250,3 +1250,18 @@
     border-radius:999px !important;
   }
 }
+/* ===== スマホ版：背番号バッジだけ小型化 ===== */
+@media (max-width: 760px){
+
+  #playerGrid .v23-number{
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+    min-width: 58px !important;
+    min-height: 58px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 18px !important;
+    box-sizing: border-box !important;
+  }
+
+}
