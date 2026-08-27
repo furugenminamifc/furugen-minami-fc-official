@@ -1254,7 +1254,7 @@
 @media (max-width: 760px){
 
   #playerGrid .v23-number{
-    transform: scale(0.45) !important;
+    transform: scale(0.35) !important;
     transform-origin: center center !important;
 
     font-size: 20px !important;
