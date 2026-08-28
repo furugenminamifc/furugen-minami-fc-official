@@ -1359,3 +1359,8 @@ bottom: 6px !important;
     box-sizing: border-box !important;
   }
 }
+/* ===== 選手カード：空のバッジを非表示 ===== */
+#playerGrid .v23-player-card .v23-meta > :empty,
+#playerGrid .v23-player-card .player-meta > :empty {
+  display: none !important;
+}
