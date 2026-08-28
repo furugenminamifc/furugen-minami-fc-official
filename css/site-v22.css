@@ -1348,32 +1348,3 @@ bottom: 6px !important;
   }
 
 }
-/* ===== スマホ版：プロフィールボタン見切れ修正 ===== */
-@media (max-width: 760px){
-
-  #playerGrid .v23-player-card .v24-profile-btn,
-  #playerGrid .v23-player-card .profile-button,
-  #playerGrid .v23-player-card .profile-link,
-  #playerGrid .v23-player-card a[href*="player-profile"]{
-    width: calc(100% - 20px) !important;
-    max-width: calc(100% - 20px) !important;
-    min-width: 0 !important;
-
-    margin: 12px 10px 0 !important;
-    padding: 10px 6px !important;
-
-    box-sizing: border-box !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    font-size: 10px !important;
-    line-height: 1.2 !important;
-    font-weight: 700 !important;
-
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: clip !important;
-  }
-}
