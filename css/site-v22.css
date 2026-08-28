@@ -1348,3 +1348,14 @@ bottom: 6px !important;
   }
 
 }
+/* ===== スマホ版：プロフィールボタン文字調整 ===== */
+@media (max-width: 600px) {
+  #playerGrid .v24-profile-btn {
+    font-size: 12px !important;
+    padding: 10px 8px !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
