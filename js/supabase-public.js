@@ -52,7 +52,36 @@
       isPublished: x.is_published !== false
     }));
   }
+async function savePlayer(player){
+  const sb = client();
+  if(!sb) throw new Error("Supabase is not configured");
 
+  const row = {
+    id: player.id,
+    name: player.name,
+    number: String(player.number || ""),
+    position: player.position || "",
+    grade: player.grade || "",
+    category: player.category || "",
+    name_kana: player.name_kana || "",
+    dominant_foot: player.dominant_foot || "",
+    profile: player.profile || "",
+    photo_url: player.photo_url || "",
+    photo_position: player.photo_position || "center 35%",
+    captain: !!player.captain,
+    is_published: player.is_published !== false
+  };
+
+  const { data, error } = await sb
+    .from("players")
+    .upsert(row, { onConflict: "id" })
+    .select()
+    .single();
+
+  if(error) throw error;
+
+  return data;
+}
   async function loadStaff(){
     const sb = client();
     if(!sb) return null;
@@ -88,6 +117,7 @@
     configured,
     client,
     loadPlayers,
+    savePlayer,
     loadStaff
   };
 })();
