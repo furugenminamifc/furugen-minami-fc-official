@@ -1,6 +1,32 @@
 
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-fetch("data/players.json?v=2.5").then(r=>r.json()).then(data=>{
+async function loadProfilePlayerData() {
+  const jsonRes = await fetch("data/players.json?v=2.6", {
+    cache: "no-store"
+  });
+
+  const data = await jsonRes.json();
+
+  try {
+    if (
+      window.FurugenPublicData &&
+      window.FurugenPublicData.configured()
+    ) {
+      const livePlayers =
+        await window.FurugenPublicData.loadPlayers();
+
+      if (Array.isArray(livePlayers) && livePlayers.length) {
+        data.players = livePlayers;
+      }
+    }
+  } catch (e) {
+    console.warn("Supabase profile fallback to JSON:", e);
+  }
+
+  return data;
+}
+
+loadProfilePlayerData().then(data => {
   const id=new URLSearchParams(location.search).get("id");
   const p=(data.players||[]).find(x=>x.id===id && x.isPublished!==false) || (data.players||[]).find(x=>x.isPublished!==false);
   if(!p){ document.querySelector("main").innerHTML='<section class="section"><div class="wrap"><h1>選手情報が見つかりません</h1></div></section>'; return; }
