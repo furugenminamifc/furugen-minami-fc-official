@@ -458,9 +458,41 @@ $("#addBtn").onclick=async()=>{
   if(file){
     localPhotoUrls[id] = URL.createObjectURL(file);
   }
+const file = $("photoLocal").files && $("photoLocal").files[0];
+if(file){
+  localPhotoUrls[id] = URL.createObjectURL(file);
+}
 
-  players.push(player);
-  render();
+try{
+  if(
+    window.FurugenPublicData &&
+    typeof window.FurugenPublicData.savePlayer === "function"
+  ){
+    await window.FurugenPublicData.savePlayer({
+      id: player.id,
+      category: player.category,
+      number: player.number,
+      name: player.name,
+      name_kana: player.nameKana || "",
+      grade: player.grade || "",
+      position: player.position || "",
+      dominant_foot: player.dominantFoot || "",
+      profile: player.profile || "",
+      photo_url: player.photo || "",
+      photo_position: player.photoPosition || "center 35%",
+      captain: !!player.captain,
+      is_published: player.isPublished !== false
+    });
+  }
+}catch(e){
+  console.error("Supabase save error:", e);
+  alert("Supabaseへの保存に失敗しました。");
+  return;
+}
+
+players.push(player);
+render();
+
 
   $("status").style.display = "block";
   setTimeout(()=>$("status").style.display="none",1800);
