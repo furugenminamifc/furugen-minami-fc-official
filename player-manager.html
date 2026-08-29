@@ -312,7 +312,9 @@ textarea{min-height:92px;resize:vertical}
     <pre id="jsonPreview" class="output"></pre>
   </section>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-public.js"></script>
 <script>
 const players = [];
 const localPhotoUrls = {};
@@ -415,7 +417,7 @@ function render(){
   $("jsonPreview").textContent = JSON.stringify(buildOutput(), null, 2);
 }
 
-$("addBtn").onclick=()=>{
+$("#addBtn").onclick=async()=>{
   const category = $("category").value;
   const number = Number($("number").value || 0);
   const name = $("name").value.trim();
