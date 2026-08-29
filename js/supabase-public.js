@@ -57,7 +57,7 @@ async function savePlayer(player){
   if(!sb) throw new Error("Supabase is not configured");
 
   const row = {
-    id: player.id,
+  id: player.id || crypto.randomUUID(),
     name: player.name,
     number: String(player.number || ""),
     position: player.position || "",
