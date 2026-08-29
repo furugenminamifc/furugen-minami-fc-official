@@ -1364,3 +1364,14 @@ bottom: 6px !important;
 #playerGrid .v23-player-card .player-meta > :empty {
   display: none !important;
 }
+/* ========================================
+   選手プロフィール 背番号カラー統一
+   一覧カードと同じ水色
+======================================== */
+
+.profile-photo-card .profile-number,
+.profile-photo-card [class*="number"],
+#profileNumber {
+  background: #49c3e6 !important;
+  color: #ffffff !important;
+}
