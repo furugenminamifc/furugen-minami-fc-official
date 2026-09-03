@@ -71,8 +71,7 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
       <div class="tabs">
         <button class="tab active" data-tab="players">選手登録</button>
         <button class="tab" data-tab="staff">スタッフ・審判員登録</button>
-      </div>
-
+<button class="tab" data-tab="matches">試合・大会管理</button>      </div>
       <div id="playersTab">
         <h2>選手登録</h2>
         <div class="grid">
@@ -119,6 +118,63 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
         <div id="staffOk" class="ok"></div><div id="staffError" class="error"></div>
         <div id="staffList" class="list"></div>
       </div>
+<div id="matchesTab" class="hidden">
+  <h2>試合・大会管理</h2>
+
+  <div class="grid">
+    <div class="field">
+      <label>日付</label>
+      <input id="mDate" type="date">
+    </div>
+
+    <div class="field">
+      <label>カテゴリー</label>
+      <select id="mCategory">
+        <option value="U-12">U-12</option>
+        <option value="U-11">U-11</option>
+        <option value="U-10">U-10</option>
+        <option value="U-9">U-9</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>大会名・試合名</label>
+      <input id="mTitle" type="text" placeholder="例：トレーニングマッチ">
+    </div>
+
+    <div class="field">
+      <label>対戦相手</label>
+      <input id="mOpponent" type="text" placeholder="例：○○FC">
+    </div>
+
+    <div class="field">
+      <label>会場</label>
+      <input id="mVenue" type="text" placeholder="例：残波ボールパーク">
+    </div>
+
+    <div class="field">
+      <label>キックオフ</label>
+      <input id="mKickoff" type="time">
+    </div>
+
+    <div class="field">
+      <label>公開設定</label>
+      <select id="mPublished">
+        <option value="true">公開</option>
+        <option value="false">非公開</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="saveMatchBtn" class="primary">試合・大会を保存</button>
+    <button id="clearMatchBtn" class="secondary">入力をクリア</button>
+  </div>
+
+  <div id="matchOk" class="ok"></div>
+  <div id="matchError" class="error"></div>
+  <div id="matchList" class="list"></div>
+</div>        
     </section>
   </div>
 </div>
