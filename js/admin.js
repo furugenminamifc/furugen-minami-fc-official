@@ -395,11 +395,42 @@ function renderMatches(){
           ${m.is_published ? " ／ 公開" : " ／ 非公開"}
         </small>
       </div>
+      <button class="secondary edit">編集</button>
+<button class="danger delete">削除</button>
     `;
-
+row.querySelector(".edit").onclick = ()=>fillMatch(m);
+row.querySelector(".delete").onclick = ()=>deleteMatch(m);
     root.appendChild(row);
   });
+  function fillMatch(m){
+  editingMatchId = m.id;
+  $("mDate").value = m.match_date || "";
+  $("mCategory").value = m.category || "U-12";
+  $("mTitle").value = m.competition || "";
+  $("mOpponent").value = m.opponent || "";
+  $("mVenue").value = m.venue || "";
+  $("mKickoff").value = m.kickoff_time ? String(m.kickoff_time).slice(0,5) : "";
+  $("mPublished").value = String(m.is_published !== false);
+  $("saveMatchBtn").textContent = "試合情報を更新";
+  window.scrollTo({top:0, behavior:"smooth"});
 }
+async function deleteMatch(m){
+  if(!confirm(`${m.match_date} ${m.opponent || ""} を削除しますか？`)) return;
+
+  const { error } = await sb
+    .from("matches")
+    .delete()
+    .eq("id", m.id);
+
+  if(error){
+    show("matchError", "削除できません: " + error.message);
+    return;
+  }
+
+  show("matchOk", "試合を削除しました。");
+  await loadMatches();
+}  
+  
 function clearMatch(){
   editingMatchId = null;
   $("mDate").value = "";
