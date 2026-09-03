@@ -82,6 +82,7 @@
       btn.classList.add("active");
       $("playersTab").classList.toggle("hidden", btn.dataset.tab !== "players");
       $("staffTab").classList.toggle("hidden", btn.dataset.tab !== "staff");
+      $("matchesTab").classList.toggle("hidden", btn.dataset.tab !== "matches");
     };
   });
 
