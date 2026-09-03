@@ -21,7 +21,13 @@
 <section class="section">
   <div class="wrap">
     <p class="eyebrow">MATCH SCHEDULE</p>
-    <h2>試合・大会予定</h2>
+    <h2>試合・大会予定</h2><div id="categoryFilter" style="margin:18px 0 22px; display:flex; gap:8px; flex-wrap:wrap;">
+  <button type="button" class="match-filter active" data-category="all">すべて</button>
+  <button type="button" class="match-filter" data-category="U-12">U-12</button>
+  <button type="button" class="match-filter" data-category="U-11">U-11</button>
+  <button type="button" class="match-filter" data-category="U-10">U-10</button>
+  <button type="button" class="match-filter" data-category="U-9">U-9</button>
+</div>
     <div id="matchesList">読み込み中...</div>
   </div>
 </section>
@@ -86,12 +92,33 @@ const futureMatches = data
 
 const displayMatches = [...pastMatches.reverse(), ...futureMatches];
 
-root.innerHTML = displayMatches.map(m => `
-  <div class="card" style="margin-bottom:14px;">
-    <strong>${m.match_date || ""}　${m.category || ""}</strong><br>
-    <span>${m.competition || ""}${m.opponent ? " / 対 " + m.opponent : ""}${m.venue ? " / " + m.venue : ""}${m.kickoff_time ? " / " + String(m.kickoff_time).slice(0,5) : ""}</span>
-  </div>
-`).join("");    
+function renderByCategory(category) {
+  const filtered = category === "all"
+    ? displayMatches
+    : displayMatches.filter(m => m.category === category);
+
+  if (filtered.length === 0) {
+    root.innerHTML = "<p>このカテゴリーの試合予定はありません。</p>";
+    return;
+  }
+
+  root.innerHTML = filtered.map(m => `
+    <div class="card" style="margin-bottom:14px;">
+      <strong>${m.match_date || ""}　${m.category || ""}</strong><br>
+      <span>${m.competition || ""}${m.opponent ? " / 対 " + m.opponent : ""}${m.venue ? " / " + m.venue : ""}${m.kickoff_time ? " / " + String(m.kickoff_time).slice(0,5) : ""}</span>
+    </div>
+  `).join("");
+}
+
+renderByCategory("all");
+
+document.querySelectorAll(".match-filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".match-filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderByCategory(btn.dataset.category);
+  });
+});   
 
   } catch (e) {
     root.textContent = "試合予定を読み込めませんでした。";
