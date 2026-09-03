@@ -41,5 +41,48 @@
 (()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(!b||!n)return;
 b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js?v=1.8"></script>
 
+<script>
+(async () => {
+  const root = document.getElementById("matchesList");
+
+  try {
+    const cfg = window.FURUGEN_SUPABASE || {};
+
+    if (!window.supabase || !cfg.url || !cfg.anonKey) {
+      root.textContent = "試合予定を読み込めませんでした。";
+      return;
+    }
+
+    const sb = window.supabase.createClient(cfg.url, cfg.anonKey);
+
+    const { data, error } = await sb
+      .from("matches")
+      .select("*")
+      .eq("is_published", true)
+      .order("match_date", { ascending: true })
+      .order("kickoff_time", { ascending: true });
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      root.textContent = "現在、公開中の試合・大会予定はありません。";
+      return;
+    }
+
+    root.innerHTML = data.map(m => `
+      <div class="card" style="margin-bottom:14px;">
+        <strong>${m.match_date || ""}　${m.category || ""}</strong><br>
+        <span>${m.competition || ""}${m.opponent ? " / 対 " + m.opponent : ""}${m.venue ? " / " + m.venue : ""}${m.kickoff_time ? " / " + String(m.kickoff_time).slice(0,5) : ""}</span>
+      </div>
+    `).join("");
+
+  } catch (e) {
+    root.textContent = "試合予定を読み込めませんでした。";
+    console.error(e);
+  }
+})();
+</script>
 </body></html>
