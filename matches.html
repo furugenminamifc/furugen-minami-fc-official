@@ -72,12 +72,26 @@ b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true'
       return;
     }
 
-    root.innerHTML = data.map(m => `
-      <div class="card" style="margin-bottom:14px;">
-        <strong>${m.match_date || ""}　${m.category || ""}</strong><br>
-        <span>${m.competition || ""}${m.opponent ? " / 対 " + m.opponent : ""}${m.venue ? " / " + m.venue : ""}${m.kickoff_time ? " / " + String(m.kickoff_time).slice(0,5) : ""}</span>
-      </div>
-    `).join("");
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const pastMatches = data
+  .filter(m => new Date(m.match_date) < today)
+  .sort((a, b) => new Date(b.match_date) - new Date(a.match_date))
+  .slice(0, 3);
+
+const futureMatches = data
+  .filter(m => new Date(m.match_date) >= today)
+  .sort((a, b) => new Date(a.match_date) - new Date(b.match_date));
+
+const displayMatches = [...pastMatches.reverse(), ...futureMatches];
+
+root.innerHTML = displayMatches.map(m => `
+  <div class="card" style="margin-bottom:14px;">
+    <strong>${m.match_date || ""}　${m.category || ""}</strong><br>
+    <span>${m.competition || ""}${m.opponent ? " / 対 " + m.opponent : ""}${m.venue ? " / " + m.venue : ""}${m.kickoff_time ? " / " + String(m.kickoff_time).slice(0,5) : ""}</span>
+  </div>
+`).join("");    
 
   } catch (e) {
     root.textContent = "試合予定を読み込めませんでした。";
