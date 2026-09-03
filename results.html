@@ -17,7 +17,23 @@
 <nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a class="is-active" href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 </div></header>
 <main><section class="subhero"><div class="wrap"><p class="eyebrow light">RESULTS</p><h1>試合結果</h1><p>チームの試合結果・大会記録を掲載します。</p></div></section><section class="section"><div class="wrap"><article class="card"><p class="eyebrow">RESULTS</p><h3>最新の試合結果</h3><p class="muted">試合結果は、試合終了後に順次更新します。</p></article></div></section></main>
-<footer class="site-footer">
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">MATCH RESULTS</p>
+    <h2>試合結果</h2>
+
+    <div id="resultCategoryFilter" style="margin:18px 0 22px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button type="button" class="result-filter active" data-category="all">すべて</button>
+      <button type="button" class="result-filter" data-category="U-12">U-12</button>
+      <button type="button" class="result-filter" data-category="U-11">U-11</button>
+      <button type="button" class="result-filter" data-category="U-10">U-10</button>
+      <button type="button" class="result-filter" data-category="U-9">U-9</button>
+    </div>
+
+    <div id="resultsList">読み込み中...</div>
+  </div>
+</section>
+</main><footer class="site-footer">
 <div class="wrap footer-inner">
 <picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
 <img class="footer-emblem" src="images/furugen-emblem-displayfix.png" alt="古堅南FC エンブレム"></picture>
