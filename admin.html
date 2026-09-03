@@ -174,7 +174,68 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <div id="matchOk" class="ok"></div>
   <div id="matchError" class="error"></div>
   <div id="matchList" class="list"></div>
-</div>        
+</div>
+<!-- 試合結果管理 -->
+<div class="admin-card" id="resultManager">
+  <h2>試合結果管理</h2>
+
+  <div class="field">
+    <label>試合日</label>
+    <input id="rDate" type="date">
+  </div>
+
+  <div class="field">
+    <label>カテゴリー</label>
+    <select id="rCategory">
+      <option value="U-12">U-12</option>
+      <option value="U-11">U-11</option>
+      <option value="U-10">U-10</option>
+      <option value="U-9">U-9</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>大会名</label>
+    <input id="rCompetition" type="text" placeholder="例：読谷村長杯">
+  </div>
+
+  <div class="field">
+    <label>対戦相手</label>
+    <input id="rOpponent" type="text" placeholder="例：○○FC">
+  </div>
+
+  <div class="field">
+    <label>古堅南FC 得点</label>
+    <input id="rOurScore" type="number" min="0" value="0">
+  </div>
+
+  <div class="field">
+    <label>相手 得点</label>
+    <input id="rOpponentScore" type="number" min="0" value="0">
+  </div>
+
+  <div class="field">
+    <label>会場</label>
+    <input id="rVenue" type="text" placeholder="例：残波ボールパーク">
+  </div>
+
+  <div class="field">
+    <label>公開設定</label>
+    <select id="rPublished">
+      <option value="true">公開</option>
+      <option value="false">非公開</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button id="saveResultBtn" class="primary">試合結果を保存</button>
+    <button id="clearResultBtn" class="secondary">入力をクリア</button>
+  </div>
+
+  <div id="resultOk" class="ok"></div>
+  <div id="resultError" class="error"></div>
+  <div id="resultAdminList" class="list"></div>
+</div>      
     </section>
   </div>
 </div>
