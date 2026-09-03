@@ -6,7 +6,8 @@
   let editingStaffId = null;
   let currentPlayers = [];
   let currentStaff = [];
-
+let editingMatchId = null;
+let currentMatches = [];
   function isConfigured(){
     return !!(
       window.supabase &&
@@ -59,7 +60,7 @@
 
     if(loggedIn){
       show("loginOk", `ログイン中：${session.user.email || ""}`);
-      await Promise.all([loadPlayers(), loadStaff()]);
+    await Promise.all([loadPlayers(), loadStaff(), loadMatches()]);
     }
   }
 
@@ -130,7 +131,21 @@
     currentPlayers = data || [];
     renderPlayers();
   }
+async function loadMatches(){
+  const { data, error } = await sb
+    .from("matches")
+    .select("*")
+    .order("match_date", { ascending:false })
+    .order("kickoff_time", { ascending:true });
 
+  if(error){
+    show("matchError", "試合一覧を読み込めません: " + error.message);
+    return;
+  }
+
+  currentMatches = data || [];
+renderMatches();
+}
   function renderPlayers(){
     const root = $("playerList");
     root.innerHTML = "";
@@ -359,6 +374,98 @@
       await loadStaff();
     }
   }
+function renderMatches(){
+  const root = $("matchList");
+  if(!root) return;
 
+  root.innerHTML = "";
+
+  currentMatches.forEach(m=>{
+    const row = document.createElement("div");
+    row.className = "row";
+
+    row.innerHTML = `
+      <div>
+        <b>${esc(m.match_date || "")}　${esc(m.category || "")}</b><br>
+        <small>
+          ${esc(m.competition || "")}
+          ${m.opponent ? " ／ 対 " + esc(m.opponent) : ""}
+          ${m.venue ? " ／ " + esc(m.venue) : ""}
+          ${m.kickoff_time ? " ／ " + esc(String(m.kickoff_time).slice(0,5)) : ""}
+          ${m.is_published ? " ／ 公開" : " ／ 非公開"}
+        </small>
+      </div>
+    `;
+
+    root.appendChild(row);
+  });
+}
+function clearMatch(){
+  editingMatchId = null;
+  $("mDate").value = "";
+  $("mCategory").value = "U-12";
+  $("mTitle").value = "";
+  $("mOpponent").value = "";
+  $("mVenue").value = "";
+  $("mKickoff").value = "";
+  $("mPublished").value = "true";
+}
+
+$("clearMatchBtn").onclick = clearMatch;
+
+$("saveMatchBtn").onclick = async ()=>{
+  hide("matchError");
+
+  const matchDate = $("mDate").value;
+  const opponent = $("mOpponent").value.trim();
+
+  if(!matchDate){
+    show("matchError", "日付を入力してください。");
+    return;
+  }
+
+  if(!opponent){
+    show("matchError", "対戦相手を入力してください。");
+    return;
+  }
+
+  const payload = {
+    match_date: matchDate,
+    category: $("mCategory").value,
+    competition: $("mTitle").value.trim(),
+    opponent: opponent,
+    venue: $("mVenue").value.trim(),
+    kickoff_time: $("mKickoff").value || null,
+    is_published: $("mPublished").value === "true"
+  };
+
+  let result;
+
+  if(editingMatchId){
+    result = await sb
+      .from("matches")
+      .update(payload)
+      .eq("id", editingMatchId);
+  }else{
+    result = await sb
+      .from("matches")
+      .insert(payload);
+  }
+
+  if(result.error){
+    show("matchError", "保存できません: " + result.error.message);
+    return;
+  }
+
+  show(
+    "matchOk",
+    editingMatchId
+      ? "試合情報を更新しました ✅"
+      : "試合を登録しました ✅"
+  );
+
+  clearMatch();
+  await loadMatches();
+};  
   init();
 })();
