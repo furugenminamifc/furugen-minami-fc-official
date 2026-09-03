@@ -430,7 +430,7 @@ async function deleteMatch(m){
   show("matchOk", "試合を削除しました。");
   await loadMatches();
 }  
-  
+} 
 function clearMatch(){
   editingMatchId = null;
   $("mDate").value = "";
