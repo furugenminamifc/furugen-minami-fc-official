@@ -35,8 +35,36 @@ let currentResults = [];
       .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
       .replaceAll('"',"&quot;").replaceAll("'","&#039;");
   }
+function setupAdminTabs(){
+  const tabs = document.querySelectorAll(".tabs .tab");
 
-  function init(){
+  const panels = {
+    players: $("playersTab"),
+    staff: $("staffTab"),
+    matches: $("matchesTab"),
+    resultManager: $("resultManager")
+  };
+
+  tabs.forEach(tab => {
+    tab.onclick = () => {
+      const target = tab.dataset.tab;
+
+      tabs.forEach(t => t.classList.remove("active"));
+
+      Object.values(panels).forEach(panel => {
+        if(panel) panel.classList.add("hidden");
+      });
+
+      tab.classList.add("active");
+
+      if(panels[target]){
+        panels[target].classList.remove("hidden");
+      }
+    };
+  });
+const activeTab = document.querySelector(".tabs .tab.active") || tabs[0];
+if(activeTab) activeTab.click();}
+  function init(){setupAdminTabs();
     $("configStatus").textContent = isConfigured()
       ? "Supabase設定：入力済み ✅"
       : "Supabase設定：未設定（js/supabase-config.js を設定してください）";
