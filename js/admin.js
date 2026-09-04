@@ -189,8 +189,9 @@ async function loadResults(){
     return;
   }
 
-  currentResults = data || [];
-  renderResults();
+currentResults = data || [];
+renderResults();
+renderResultMatchSelect();
 }
 function renderResultMatchSelect(){
   const select = $("resultMatchSelect");
@@ -208,8 +209,14 @@ function renderResultMatchSelect(){
     const competition = m.competition || "";
     const opponent = m.opponent || "";
 
-    option.textContent =
-      `${date}｜${category}｜${competition}｜vs ${opponent}`;
+  const alreadyEntered = currentResults.some(r =>
+  r.match_date === m.match_date &&
+  r.category === m.category &&
+  r.opponent === m.opponent
+);
+
+option.textContent =
+  `${date} | ${category} | ${competition} | vs ${opponent}${alreadyEntered ? " ✅ 結果入力済み" : ""}`;
 
     select.appendChild(option);
   });
