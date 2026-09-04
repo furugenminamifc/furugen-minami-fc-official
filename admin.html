@@ -179,7 +179,12 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 <!-- 試合結果管理 -->
 <div class="admin-card" id="resultManager">
   <h2>試合結果管理</h2>
-
+<div class="field">
+  <label>登録済み試合から選択</label>
+  <select id="resultMatchSelect">
+    <option value="">試合を選択してください</option>
+  </select>
+</div>
   <div class="field">
     <label>試合日</label>
     <input id="rDate" type="date">
