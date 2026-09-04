@@ -1,7 +1,10 @@
 (() => {
   const list = document.getElementById("resultsList");
   const filters = document.querySelectorAll(".result-filter");
-
+const cfg = window.FURUGEN_SUPABASE || {};
+const sb = (window.supabase && cfg.url && cfg.anonKey)
+  ? window.supabase.createClient(cfg.url, cfg.anonKey)
+  : null;
   if (!list) return;
 
   let allResults = [];
@@ -59,7 +62,7 @@
     list.innerHTML = "<p>読み込み中...</p>";
 
     try {
-      if (typeof sb === "undefined") {
+  if (!sb) {
         throw new Error("Supabase設定を読み込めませんでした。");
       }
 
