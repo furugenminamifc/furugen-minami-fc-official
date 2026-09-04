@@ -1375,3 +1375,40 @@ bottom: 6px !important;
   background: #49c3e6 !important;
   color: #ffffff !important;
 }
+/* ===== 管理画面 4タブ 横並び修正版 ===== */
+
+#adminArea .panel{
+  display:block;
+  width:100%;
+}
+
+#adminArea .tabs{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:10px;
+  width:100%;
+  margin:0 0 20px;
+}
+
+#adminArea .tabs .tab{
+  width:100%;
+  min-height:48px;
+  padding:12px 10px;
+  writing-mode:horizontal-tb;
+  white-space:normal;
+  text-align:center;
+}
+
+#adminArea #playersTab,
+#adminArea #staffTab,
+#adminArea #matchesTab,
+#adminArea #resultManager{
+  width:100%;
+}
+
+/* iPad・スマホ */
+@media (max-width: 800px){
+  #adminArea .tabs{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
