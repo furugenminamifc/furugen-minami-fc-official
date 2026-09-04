@@ -176,6 +176,7 @@ async function loadMatches(){
 
   currentMatches = data || [];
 renderMatches();
+renderResultMatchSelect();
 }
 async function loadResults(){
   const { data, error } = await sb
@@ -191,7 +192,50 @@ async function loadResults(){
   currentResults = data || [];
   renderResults();
 }
-function renderResults(){
+function renderResultMatchSelect(){
+  const select = $("resultMatchSelect");
+  if(!select) return;
+
+  const currentValue = select.value;
+  select.innerHTML = '<option value="">試合を選択してください</option>';
+
+  currentMatches.forEach(m=>{
+    const option = document.createElement("option");
+    option.value = m.id;
+
+    const date = m.match_date || "";
+    const category = m.category || "";
+    const competition = m.competition || "";
+    const opponent = m.opponent || "";
+
+    option.textContent =
+      `${date}｜${category}｜${competition}｜vs ${opponent}`;
+
+    select.appendChild(option);
+  });
+
+  if(currentValue){
+    select.value = currentValue;
+  }
+}
+const resultMatchSelect = $("resultMatchSelect");
+
+if(resultMatchSelect){
+  resultMatchSelect.addEventListener("change", ()=>{
+    const match = currentMatches.find(
+      m => String(m.id) === String(resultMatchSelect.value)
+    );
+
+    if(!match) return;
+
+    $("rDate").value = match.match_date || "";
+    $("rCategory").value = match.category || "";
+    $("rCompetition").value = match.competition || "";
+    $("rOpponent").value = match.opponent || "";
+    $("rVenue").value = match.venue || "";
+  });
+}  
+  function renderResults(){
   const root = $("resultAdminList");
   if(!root) return;
 
