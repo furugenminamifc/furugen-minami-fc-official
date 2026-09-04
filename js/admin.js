@@ -8,6 +8,9 @@
   let currentStaff = [];
 let editingMatchId = null;
 let currentMatches = [];
+let editingResultId = null;
+let currentResults = [];
+  
   function isConfigured(){
     return !!(
       window.supabase &&
@@ -60,7 +63,7 @@ let currentMatches = [];
 
     if(loggedIn){
       show("loginOk", `ログイン中：${session.user.email || ""}`);
-    await Promise.all([loadPlayers(), loadStaff(), loadMatches()]);
+  await Promise.all([loadPlayers(), loadStaff(), loadMatches(), loadResults()]);
     }
   }
 
@@ -146,6 +149,80 @@ async function loadMatches(){
   currentMatches = data || [];
 renderMatches();
 }
+async function loadResults(){
+  const { data, error } = await sb
+    .from("match_results")
+    .select("*")
+    .order("match_date", { ascending:false });
+
+  if(error){
+    show("resultError", "試合結果を読み込めません: " + error.message);
+    return;
+  }
+
+  currentResults = data || [];
+  renderResults();
+}
+function renderResults(){
+  const root = $("resultAdminList");
+  if(!root) return;
+
+  root.innerHTML = "";
+
+  currentResults.forEach(r=>{
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const score = `${r.our_score} - ${r.opponent_score}`;
+
+    row.innerHTML = `
+      <div>
+        <b>${esc(r.match_date)} ${esc(r.category)}</b><br>
+        <strong>古堅南FC ${score} ${esc(r.opponent)}</strong><br>
+        <small>${esc(r.competition || "")} / ${esc(r.venue || "")}
+        ${r.is_published ? "・公開" : "・非公開"}</small>
+      </div>
+      <button class="secondary edit">編集</button>
+      <button class="danger delete">削除</button>
+    `;
+row.querySelector(".edit").onclick = ()=>fillResult(r);
+row.querySelector(".delete").onclick = ()=>deleteResult(r);
+root.appendChild(row);
+  });
+}
+function fillResult(r){
+  editingResultId = r.id;
+
+  $("rDate").value = r.match_date || "";
+  $("rCategory").value = r.category || "U-12";
+  $("rCompetition").value = r.competition || "";
+  $("rOpponent").value = r.opponent || "";
+  $("rOurScore").value = r.our_score ?? 0;
+  $("rOpponentScore").value = r.opponent_score ?? 0;
+  $("rVenue").value = r.venue || "";
+  $("rPublished").value = String(r.is_published !== false);
+
+  $("saveResultBtn").textContent = "試合結果を更新";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+async function deleteResult(r){
+  if(!confirm(`${r.match_date} ${r.opponent || ""} を削除しますか？`)) return;
+
+  const { error } = await sb
+    .from("match_results")
+    .delete()
+    .eq("id", r.id);
+
+  if(error){
+    show("resultError", "削除できません: " + error.message);
+    return;
+  }
+
+  show("resultOk", "試合結果を削除しました。");
+  await loadResults();
+}  
+  
   function renderPlayers(){
     const root = $("playerList");
     root.innerHTML = "";
@@ -497,6 +574,64 @@ $("saveMatchBtn").onclick = async ()=>{
 
   clearMatch();
   await loadMatches();
-};  
+};
+$("saveResultBtn").onclick = async ()=>{
+  hide("resultError");
+
+  const matchDate = $("rDate").value;
+  const opponent = $("rOpponent").value.trim();
+
+  if(!matchDate){
+    show("resultError", "日付を入力してください。");
+    return;
+  }
+
+  if(!opponent){
+    show("resultError", "対戦相手を入力してください。");
+    return;
+  }
+
+  const payload = {
+    match_date: matchDate,
+    category: $("rCategory").value,
+    competition: $("rCompetition").value.trim(),
+    opponent: opponent,
+    our_score: Number($("rOurScore").value || 0),
+    opponent_score: Number($("rOpponentScore").value || 0),
+    venue: $("rVenue").value.trim(),
+    is_published: $("rPublished").value === "true"
+  };
+
+  let result;
+
+  if(editingResultId){
+    result = await sb
+      .from("match_results")
+      .update(payload)
+      .eq("id", editingResultId);
+  }else{
+    result = await sb
+      .from("match_results")
+      .insert(payload);
+  }
+
+  if(result.error){
+    show("resultError", "保存できません: " + result.error.message);
+    return;
+  }
+
+  show(
+    "resultOk",
+    editingResultId
+      ? "試合結果を更新しました ✅"
+      : "試合結果を登録しました ✅"
+  );
+
+  editingResultId = null;
+  $("saveResultBtn").textContent = "試合結果を保存";
+
+  await loadResults();
+};
+
   init();
 })();
