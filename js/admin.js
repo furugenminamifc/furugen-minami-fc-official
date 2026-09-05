@@ -200,7 +200,27 @@ function renderResultMatchSelect(){
   const currentValue = select.value;
   select.innerHTML = '<option value="">試合を選択してください</option>';
 
-  currentMatches.forEach(m=>{
+  const sortedMatches = [...currentMatches].sort((a, b) => {
+  const aEntered = currentResults.some(r =>
+    r.match_date === a.match_date &&
+    r.category === a.category &&
+    r.opponent === a.opponent
+  );
+
+  const bEntered = currentResults.some(r =>
+    r.match_date === b.match_date &&
+    r.category === b.category &&
+    r.opponent === b.opponent
+  );
+
+  if (aEntered !== bEntered) {
+    return aEntered ? 1 : -1;
+  }
+
+  return String(b.match_date || "").localeCompare(String(a.match_date || ""));
+});
+
+sortedMatches.forEach(m=>{
     const option = document.createElement("option");
     option.value = m.id;
 
