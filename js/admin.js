@@ -200,7 +200,9 @@ function renderResultMatchSelect(){
   const currentValue = select.value;
   select.innerHTML = '<option value="">試合を選択してください</option>';
 
-  const sortedMatches = [...currentMatches].sort((a, b) => {
+  const sortedMatches = [...currentMatches]
+  .filter(m => m.competition !== "過去試合一括取込")
+  .sort((a, b) => {
   const aEntered = currentResults.some(r =>
     r.match_date === a.match_date &&
     r.category === a.category &&
