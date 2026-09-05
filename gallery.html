@@ -16,7 +16,8 @@
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button>
 <nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a class="is-active" href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 </div></header>
-<main><section class="subhero"><div class="wrap"><p class="eyebrow light">GALLERY</p><h1>ギャラリー</h1><p>古堅南FCの活動を写真で残します。</p></div></section><section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">TEAM PHOTO</p><h2>2026年度 チーム写真</h2></div></div><div class="gallery-grid"><figure><img src="images/team-2026.webp" alt="古堅南FC チーム写真"></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure></div></div></section></main>
+<main>
+<section class="subhero"><div class="wrap"><p class="eyebrow light">GALLERY</p><h1>ギャラリー</h1><p>古堅南FCの活動を写真で残します。</p></div></section><section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">TEAM PHOTO</p><h2>2026年度 チーム写真</h2></div></div><div class="gallery-grid"><figure><img src="images/team-2026.webp" alt="古堅南FC チーム写真"></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure><figure><div class="empty-gallery">PHOTO</div></figure></div></div></section></main>
 <footer class="site-footer">
 <div class="wrap footer-inner">
 <picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
@@ -27,7 +28,10 @@
 <nav><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 <small>© 2026 古堅南FC All Rights Reserved.</small>
 </div></footer>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js?v=1.8"></script>
+<script src="js/gallery-public.js?v=1.0"></script>
+  <script>
 (()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(!b||!n)return;
 b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
 </script>
