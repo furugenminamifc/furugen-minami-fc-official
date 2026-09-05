@@ -69,10 +69,11 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <div id="adminArea" class="hidden">
     <section class="panel">
       <div class="tabs">
-        <button class="tab active" data-tab="players">選手登録</button>
-        <button class="tab" data-tab="staff">スタッフ・審判員登録</button>
+<button class="tab active" data-tab="players">選手登録</button>
+<button class="tab" data-tab="staff">スタッフ・審判員登録</button>
 <button class="tab" data-tab="matches">試合・大会管理</button>
-      <button class="tab" data-tab="resultManager">試合結果管理</button>
+<button class="tab" data-tab="resultManager">試合結果管理</button>
+<button class="tab" data-tab="gallery">ギャラリー管理</button>   
       <div id="playersTab">
         <h2>選手登録</h2>
         <div class="grid">
@@ -246,7 +247,48 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <div id="resultOk" class="ok"></div>
   <div id="resultError" class="error"></div>
   <div id="resultAdminList" class="list"></div>
-</div>      
+</div> 
+<div id="galleryTab" class="hidden">
+  <h2>ギャラリー管理</h2>
+
+  <div class="grid">
+    <div class="field">
+      <label>年度</label>
+      <select id="gYear">
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>タイトル</label>
+      <input id="gTitle" type="text" placeholder="例：U-12 大会写真">
+    </div>
+
+    <div class="field full">
+      <label>写真</label>
+      <input id="gPhoto" type="file" accept="image/*">
+    </div>
+
+    <div class="field">
+      <label>公開設定</label>
+      <select id="gPublished">
+        <option value="true">公開</option>
+        <option value="false">非公開</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="saveGalleryBtn" class="primary">写真を登録</button>
+    <button id="clearGalleryBtn" class="secondary">入力をクリア</button>
+  </div>
+
+  <div id="galleryOk" class="ok"></div>
+  <div id="galleryError" class="error"></div>
+  <div id="galleryAdminList" class="list"></div>
+</div>        
     </section>
   </div>
 </div>
