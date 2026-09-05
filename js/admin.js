@@ -38,11 +38,12 @@ let resultFilterMode = "all";
 function setupAdminTabs(){
   const tabs = document.querySelectorAll(".tabs .tab");
 
-  const panels = {
-    players: $("playersTab"),
-    staff: $("staffTab"),
-    matches: $("matchesTab"),
-    resultManager: $("resultManager")
+const panels = {
+players: $("playersTab"),
+staff: $("staffTab"),
+matches: $("matchesTab"),
+resultManager: $("resultManager"),
+gallery: $("galleryTab")
   };
 
   tabs.forEach(tab => {
@@ -763,6 +764,18 @@ if (resultFilterButtons) {
     btn.classList.add("active");
     renderResultMatchSelect();
   };
+}
+  const saveGalleryBtn = $("saveGalleryBtn");
+const clearGalleryBtn = $("clearGalleryBtn");
+
+function clearGalleryForm(){
+  if ($("gTitle")) $("gTitle").value = "";
+  if ($("gPhoto")) $("gPhoto").value = "";
+  if ($("gPublished")) $("gPublished").value = "true";
+}
+
+if (clearGalleryBtn) {
+  clearGalleryBtn.onclick = clearGalleryForm;
 }
   init();
 })();
