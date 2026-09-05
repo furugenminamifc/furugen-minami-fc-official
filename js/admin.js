@@ -10,7 +10,7 @@ let editingMatchId = null;
 let currentMatches = [];
 let editingResultId = null;
 let currentResults = [];
-  
+let resultFilterMode = "all";  
   function isConfigured(){
     return !!(
       window.supabase &&
@@ -199,8 +199,22 @@ function renderResultMatchSelect(){
 
   const currentValue = select.value;
   select.innerHTML = '<option value="">試合を選択してください</option>';
+const isResultEntered = (m) => currentResults.some(r =>
+  r.match_date === m.match_date &&
+  r.category === m.category &&
+  r.opponent === m.opponent
+);
 
-  const sortedMatches = [...currentMatches]
+const filteredMatches = currentMatches.filter(m => {
+  if (m.competition === "過去試合一括取込") return false;
+
+  const entered = isResultEntered(m);
+
+  if (resultFilterMode === "pending") return !entered;
+  if (resultFilterMode === "done") return entered;
+  return true;
+});
+const sortedMatches = [...filteredMatches]
   .filter(m => m.competition !== "過去試合一括取込")
   .sort((a, b) => {
   const aEntered = currentResults.some(r =>
@@ -733,6 +747,17 @@ $("saveResultBtn").onclick = async ()=>{
 
   await loadResults();
 };
+document.querySelectorAll(".result-filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    resultFilterMode = btn.dataset.filter || "all";
 
+    document.querySelectorAll(".result-filter").forEach(b => {
+      b.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+    renderResultMatchSelect();
+  });
+});
   init();
 })();
