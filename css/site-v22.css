@@ -1412,3 +1412,16 @@ bottom: 6px !important;
     grid-template-columns:repeat(2, minmax(0, 1fr));
   }
 }
+/* 試合結果フィルター：選択中を分かりやすくする */
+.result-filter.active {
+  background: #8b002b !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  border: 2px solid #8b002b !important;
+  box-shadow: 0 0 0 3px rgba(139, 0, 43, 0.15) !important;
+  transform: translateY(-1px);
+}
+
+.result-filter:not(.active) {
+  opacity: 0.75;
+}
