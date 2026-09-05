@@ -87,7 +87,7 @@
   const footer = document.querySelector(".site-footer");
 
   if (footer) {
-    main.insertBefore(section, footer);
+footer.parentNode.insertBefore(section, footer);
   } else {
     main.appendChild(section);
   }
