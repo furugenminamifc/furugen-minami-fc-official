@@ -774,7 +774,54 @@ function clearGalleryForm(){
   if ($("gPublished")) $("gPublished").value = "true";
 }
 
-if (clearGalleryBtn) {
+if(saveGalleryBtn) {
+  saveGalleryBtn.onclick = async () => {
+    try {
+      const year = $("gYear")?.value;
+      const title = $("gTitle")?.value?.trim();
+      const file = $("gPhoto")?.files?.[0];
+      const published = $("gPublished")?.value === "true";
+
+      if (!year || !title || !file) {
+        show("galleryError", "年度・タイトル・写真を入力してください。");
+        return;
+      }
+
+      hide("galleryError");
+      hide("galleryOk");
+
+      saveGalleryBtn.disabled = true;
+      saveGalleryBtn.textContent = "登録中...";
+
+      const photoUrl = await uploadPhoto(file, "gallery");
+
+      const { error } = await sb
+        .from("gallery")
+        .insert({
+          year: Number(year),
+          title: title,
+          photo_url: photoUrl,
+          published: published
+        });
+
+      if (error) throw error;
+
+      show("galleryOk", "写真を登録しました ✅");
+      clearGalleryForm();
+
+    } catch (error) {
+      console.error("Gallery save error:", error);
+      show(
+        "galleryError",
+        "登録に失敗しました：" + (error?.message || String(error))
+      );
+    } finally {
+      saveGalleryBtn.disabled = false;
+      saveGalleryBtn.textContent = "写真を登録";
+    }
+  };
+} 
+  if (clearGalleryBtn) {
   clearGalleryBtn.onclick = clearGalleryForm;
 }
   init();
