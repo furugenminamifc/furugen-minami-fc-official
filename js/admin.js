@@ -747,17 +747,22 @@ $("saveResultBtn").onclick = async ()=>{
 
   await loadResults();
 };
-document.querySelectorAll(".result-filter").forEach(btn => {
-  btn.addEventListener("click", () => {
+const resultFilterButtons = $("resultFilterButtons");
+
+if (resultFilterButtons) {
+  resultFilterButtons.onclick = (event) => {
+    const btn = event.target.closest(".result-filter");
+    if (!btn) return;
+
     resultFilterMode = btn.dataset.filter || "all";
 
-    document.querySelectorAll(".result-filter").forEach(b => {
+    resultFilterButtons.querySelectorAll(".result-filter").forEach(b => {
       b.classList.remove("active");
     });
 
     btn.classList.add("active");
     renderResultMatchSelect();
-  });
-});
+  };
+}
   init();
 })();
