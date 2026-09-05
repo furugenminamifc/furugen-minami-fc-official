@@ -58,7 +58,8 @@
     img.loading = "lazy";
     img.style.width = "100%";
     img.style.height = "240px";
-    img.style.objectFit = "cover";
+    img.style.objectFit = "contain";
+　　　img.style.background = "#f5f5f5";
     img.style.display = "block";
 
     const info = document.createElement("div");
