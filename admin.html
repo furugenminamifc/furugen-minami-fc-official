@@ -181,7 +181,12 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <h2>試合結果管理</h2>
 <div class="field">
   <label>登録済み試合から選択</label>
-  <select id="resultMatchSelect">
+  <div class="actions" id="resultFilterButtons" style="margin:8px 0 10px;">
+  <button type="button" class="secondary result-filter active" data-filter="all">すべて</button>
+  <button type="button" class="secondary result-filter" data-filter="pending">未入力のみ</button>
+  <button type="button" class="secondary result-filter" data-filter="done">入力済み</button>
+</div>
+<select id="resultMatchSelect">
     <option value="">試合を選択してください</option>
   </select>
 </div>
