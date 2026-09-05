@@ -254,37 +254,6 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js?v=1.8"></script>
 <script src="js/admin.js?v=1.9"></script>
-<script>
-document.querySelectorAll(".result-filter").forEach(function(btn){
-  btn.addEventListener("click", function(){
-    var mode = btn.getAttribute("data-filter");
-    var select = document.getElementById("resultMatchSelect");
-    if (!select) return;
 
-    var options = Array.from(select.options);
-
-    options.forEach(function(opt){
-      if (!opt.value) return;
-
-      var entered = opt.textContent.indexOf("結果入力済み") !== -1;
-
-      if (mode === "all") {
-        opt.hidden = false;
-      } else if (mode === "pending") {
-        opt.hidden = entered;
-      } else if (mode === "done") {
-        opt.hidden = !entered;
-      }
-    });
-
-    document.querySelectorAll(".result-filter").forEach(function(b){
-      b.classList.remove("active");
-    });
-
-    btn.classList.add("active");
-    select.selectedIndex = 0;
-  });
-});
-</script>  
 </body>
 </html>
