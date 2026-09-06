@@ -230,7 +230,29 @@ async function loadGallery(){
     list.appendChild(row);
   });
 }
-  
+document.addEventListener("click", async (event) => {
+  const btn = event.target.closest("[data-gallery-delete]");
+  if (!btn) return;
+
+  const id = btn.dataset.galleryDelete;
+  if (!id) return;
+
+  const ok = confirm("このギャラリー写真を削除しますか？");
+  if (!ok) return;
+
+  const { error } = await sb
+    .from("gallery")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    alert("削除に失敗しました：" + error.message);
+    return;
+  }
+
+  alert("削除しました");
+  await loadGallery();
+});  
 function renderResultMatchSelect(){
   const select = $("resultMatchSelect");
   if(!select) return;
