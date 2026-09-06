@@ -203,7 +203,8 @@ async function loadGallery(){
   const { data, error } = await sb
     .from("gallery")
     .select("*")
-    .order("year", { ascending: false });
+    .order("year", { ascending: false })
+　　　.order("sort_order", { ascending: true });
 
   if (error) {
     list.innerHTML = `<div class="error">ギャラリーを読み込めません: ${esc(error.message)}</div>`;
@@ -225,7 +226,9 @@ async function loadGallery(){
           <strong>${esc(item.title || "無題")}</strong><br>
           <small>${esc(item.year || "")}年度 ／ ${item.published ? "公開" : "非公開"}</small>
         </div>
-        <button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
+<button class="secondary" data-gallery-up="${esc(item.id)}">↑ 上へ</button>
+<button class="secondary" data-gallery-down="${esc(item.id)}">↓ 下へ</button>
+<button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
       </div>
     `;
 
@@ -253,6 +256,59 @@ document.addEventListener("click", async (event) => {
   }
 
   alert("削除しました");
+  await loadGallery();
+});
+document.addEventListener("click", async (event) => {
+  const upBtn = event.target.closest("[data-gallery-up]");
+  const downBtn = event.target.closest("[data-gallery-down]");
+
+  if (!upBtn && !downBtn) return;
+
+  const id = upBtn
+    ? upBtn.dataset.galleryUp
+    : downBtn.dataset.galleryDown;
+
+  const direction = upBtn ? -1 : 1;
+
+  const { data, error } = await sb
+    .from("gallery")
+    .select("id, sort_order")
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    alert("並び替え情報の取得に失敗しました：" + error.message);
+    return;
+  }
+
+  const index = data.findIndex(item => String(item.id) === String(id));
+  if (index === -1) return;
+
+  const targetIndex = index + direction;
+  if (targetIndex < 0 || targetIndex >= data.length) return;
+
+  const current = data[index];
+  const target = data[targetIndex];
+
+  const { error: error1 } = await sb
+    .from("gallery")
+    .update({ sort_order: target.sort_order })
+    .eq("id", current.id);
+
+  if (error1) {
+  alert("並び替えに失敗しました：" + error1.message);
+  return;
+}
+
+  const { error: error2 } = await sb
+    .from("gallery")
+    .update({ sort_order: current.sort_order })
+    .eq("id", target.id);
+
+  if (error2) {
+    alert("並び替えに失敗しました：" + error2.message);
+    return;
+  }
+
   await loadGallery();
 });  
 function renderResultMatchSelect(){
