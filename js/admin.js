@@ -226,7 +226,7 @@ async function loadGallery(){
           <strong>${esc(item.title || "無題")}</strong><br>
           <small>${esc(item.year || "")}年度 ／ ${item.published ? "公開" : "非公開"}</small>
         </div>
-<button class="secondary" data-gallery-type="${esc(item.id)}">${String(item.photo_type || "gallery").replaceAll("'", "") === "team" ? "通常ギャラリーへ" : "チーム写真へ"}</button>
+<button class="secondary" data-gallery-type="${esc(item.id)}">${String(item.photo_type || "gallery").replaceAll("'", "") === "team" ? "チーム写真へ" : "通常ギャラリーへ"}</button>
 <button class="secondary" data-gallery-up="${esc(item.id)}">↑ 上へ</button>
 <button class="secondary" data-gallery-down="${esc(item.id)}">↓ 下へ</button>
 <button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
