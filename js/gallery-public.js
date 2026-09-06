@@ -31,9 +31,12 @@ const teamPhotos = data
     String(item.photo_type || "gallery").replaceAll("'", "") === "team"
   )
   .slice(0, 4);
-
+for (let i = 1; i <= 5; i++) {
+  const box = document.getElementById(`teamPhoto${i}`);
+  if (box) box.textContent = "";
+}
 teamPhotos.forEach((item, index) => {
-const box = document.getElementById(`teamPhoto${index + 2}`);
+const box = document.getElementById(`teamPhoto${index + 1}`);
   if (!box || !item.photo_url) return;
 
   const img = document.createElement("img");
