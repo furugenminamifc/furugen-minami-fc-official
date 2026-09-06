@@ -12,7 +12,8 @@
     .from("gallery")
     .select("*")
     .eq("published", true)
-    .order("year", { ascending: false });
+    .order("year", { ascending: false })
+    .order("sort_order", { ascending: true });
 
   if (error) {
     console.error("Gallery load error:", error);
