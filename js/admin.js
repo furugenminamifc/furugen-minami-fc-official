@@ -92,7 +92,7 @@ if(activeTab) activeTab.click();}
 
     if(loggedIn){
       show("loginOk", `ログイン中：${session.user.email || ""}`);
-  await Promise.all([loadPlayers(), loadStaff(), loadMatches(), loadResults()]);
+  await Promise.all([loadPlayers(), loadStaff(), loadMatches(), loadResults(), loadGallery()]);
     }
   }
 
@@ -194,6 +194,43 @@ currentResults = data || [];
 renderResults();
 renderResultMatchSelect();
 }
+async function loadGallery(){
+  const list = $("galleryAdminList");
+  if (!list) return;
+
+  const { data, error } = await sb
+    .from("gallery")
+    .select("*")
+    .order("year", { ascending: false });
+
+  if (error) {
+    list.innerHTML = `<div class="error">ギャラリーを読み込めません: ${esc(error.message)}</div>`;
+    return;
+  }
+
+  list.innerHTML = "";
+
+  (data || []).forEach(item => {
+    const row = document.createElement("div");
+    row.className = "list-item";
+
+    row.innerHTML = `
+      <div style="display:flex;gap:12px;align-items:center;">
+        <img src="${esc(item.photo_url || "")}"
+             alt=""
+             style="width:90px;height:70px;object-fit:cover;border-radius:8px;">
+        <div style="flex:1;">
+          <strong>${esc(item.title || "無題")}</strong><br>
+          <small>${esc(item.year || "")}年度 ／ ${item.published ? "公開" : "非公開"}</small>
+        </div>
+        <button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
+      </div>
+    `;
+
+    list.appendChild(row);
+  });
+}
+  
 function renderResultMatchSelect(){
   const select = $("resultMatchSelect");
   if(!select) return;
