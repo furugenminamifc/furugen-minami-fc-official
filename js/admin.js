@@ -954,8 +954,9 @@ if(saveGalleryBtn) {
           year: Number(year),
           title: title,
           photo_url: photoUrl,
-          published: published
+          published: published,
           photo_type: photoType
+          
         });
 
       if (error) throw error;
