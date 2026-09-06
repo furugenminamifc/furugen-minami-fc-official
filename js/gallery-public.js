@@ -67,7 +67,11 @@ const box = document.getElementById(`teamPhoto${index + 2}`);
   grid.style.gap = "20px";
   grid.style.marginTop = "24px";
 
-  data.forEach(item => {
+  data
+  .filter(item =>
+    String(item.photo_type || "gallery").replaceAll("'", "") === "gallery"
+  )
+  .forEach(item => {
     const card = document.createElement("article");
 
     card.style.background = "#fff";
