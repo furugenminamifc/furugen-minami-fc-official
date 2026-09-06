@@ -116,6 +116,8 @@ if(activeTab) activeTab.click();}
       $("playersTab").classList.toggle("hidden", btn.dataset.tab !== "players");
       $("staffTab").classList.toggle("hidden", btn.dataset.tab !== "staff");
       $("matchesTab").classList.toggle("hidden", btn.dataset.tab !== "matches");
+      $("resultManager").classList.toggle("hidden", btn.dataset.tab !== "resultManager");
+      $("galleryTab").classList.toggle("hidden", btn.dataset.tab !== "gallery");
     };
   });
 
