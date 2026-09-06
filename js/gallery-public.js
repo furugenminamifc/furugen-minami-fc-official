@@ -40,7 +40,7 @@
   const grid = document.createElement("div");
   grid.style.display = "grid";
   grid.style.gridTemplateColumns =
-    "repeat(auto-fit, minmax(240px, 1fr))";
+  "repeat(auto-fill, minmax(260px, 360px))";
   grid.style.gap = "20px";
   grid.style.marginTop = "24px";
 
