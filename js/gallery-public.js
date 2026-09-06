@@ -26,7 +26,10 @@
   }
   // 2026年度チーム写真の4枠へ表示
 const teamPhotos = data
-  .filter(item => Number(item.year) === 2026)
+  .filter(item =>
+    Number(item.year) === 2026 &&
+    String(item.photo_type || "gallery").replaceAll("'", "") === "team"
+  )
   .slice(0, 4);
 
 teamPhotos.forEach((item, index) => {
