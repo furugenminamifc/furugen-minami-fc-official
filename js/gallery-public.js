@@ -23,7 +23,26 @@
     console.log("公開ギャラリー写真はありません");
     return;
   }
+  // 2026年度チーム写真の4枠へ表示
+const teamPhotos = data
+  .filter(item => Number(item.year) === 2026)
+  .slice(0, 4);
 
+teamPhotos.forEach((item, index) => {
+const box = document.getElementById(`teamPhoto${index + 2}`);
+  if (!box || !item.photo_url) return;
+
+  const img = document.createElement("img");
+  img.src = item.photo_url;
+  img.alt = item.title || "古堅南FC チーム写真";
+  img.style.width = "100%";
+  img.style.height = "100%";
+  img.style.objectFit = "cover";
+  img.style.display = "block";
+
+  box.textContent = "";
+  box.appendChild(img);
+});
   const main = document.querySelector("main");
   if (!main) return;
 
