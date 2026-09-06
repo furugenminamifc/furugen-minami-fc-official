@@ -57,7 +57,7 @@
     img.alt = item.title || "古堅南FC ギャラリー";
     img.loading = "lazy";
     img.style.width = "100%";
-    img.style.height = "240px";
+    img.style.height = "360px";
     img.style.objectFit = "contain";
 　　　img.style.background = "#f5f5f5";
     img.style.display = "block";
