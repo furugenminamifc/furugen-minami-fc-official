@@ -923,6 +923,7 @@ function clearGalleryForm(){
   if ($("gTitle")) $("gTitle").value = "";
   if ($("gPhoto")) $("gPhoto").value = "";
   if ($("gPublished")) $("gPublished").value = "true";
+  if ($("gPhotoType")) $("gPhotoType").value = "gallery";
 }
 
 if(saveGalleryBtn) {
@@ -932,7 +933,8 @@ if(saveGalleryBtn) {
       const title = $("gTitle")?.value?.trim();
       const file = $("gPhoto")?.files?.[0];
       const published = $("gPublished")?.value === "true";
-
+      const photoType = $("gPhotoType")?.value || "gallery";
+      
       if (!year || !title || !file) {
         show("galleryError", "年度・タイトル・写真を入力してください。");
         return;
@@ -953,6 +955,7 @@ if(saveGalleryBtn) {
           title: title,
           photo_url: photoUrl,
           published: published
+          photo_type: photoType
         });
 
       if (error) throw error;
