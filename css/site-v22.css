@@ -1425,3 +1425,7 @@ bottom: 6px !important;
 .result-filter:not(.active) {
   opacity: 0.75;
 }
+/* トップ画像を見えるようにする */
+.hero-overlay{
+  background:linear-gradient(90deg,rgba(15,42,68,.72) 0%,rgba(15,42,68,.35) 45%,rgba(15,42,68,.08) 100%) !important;
+}
