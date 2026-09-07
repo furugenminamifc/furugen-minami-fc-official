@@ -196,8 +196,65 @@ currentResults = data || [];
 renderResults();
 renderResultMatchSelect();
 }
-async function loadGallery(){
+async function loadCurrentPhotoPreviews() {
+  try {
+    async function getLatest(type) {
+      let result = await sb
+        .from("gallery")
+        .select("photo_url, created_at, year")
+        .eq("published", true)
+        .eq("photo_type", type)
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+      if (result.error) {
+        result = await sb
+          .from("gallery")
+          .select("photo_url, year")
+          .eq("published", true)
+          .eq("photo_type", type)
+          .order("year", { ascending: false })
+          .limit(1);
+      }
+
+      return result.data && result.data[0]
+        ? result.data[0].photo_url
+        : "";
+    }
+
+    const heroUrl = await getLatest("hero");
+    const teamUrl = await getLatest("team");
+
+    const heroPreview = $("currentHeroPreview");
+    const teamPreview = $("currentTeamPreview");
+
+    if (heroPreview) {
+      if (heroUrl) {
+        heroPreview.src = heroUrl;
+        heroPreview.style.display = "block";
+      } else {
+        heroPreview.removeAttribute("src");
+        heroPreview.style.display = "none";
+      }
+    }
+
+    if (teamPreview) {
+      if (teamUrl) {
+        teamPreview.src = teamUrl;
+        teamPreview.style.display = "block";
+      } else {
+        teamPreview.removeAttribute("src");
+        teamPreview.style.display = "none";
+      }
+    }
+
+  } catch (error) {
+    console.error("画像プレビュー読み込みエラー:", error);
+  }
+}
+  async function loadGallery(){
   const list = $("galleryAdminList");
+  await loadCurrentPhotoPreviews();  
   if (!list) return;
 
   const { data, error } = await sb
