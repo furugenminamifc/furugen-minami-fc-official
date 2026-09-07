@@ -1429,3 +1429,21 @@ bottom: 6px !important;
 .hero-overlay{
   background:linear-gradient(90deg,rgba(15,42,68,.72) 0%,rgba(15,42,68,.35) 45%,rgba(15,42,68,.08) 100%) !important;
 }
+/* トップ画像表示領域を修正 */
+.hero-bg{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  background-size:cover !important;
+  background-position:center 43% !important;
+  background-repeat:no-repeat !important;
+}
+
+.hero-overlay{
+  z-index:1 !important;
+}
+
+.hero-inner{
+  position:relative !important;
+  z-index:2 !important;
+}
