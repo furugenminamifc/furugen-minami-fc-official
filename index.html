@@ -17,14 +17,14 @@
 <nav id="main-nav" class="main-nav"><a class="is-active" href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 </div></header>
 <main>
-<section class="hero"><div class="hero-bg"></div><div class="hero-overlay"></div>
+<section class="hero"><div class="hero-bg" id="heroBg"></div><div class="hero-overlay"></div>
 <div class="hero-inner"><p class="kicker">FURUGEN MINAMI FC · YOMITAN, OKINAWA</p>
 <h1>サッカーを楽しむ。<br>仲間と成長する。</h1>
 <p class="lead">沖縄・読谷村から未来へ。<br>仲間とともに、夢に向かって全力で。</p>
 <div class="actions"><a class="btn maroon" href="join.html">体験参加はこちら</a><a class="btn light" href="about.html">チームについて</a><a class="btn sky" href="matches.html">試合予定をチェック</a></div></div>
 <div class="hero-badge"><span>ONE TEAM</span><strong>ONE DREAM</strong></div></section>
 <section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">TEAM PHOTO</p><h2>古堅南FCの仲間たち</h2><p class="muted">サッカーを楽しみ、挑戦し、仲間と一緒に成長しています。</p></div><a class="text-link" href="players.html?category=u-12">選手紹介を見る →</a></div>
-<div class="team-photo"><picture><source srcset="images/IMG_5689.jpeg"><img src="images/IMG_5689.jpeg" alt="2026年度 古堅南FC チーム写真"></picture></div>
+<div class="team-photo"><img id="teamPhotoImage" src="images/IMG_5689.jpeg" alt="2026年度 古堅南FC チーム写真"></div>
 <div class="category-grid"><a class="cat-card" href="category.html?category=u-12"><span>U-12</span><strong>6・5年生</strong><small>2026年度チーム</small></a><a class="cat-card" href="category.html?category=u-11"><span>U-11</span><strong>5・4年生</strong><small>2026年度チーム</small></a><a class="cat-card" href="category.html?category=u-10"><span>U-10</span><strong>4・3年生</strong><small>2026年度チーム</small></a><a class="cat-card" href="category.html?category=u-9"><span>U-9</span>
 <strong>3〜1年生</strong>
 <small>2026年度チーム</small></a></div></div></section>
@@ -96,6 +96,59 @@
 <nav><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a href="contact.html">お問い合わせ</a></nav>
 <small>© 2026 古堅南FC All Rights Reserved.</small>
 </div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+
+<script>
+(async function () {
+  try {
+    const cfg = window.FURUGEN_SUPABASE || {};
+    if (!window.supabase || !cfg.url || !cfg.anonKey) return;
+
+    const sb = window.supabase.createClient(cfg.url, cfg.anonKey);
+
+    async function getLatestPhoto(type) {
+      let result = await sb
+        .from("gallery")
+        .select("photo_url, photo_type, year, created_at")
+        .eq("published", true)
+        .eq("photo_type", type)
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+      if (result.error) {
+        result = await sb
+          .from("gallery")
+          .select("photo_url, photo_type, year")
+          .eq("published", true)
+          .eq("photo_type", type)
+          .order("year", { ascending: false })
+          .limit(1);
+      }
+
+      return result.data && result.data[0]
+        ? result.data[0].photo_url
+        : null;
+    }
+
+    const heroUrl = await getLatestPhoto("hero");
+    const teamUrl = await getLatestPhoto("team");
+
+    const heroBg = document.getElementById("heroBg");
+    if (heroBg && heroUrl) {
+      heroBg.style.backgroundImage = `url("${heroUrl}")`;
+    }
+
+    const teamPhoto = document.getElementById("teamPhotoImage");
+    if (teamPhoto && teamUrl) {
+      teamPhoto.src = teamUrl;
+    }
+
+  } catch (error) {
+    console.error("ホーム画像読み込みエラー:", error);
+  }
+})();
+</script>  
 <script>
 (()=>{const b=document.querySelector('.menu-btn'),n=document.querySelector('.main-nav');if(!b||!n)return;
 b.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('is-open',!o)})})();
