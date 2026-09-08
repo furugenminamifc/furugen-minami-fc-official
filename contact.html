@@ -16,7 +16,88 @@
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button>
 <nav id="main-nav" class="main-nav"><a href="index.html">HOME</a><a href="about.html">古堅南FCについて</a><a href="players.html">選手紹介</a><a href="staff.html">スタッフ</a><a href="matches.html">試合・大会</a><a href="results.html">試合結果</a><a href="gallery.html">ギャラリー</a><a href="cup.html">古堅南FC CUP</a><a href="join.html">入団案内</a><a class="is-active" href="contact.html">お問い合わせ</a></nav>
 </div></header>
-<main><section class="subhero"><div class="wrap"><p class="eyebrow light">CONTACT</p><h1>お問い合わせ</h1><p>体験参加・練習試合・大会などのお問い合わせ窓口です。</p></div></section><section class="section"><div class="wrap"><div class="page-grid"><article class="card"><p class="eyebrow">CONTACT</p><h3>お問い合わせ内容</h3><ul class="muted"><li>体験参加・入団について</li><li>練習試合について</li><li>大会・古堅南FC CUPについて</li><li>その他チームへのご連絡</li></ul></article><article class="card"><p class="eyebrow">INFORMATION</p><h3>連絡先について</h3><p class="muted">公式メール・SNSなどの公開連絡先が決まり次第、このページへ追加できます。</p></article></div></div></section></main>
+<main>
+
+  <section class="subhero">
+    <div class="wrap">
+      <p class="eyebrow light">CONTACT</p>
+      <h1>お問い合わせ</h1>
+      <p>体験参加・入団・練習試合・大会など、お気軽にお問い合わせください。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">CONTACT</p>
+          <h2>お問い合わせフォーム</h2>
+        </div>
+      </div>
+
+      <form class="contact-form">
+
+        <div class="field">
+          <label for="name">お名前</label>
+          <input id="name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="kana">ふりがな</label>
+          <input id="kana" type="text">
+        </div>
+
+        <div class="field">
+          <label for="email">メールアドレス</label>
+          <input id="email" type="email" required>
+        </div>
+
+        <div class="field">
+          <label for="tel">電話番号</label>
+          <input id="tel" type="tel">
+        </div>
+
+        <div class="field">
+          <label for="type">お問い合わせ種類</label>
+          <select id="type">
+            <option>体験参加</option>
+            <option>入団について</option>
+            <option>練習試合</option>
+            <option>大会について</option>
+            <option>その他</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="grade">学年</label>
+          <select id="grade">
+            <option>幼稚園</option>
+            <option>小学1年生</option>
+            <option>小学2年生</option>
+            <option>小学3年生</option>
+            <option>小学4年生</option>
+            <option>小学5年生</option>
+            <option>小学6年生</option>
+            <option>該当なし</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="message">お問い合わせ内容</label>
+          <textarea id="message" rows="6"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn maroon">送信する</button>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
+</main>
 <footer class="site-footer">
 <div class="wrap footer-inner">
 <picture><source srcset="images/furugen-emblem-displayfix.webp" type="image/webp">
