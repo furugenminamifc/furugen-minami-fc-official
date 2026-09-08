@@ -283,7 +283,11 @@ async function loadCurrentPhotoPreviews() {
           <strong>${esc(item.title || "無題")}</strong><br>
           <small>${esc(item.year || "")}年度 ／ ${item.published ? "公開" : "非公開"}</small>
         </div>
-<button class="secondary" data-gallery-type="${esc(item.id)}">${String(item.photo_type || "gallery").replaceAll("'", "") === "team" ? "チーム写真へ" : "通常ギャラリーへ"}</button>
+<button class="secondary" data-gallery-type="${esc(item.id)}">${String(item.photo_type || "gallery").replaceAll('"', "") === "gallery"
+  ? "トップ画像へ"
+  : String(item.photo_type || "gallery").replaceAll('"', "") === "hero"
+    ? "TEAM PHOTOへ"
+    : "通常ギャラリーへ"}</button>
 <button class="secondary" data-gallery-up="${esc(item.id)}">↑ 上へ</button>
 <button class="secondary" data-gallery-down="${esc(item.id)}">↓ 下へ</button>
 <button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
@@ -334,8 +338,10 @@ document.addEventListener("click", async (event) => {
     return;
   }
 
-  const currentType = String(data.photo_type || "gallery").replaceAll("'", "");
-  const newType = currentType === "team" ? "gallery" : "team";
+const currentType = String(data.photo_type || "gallery").replaceAll("'", "");
+const typeOrder = ["gallery", "hero", "team"];
+const currentIndex = typeOrder.indexOf(currentType);
+const newType = typeOrder[(currentIndex + 1) % typeOrder.length];
 
   const { error: updateError } = await sb
     .from("gallery")
