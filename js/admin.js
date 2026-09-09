@@ -1057,6 +1057,10 @@ if(saveGalleryBtn) {
     $("cupVenue").value = "";
     $("cupCategory").value = "";
     $("cupFormat").value = "";
+    $("cupYear").value = "";
+    $("cupTeams").value = "";
+    $("cupMatchStyle").value = "";
+    $("cupMatchTime").value = "";
   }
 
   async function loadCupSettings() {
@@ -1076,6 +1080,10 @@ if(saveGalleryBtn) {
       $("cupVenue").value = data.venue || "";
       $("cupCategory").value = data.category || "";
       $("cupFormat").value = data.format || "";
+      $("cupYear").value = data.year || "";
+      $("cupTeams").value = data.teams || "";
+      $("cupMatchStyle").value = data.match_style || "";
+      $("cupMatchTime").value = data.match_time || "";
 
     } catch (error) {
       console.error("CUP load error:", error);
@@ -1090,12 +1098,16 @@ if(saveGalleryBtn) {
 
         const payload = {
           id: 1,
-          cup_name: $("cupName").value.trim(),
-          cup_date: $("cupDate").value.trim(),
+           cup_name: $("cupName").value.trim(),
+           cup_date: $("cupDate").value.trim(),
           organizer: $("cupOrganizer").value.trim(),
-          venue: $("cupVenue").value.trim(),
-          category: $("cupCategory").value.trim(),
-          format: $("cupFormat").value.trim(),
+              venue: $("cupVenue").value.trim(),
+           category: $("cupCategory").value.trim(),
+             format: $("cupFormat").value.trim(),
+               year: $("cupYear").value.trim(),
+              teams: $("cupTeams").value.trim(),
+        match_style: $("cupMatchStyle").value.trim(),
+         match_time: $("cupMatchTime").value.trim(),
           updated_at: new Date().toISOString()
         };
 
