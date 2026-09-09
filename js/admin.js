@@ -1042,5 +1042,90 @@ if(saveGalleryBtn) {
   if (clearGalleryBtn) {
   clearGalleryBtn.onclick = clearGalleryForm;
 }
+  // =========================
+  // 古堅南FC CUP 管理
+  // =========================
+
+  const saveCupBtn = $("saveCupBtn");
+  const clearCupBtn = $("clearCupBtn");
+
+  function clearCupForm() {
+    $("cupName").value = "";
+    $("cupDate").value = "";
+    $("cupOrganizer").value = "";
+    $("cupVenue").value = "";
+    $("cupCategory").value = "";
+    $("cupFormat").value = "";
+  }
+
+  async function loadCupSettings() {
+    try {
+      const { data, error } = await sb
+        .from("cup_settings")
+        .select("*")
+        .eq("id", 1)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (!data) return;
+
+      $("cupName").value = data.cup_name || "";
+      $("cupDate").value = data.cup_date || "";
+      $("cupOrganizer").value = data.organizer || "";
+      $("cupVenue").value = data.venue || "";
+      $("cupCategory").value = data.category || "";
+      $("cupFormat").value = data.format || "";
+
+    } catch (error) {
+      console.error("CUP load error:", error);
+    }
+  }
+
+  if (saveCupBtn) {
+    saveCupBtn.onclick = async () => {
+      try {
+        saveCupBtn.disabled = true;
+        saveCupBtn.textContent = "保存中...";
+
+        const payload = {
+          id: 1,
+          cup_name: $("cupName").value.trim(),
+          cup_date: $("cupDate").value.trim(),
+          organizer: $("cupOrganizer").value.trim(),
+          venue: $("cupVenue").value.trim(),
+          category: $("cupCategory").value.trim(),
+          format: $("cupFormat").value.trim(),
+          updated_at: new Date().toISOString()
+        };
+
+        const { error } = await sb
+          .from("cup_settings")
+          .upsert(payload, { onConflict: "id" });
+
+        if (error) throw error;
+
+        show("cupOk", "CUP情報を保存しました ✅");
+
+      } catch (error) {
+        console.error("CUP save error:", error);
+
+        show(
+          "cupError",
+          "CUP情報の保存に失敗しました：" +
+          (error?.message || String(error))
+        );
+
+      } finally {
+        saveCupBtn.disabled = false;
+        saveCupBtn.textContent = "CUP情報を保存";
+      }
+    };
+  }
+
+  if (clearCupBtn) {
+    clearCupBtn.onclick = clearCupForm;
+  }
+
+  loadCupSettings();  
   init();
 })();
