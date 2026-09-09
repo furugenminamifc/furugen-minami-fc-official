@@ -39,12 +39,13 @@ function setupAdminTabs(){
   const tabs = document.querySelectorAll(".tabs .tab");
 
 const panels = {
-players: $("playersTab"),
-staff: $("staffTab"),
-matches: $("matchesTab"),
-resultManager: $("resultManager"),
-gallery: $("galleryTab")
-  };
+  players: $("playersTab"),
+  staff: $("staffTab"),
+  matches: $("matchesTab"),
+  resultManager: $("resultManager"),
+  gallery: $("galleryTab"),
+  cup: $("cupTab")
+};
 
   tabs.forEach(tab => {
     tab.onclick = () => {
