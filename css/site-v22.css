@@ -1556,3 +1556,9 @@ bottom: 6px !important;
     font-size:16px;
   }
 }
+.contact-note{
+  margin-top:12px;
+  font-size:14px;
+  color:#666;
+  line-height:1.6;
+}
