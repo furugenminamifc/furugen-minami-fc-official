@@ -74,6 +74,7 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 <button class="tab" data-tab="matches">試合・大会管理</button>
 <button class="tab" data-tab="resultManager">試合結果管理</button>
 <button class="tab" data-tab="gallery">写真・トップ画像管理</button>   
+<button class="tab" data-tab="cup">古堅南FC CUP</button>
 </div>
 <div id="playersTab">
         <h2>選手登録</h2>
@@ -318,7 +319,51 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
     </section>
   </div>
 </div>
+<div id="cupTab" class="hidden">
+  <section class="panel">
+    <h2>古堅南FC CUP 管理</h2>
 
+    <div class="grid">
+
+      <div class="field">
+        <label>大会名</label>
+        <input id="cupName" type="text" placeholder="例：古堅南FC CUP">
+      </div>
+
+      <div class="field">
+        <label>開催日</label>
+        <input id="cupDate" type="text" placeholder="例：2026年5月30日（土）・31日（日）">
+      </div>
+
+      <div class="field">
+        <label>主催</label>
+        <input id="cupOrganizer" type="text" placeholder="例：古堅南FC">
+      </div>
+
+      <div class="field">
+        <label>会場</label>
+        <input id="cupVenue" type="text" placeholder="例：古堅南小学校グランド">
+      </div>
+
+      <div class="field">
+        <label>対象カテゴリー</label>
+        <input id="cupCategory" type="text" placeholder="例：U-12・U-10">
+      </div>
+
+      <div class="field">
+        <label>大会形式</label>
+        <input id="cupFormat" type="text" placeholder="例：予選リーグ＋順位決定戦">
+      </div>
+<div class="actions">
+  <button id="saveCupBtn" class="primary">CUP情報を保存</button>
+  <button id="clearCupBtn" class="secondary">入力をクリア</button>
+</div>
+
+<div id="cupOk" class="ok"></div>
+<div id="cupError" class="error"></div>
+    </div>
+  </section>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js?v=1.8"></script>
 <script src="js/admin.js?v=1.10"></script>
