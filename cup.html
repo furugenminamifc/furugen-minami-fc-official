@@ -91,12 +91,12 @@
 
       <div class="join-info-card">
         <h3>参加チーム</h3>
-        <p>決定次第掲載します</p>
+  <p id="cupTeamsPublic">決定次第掲載します</p>
       </div>
 
       <div class="join-info-card">
         <h3>試合方式</h3>
-        <p>大会ごとに掲載します</p>
+  <p id="cupMatchStylePublic">大会ごとに掲載します</p>
       </div>
 <div class="join-info-card">
   <h3>参加チーム数</h3>
@@ -129,7 +129,7 @@
 </div>
       <div class="join-info-card">
         <h3>試合時間</h3>
-        <p>大会ごとに掲載します</p>
+<p id="cupMatchTimePublic">大会ごとに掲載します</p>
       </div>
 
     </div>
@@ -286,7 +286,9 @@
     setText("cupPreliminaryPublic", data.preliminary);
     setText("cupRankingRulePublic", data.ranking_rule);
     setText("cupNotePublic", data.note);
-
+　　　setText("cupTeamsPublic", data.teams);
+　　　setText("cupMatchStylePublic", data.match_style);
+　　　setText("cupMatchTimePublic", data.match_time);
   } catch (error) {
     console.error("CUP情報の読み込みに失敗しました:", error);
   }
