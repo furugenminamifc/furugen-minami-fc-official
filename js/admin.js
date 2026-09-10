@@ -1061,6 +1061,12 @@ if(saveGalleryBtn) {
     $("cupTeams").value = "";
     $("cupMatchStyle").value = "";
     $("cupMatchTime").value = "";
+    $("cupTeamCount").value = "";
+    $("cupVenueCount").value = "";
+    $("cupCourtCount").value = "";
+    $("cupPreliminary").value = "";
+    $("cupRankingRule").value = "";
+    $("cupNote").value = "";
   }
 
   async function loadCupSettings() {
@@ -1084,6 +1090,12 @@ if(saveGalleryBtn) {
       $("cupTeams").value = data.teams || "";
       $("cupMatchStyle").value = data.match_style || "";
       $("cupMatchTime").value = data.match_time || "";
+      $("cupTeamCount").value = data.team_count || "";
+      $("cupVenueCount").value = data.venue_count || "";
+      $("cupCourtCount").value = data.court_count || "";
+      $("cupPreliminary").value = data.preliminary || "";
+      $("cupRankingRule").value = data.ranking_rule || "";
+      $("cupNote").value = data.note || "";
 
     } catch (error) {
       console.error("CUP load error:", error);
@@ -1108,6 +1120,12 @@ if(saveGalleryBtn) {
               teams: $("cupTeams").value.trim(),
         match_style: $("cupMatchStyle").value.trim(),
          match_time: $("cupMatchTime").value.trim(),
+         team_count: $("cupTeamCount").value.trim(),
+        venue_count: $("cupVenueCount").value.trim(),
+        court_count: $("cupCourtCount").value.trim(),
+        preliminary: $("cupPreliminary").value.trim(),
+       ranking_rule: $("cupRankingRule").value.trim(),
+               note: $("cupNote").value.trim(),          
           updated_at: new Date().toISOString()
         };
 
