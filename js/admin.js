@@ -1067,6 +1067,10 @@ if(saveGalleryBtn) {
     $("cupPreliminary").value = "";
     $("cupRankingRule").value = "";
     $("cupNote").value = "";
+    $("cupU12ScheduleTitle").value = "";
+    $("cupU12ScheduleText").value = "";
+    $("cupU10ScheduleTitle").value = "";
+    $("cupU10ScheduleText").value = "";
   }
 
   async function loadCupSettings() {
@@ -1096,6 +1100,10 @@ if(saveGalleryBtn) {
       $("cupPreliminary").value = data.preliminary || "";
       $("cupRankingRule").value = data.ranking_rule || "";
       $("cupNote").value = data.note || "";
+      $("cupU12ScheduleTitle").value = data.u12_schedule_title || "";
+      $("cupU12ScheduleText").value = data.u12_schedule_text || "";
+      $("cupU10ScheduleTitle").value = data.u10_schedule_title || "";
+      $("cupU10ScheduleText").value = data.u10_schedule_text || "";
 
     } catch (error) {
       console.error("CUP load error:", error);
@@ -1125,7 +1133,11 @@ if(saveGalleryBtn) {
         court_count: $("cupCourtCount").value.trim(),
         preliminary: $("cupPreliminary").value.trim(),
        ranking_rule: $("cupRankingRule").value.trim(),
-               note: $("cupNote").value.trim(),          
+               note: $("cupNote").value.trim(),
+ u12_schedule_title: $("cupU12ScheduleTitle").value.trim(),
+  u12_schedule_text: $("cupU12ScheduleText").value.trim(),
+ u10_schedule_title: $("cupU10ScheduleTitle").value.trim(),
+  u10_schedule_text: $("cupU10ScheduleText").value.trim(),
           updated_at: new Date().toISOString()
         };
 
