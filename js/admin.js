@@ -1075,6 +1075,10 @@ if(saveGalleryBtn) {
 　　　$("cupU12ResultText").value = "";
 　　　$("cupU10ResultTitle").value = "";
 　　　$("cupU10ResultText").value = "";
+    $("cupPastYear").value = "";
+    $("cupPastTitle").value = "";
+    $("cupPastDate").value = "";
+    $("cupPastLink").value = "";
   }
 
   async function loadCupSettings() {
@@ -1112,6 +1116,10 @@ if(saveGalleryBtn) {
 　　　　$("cupU12ResultText").value = data.u12_result_text || "";
 　　　　$("cupU10ResultTitle").value = data.u10_result_title || "";
 　　　　$("cupU10ResultText").value = data.u10_result_text || "";
+      $("cupPastYear").value = data.past_year || "";
+      $("cupPastTitle").value = data.past_title || "";
+      $("cupPastDate").value = data.past_date || "";
+      $("cupPastLink").value = data.past_link || "";
 
     } catch (error) {
       console.error("CUP load error:", error);
@@ -1146,10 +1154,14 @@ if(saveGalleryBtn) {
   u12_schedule_text: $("cupU12ScheduleText").value.trim(),
  u10_schedule_title: $("cupU10ScheduleTitle").value.trim(),
   u10_schedule_text: $("cupU10ScheduleText").value.trim(),
-  u12_result_title: $("cupU12ResultTitle").value.trim(),
-u12_result_text: $("cupU12ResultText").value.trim(),
-u10_result_title: $("cupU10ResultTitle").value.trim(),
-u10_result_text: $("cupU10ResultText").value.trim(),        
+   u12_result_title: $("cupU12ResultTitle").value.trim(),
+    u12_result_text: $("cupU12ResultText").value.trim(),
+   u10_result_title: $("cupU10ResultTitle").value.trim(),
+    u10_result_text: $("cupU10ResultText").value.trim(),
+          past_year: $("cupPastYear").value.trim(),
+         past_title: $("cupPastTitle").value.trim(),
+          past_date: $("cupPastDate").value.trim(),
+          past_link: $("cupPastLink").value.trim(),          
           updated_at: new Date().toISOString()
         };
 
