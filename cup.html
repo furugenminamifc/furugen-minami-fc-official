@@ -207,10 +207,13 @@
     <div class="join-info-grid">
 
     <div class="join-info-card">
-  <h3>2026年度</h3>
-  <p>2026年５月30・31日開催・第1回 古堅南FC CUP</p>
+  <h3 id="cupPastYearPublic">2026年度</h3>
+  <p>
+    <span id="cupPastDatePublic">2026年5月30日・31日</span>開催・
+    <span id="cupPastTitlePublic">第1回 古堅南FC CUP</span>
+  </p>
   <div style="margin-top:12px;">
-    <a class="btn maroon" href="cup-2026.html">大会詳細を見る</a>
+    <a id="cupPastLinkPublic" class="btn maroon" href="cup-2026.html">大会詳細を見る</a>
   </div>
 </div>
 
@@ -299,6 +302,13 @@
     setText("cupU12ResultTextPublic", data.u12_result_text);
     setText("cupU10ResultTitlePublic", data.u10_result_title);
     setText("cupU10ResultTextPublic", data.u10_result_text);
+    setText("cupPastYearPublic", data.past_year);
+    setText("cupPastDatePublic", data.past_date);
+    setText("cupPastTitlePublic", data.past_title);
+    const pastLink = document.getElementById("cupPastLinkPublic");
+if (pastLink && data.past_link) {
+  pastLink.href = data.past_link;
+}
   } catch (error) {
     console.error("CUP情報の読み込みに失敗しました:", error);
   }
