@@ -151,13 +151,13 @@
   <div class="join-info-card">
     <h3 id="cupU12ScheduleTitlePublic">U-12 対戦表・組み合わせ</h3>
 　　　<p id="cupU12ScheduleTextPublic">予選リーグ＋順位決定戦</p>
-    <p>2026年5月30日（土）・31日（日）</p>
+    <p id="cupU12ScheduleDatePublic">2026年5月30日（土）・31日（日）</p>
   </div>
 
   <div class="join-info-card">
     <h3 id="cupU10ScheduleTitlePublic">U-10 対戦表・組み合わせ</h3>
 　　　<p id="cupU10ScheduleTextPublic">予選リーグ＋順位決定戦</p>
-    <p>2026年5月30日（土）・31日（日）</p>
+    <p id="cupU10ScheduleDatePublic">2026年5月30日（土）・31日（日）</p>
   </div>
 
 </div>
@@ -293,6 +293,8 @@
 　　　setText("cupU12ScheduleTextPublic", data.u12_schedule_text);
 　　　setText("cupU10ScheduleTitlePublic", data.u10_schedule_title);
 　　　setText("cupU10ScheduleTextPublic", data.u10_schedule_text);
+    setText("cupU12ScheduleDatePublic", data.cup_date);
+    setText("cupU10ScheduleDatePublic", data.cup_date);
   } catch (error) {
     console.error("CUP情報の読み込みに失敗しました:", error);
   }
