@@ -1071,6 +1071,10 @@ if(saveGalleryBtn) {
     $("cupU12ScheduleText").value = "";
     $("cupU10ScheduleTitle").value = "";
     $("cupU10ScheduleText").value = "";
+    $("cupU12ResultTitle").value = "";
+　　　$("cupU12ResultText").value = "";
+　　　$("cupU10ResultTitle").value = "";
+　　　$("cupU10ResultText").value = "";
   }
 
   async function loadCupSettings() {
@@ -1104,6 +1108,10 @@ if(saveGalleryBtn) {
       $("cupU12ScheduleText").value = data.u12_schedule_text || "";
       $("cupU10ScheduleTitle").value = data.u10_schedule_title || "";
       $("cupU10ScheduleText").value = data.u10_schedule_text || "";
+      $("cupU12ResultTitle").value = data.u12_result_title || "";
+　　　　$("cupU12ResultText").value = data.u12_result_text || "";
+　　　　$("cupU10ResultTitle").value = data.u10_result_title || "";
+　　　　$("cupU10ResultText").value = data.u10_result_text || "";
 
     } catch (error) {
       console.error("CUP load error:", error);
@@ -1138,6 +1146,10 @@ if(saveGalleryBtn) {
   u12_schedule_text: $("cupU12ScheduleText").value.trim(),
  u10_schedule_title: $("cupU10ScheduleTitle").value.trim(),
   u10_schedule_text: $("cupU10ScheduleText").value.trim(),
+  u12_result_title: $("cupU12ResultTitle").value.trim(),
+u12_result_text: $("cupU12ResultText").value.trim(),
+u10_result_title: $("cupU10ResultTitle").value.trim(),
+u10_result_text: $("cupU10ResultText").value.trim(),        
           updated_at: new Date().toISOString()
         };
 
