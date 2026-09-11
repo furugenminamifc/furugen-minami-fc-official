@@ -1131,15 +1131,89 @@ if(saveGalleryBtn) {
       try {
         saveCupBtn.disabled = true;
         saveCupBtn.textContent = "保存中...";
+// ===== CUP 新入力方式を保存用データに変換 =====
 
+// 大会回数
+const cupRound = $("cupRound")?.value || "";
+
+// 大会名
+const baseCupName = $("cupName")?.value.trim() || "古堅南FC CUP";
+const cupNameForSave = cupRound
+  ? `第${cupRound}回 ${baseCupName}`
+  : baseCupName;
+
+// 開催日
+const dateStart = $("cupDateStart")?.value || "";
+const dateEnd = $("cupDateEnd")?.value || "";
+
+const formatDateJP = (value) => {
+  if (!value) return "";
+  const [y, m, d] = value.split("-");
+  return `${Number(y)}年${Number(m)}月${Number(d)}日`;
+};
+
+let cupDateForSave = formatDateJP(dateStart);
+
+if (dateStart && dateEnd && dateStart !== dateEnd) {
+  cupDateForSave =
+    `${formatDateJP(dateStart)} ～ ${formatDateJP(dateEnd)}`;
+}
+
+// 対象カテゴリー
+const selectedCategories = [
+  ...document.querySelectorAll(".cupCategoryCheck:checked")
+].map(el => el.value);
+
+const cupCategoryForSave = selectedCategories.join("・");
+
+// 大会形式
+const formatSelect = $("cupFormatSelect")?.value || "";
+const formatOther = $("cupFormatOther")?.value.trim() || "";
+
+const cupFormatForSave =
+  formatSelect === "その他"
+    ? formatOther
+    : formatSelect;
+
+// 順位を文章にまとめる
+const makeRankingText = (category) => {
+  const labels = [
+    "優勝", "2位", "3位", "4位",
+    "5位", "6位", "7位", "8位"
+  ];
+
+  return labels.map((label, index) => {
+    const value =
+      $(`cup${category}Rank${index + 1}`)?.value.trim() || "";
+
+    return value ? `${label}：${value}` : "";
+  })
+  .filter(Boolean)
+  .join(" / ");
+};
+
+const u12RankingText = makeRankingText("U12");
+const u11RankingText = makeRankingText("U11");
+const u10RankingText = makeRankingText("U10");
+const u9RankingText  = makeRankingText("U9");
+
+// 既存の公開ページ互換用
+$("cupCategory").value = cupCategoryForSave;
+$("cupFormat").value = cupFormatForSave;
+
+$("cupU12ResultTitle").value = "U-12 大会結果";
+$("cupU12ResultText").value = u12RankingText;
+
+$("cupU10ResultTitle").value = "U-10 大会結果";
+$("cupU10ResultText").value = u10RankingText;
         const payload = {
           id: 1,
-           cup_name: $("cupName").value.trim(),
-           cup_date: $("cupDate").value.trim(),
+                      cup_name: cupNameForSave,
+                      cup_date: cupDateForSave,
           organizer: $("cupOrganizer").value.trim(),
               venue: $("cupVenue").value.trim(),
-           category: $("cupCategory").value.trim(),
-             format: $("cupFormat").value.trim(),
+                       category: cupCategoryForSave,
+                       format: cupFormatForSave,
                year: $("cupYear").value.trim(),
               teams: $("cupTeams").value.trim(),
         match_style: $("cupMatchStyle").value.trim(),
