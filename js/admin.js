@@ -1092,12 +1092,71 @@ if(saveGalleryBtn) {
       if (error) throw error;
       if (!data) return;
 
-      $("cupName").value = data.cup_name || "";
-      $("cupDate").value = data.cup_date || "";
-      $("cupOrganizer").value = data.organizer || "";
-      $("cupVenue").value = data.venue || "";
-      $("cupCategory").value = data.category || "";
-      $("cupFormat").value = data.format || "";
+      // ===== CUP 新入力方式 読み込み =====
+
+// 大会名から「第○回」を分離
+const savedCupName = data.cup_name || "";
+const roundMatch = savedCupName.match(/^第(\d+)回\s*(.*)$/);
+
+if (roundMatch) {
+  $("cupRound").value = roundMatch[1];
+  $("cupName").value = roundMatch[2] || "古堅南FC CUP";
+} else {
+  $("cupRound").value = "";
+  $("cupName").value = savedCupName || "古堅南FC CUP";
+}
+
+// 開催日をカレンダーへ戻す
+const parseJapaneseDate = (text) => {
+  const match = String(text || "").match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+  if (!match) return "";
+
+  const [, y, m, d] = match;
+  return `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+};
+
+const savedDates = String(data.cup_date || "")
+  .split("～")
+  .map(v => v.trim());
+
+$("cupDateStart").value = parseJapaneseDate(savedDates[0]);
+
+$("cupDateEnd").value =
+  savedDates[1]
+    ? parseJapaneseDate(savedDates[1])
+    : parseJapaneseDate(savedDates[0]);
+
+// 対象カテゴリーをチェック状態へ戻す
+const savedCategories = String(data.category || "")
+  .split("・")
+  .map(v => v.trim());
+
+document.querySelectorAll(".cupCategoryCheck").forEach(el => {
+  el.checked = savedCategories.includes(el.value);
+});
+
+$("cupCategory").value = data.category || "";
+
+// 大会形式をプルダウンへ戻す
+const formatSelect = $("cupFormatSelect");
+const formatOther = $("cupFormatOther");
+
+if (formatSelect) {
+  const options = [...formatSelect.options].map(opt => opt.value);
+
+  if (options.includes(data.format || "")) {
+    formatSelect.value = data.format || "";
+    if (formatOther) formatOther.value = "";
+  } else if (data.format) {
+    formatSelect.value = "その他";
+    if (formatOther) formatOther.value = data.format;
+  } else {
+    formatSelect.value = "";
+    if (formatOther) formatOther.value = "";
+  }
+}
+
+$("cupFormat").value = data.format || "";
       $("cupYear").value = data.year || "";
       $("cupTeams").value = data.teams || "";
       $("cupMatchStyle").value = data.match_style || "";
@@ -1116,6 +1175,21 @@ if(saveGalleryBtn) {
 　　　　$("cupU12ResultText").value = data.u12_result_text || "";
 　　　　$("cupU10ResultTitle").value = data.u10_result_title || "";
 　　　　$("cupU10ResultText").value = data.u10_result_text || "";
+      const restoreRankingText = (category, text) => {
+  const values = String(text || "")
+    .split(" / ")
+    .map(item => item.replace(/^.*?：/, "").trim());
+
+  for (let i = 1; i <= 8; i++) {
+    const el = $(`cup${category}Rank${i}`);
+    if (el) el.value = values[i - 1] || "";
+  }
+};
+
+restoreRankingText("U12", data.u12_result_text);
+restoreRankingText("U11", data.u11_result_text);
+restoreRankingText("U10", data.u10_result_text);
+restoreRankingText("U9", data.u9_result_text);
       $("cupPastYear").value = data.past_year || "";
       $("cupPastTitle").value = data.past_title || "";
       $("cupPastDate").value = data.past_date || "";
@@ -1232,6 +1306,10 @@ $("cupU10ResultText").value = u10RankingText;
     u12_result_text: $("cupU12ResultText").value.trim(),
    u10_result_title: $("cupU10ResultTitle").value.trim(),
     u10_result_text: $("cupU10ResultText").value.trim(),
+    u11_result_title: "U-11 大会結果",
+    u11_result_text: u11RankingText,
+   u9_result_title: "U-9 大会結果",
+   u9_result_text: u9RankingText,      
           past_year: $("cupPastYear").value.trim(),
          past_title: $("cupPastTitle").value.trim(),
           past_date: $("cupPastDate").value.trim(),
