@@ -448,14 +448,51 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <label>備考</label>
   <textarea id="cupNote" placeholder="例：雨天時の対応、注意事項など"></textarea>
 </div>      
-<div class="field">
+ <div class="field">
   <label>U-12 対戦表タイトル</label>
-  <input id="cupU12ScheduleTitle" type="text" placeholder="例：U-12 対戦表・組み合わせ">
+
+  <select id="cupU12ScheduleTitleSelect">
+    <option value="">選択してください</option>
+    <option value="予選リーグ">予選リーグ</option>
+    <option value="順位決定戦">順位決定戦</option>
+    <option value="予選リーグ＋順位決定戦">予選リーグ＋順位決定戦</option>
+    <option value="総当たりリーグ">総当たりリーグ</option>
+    <option value="トーナメント">トーナメント</option>
+    <option value="交流戦">交流戦</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <input
+    id="cupU12ScheduleTitleOther"
+    type="text"
+    placeholder="その他の場合はこちらに入力"
+    style="margin-top:8px;"
+  >
+
+  <input id="cupU12ScheduleTitle" type="hidden">
 </div>
 
 <div class="field">
   <label>U-12 対戦表説明</label>
-  <input id="cupU12ScheduleText" type="text" placeholder="例：予選リーグ＋順位決定戦">
+
+  <select id="cupU12ScheduleTextSelect">
+    <option value="">選択してください</option>
+    <option value="予選リーグ＋順位決定戦">予選リーグ＋順位決定戦</option>
+    <option value="総当たり戦">総当たり戦</option>
+    <option value="各グループ上位進出">各グループ上位進出</option>
+    <option value="勝点方式">勝点方式</option>
+    <option value="順位決定戦あり">順位決定戦あり</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <input
+    id="cupU12ScheduleTextOther"
+    type="text"
+    placeholder="その他の場合はこちらに入力"
+    style="margin-top:8px;"
+  >
+
+  <input id="cupU12ScheduleText" type="hidden">
 </div>
 
 <div class="field">
@@ -467,17 +504,48 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <label>U-10 対戦表説明</label>
   <input id="cupU10ScheduleText" type="text" placeholder="例：予選リーグ＋順位決定戦">
 </div>
-  <div class="field full">
+ <div class="field full">
   <label>U-12 大会結果</label>
 
-  <input id="cupU12Rank1" type="text" placeholder="優勝 チーム名">
-  <input id="cupU12Rank2" type="text" placeholder="2位 チーム名">
-  <input id="cupU12Rank3" type="text" placeholder="3位 チーム名">
-  <input id="cupU12Rank4" type="text" placeholder="4位 チーム名">
-  <input id="cupU12Rank5" type="text" placeholder="5位 チーム名">
-  <input id="cupU12Rank6" type="text" placeholder="6位 チーム名">
-  <input id="cupU12Rank7" type="text" placeholder="7位 チーム名">
-  <input id="cupU12Rank8" type="text" placeholder="8位 チーム名">
+  <div class="ranking-row">
+    <span>優勝</span>
+    <input id="cupU12Rank1" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>2位</span>
+    <input id="cupU12Rank2" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>3位</span>
+    <input id="cupU12Rank3" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>4位</span>
+    <input id="cupU12Rank4" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>5位</span>
+    <input id="cupU12Rank5" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>6位</span>
+    <input id="cupU12Rank6" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>7位</span>
+    <input id="cupU12Rank7" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>8位</span>
+    <input id="cupU12Rank8" type="text" placeholder="チーム名">
+  </div>
 
   <input id="cupU12ResultTitle" type="hidden">
   <input id="cupU12ResultText" type="hidden">
@@ -486,14 +554,45 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 <div class="field full">
   <label>U-10 大会結果</label>
 
-  <input id="cupU10Rank1" type="text" placeholder="優勝 チーム名">
-  <input id="cupU10Rank2" type="text" placeholder="2位 チーム名">
-  <input id="cupU10Rank3" type="text" placeholder="3位 チーム名">
-  <input id="cupU10Rank4" type="text" placeholder="4位 チーム名">
-  <input id="cupU10Rank5" type="text" placeholder="5位 チーム名">
-  <input id="cupU10Rank6" type="text" placeholder="6位 チーム名">
-  <input id="cupU10Rank7" type="text" placeholder="7位 チーム名">
-  <input id="cupU10Rank8" type="text" placeholder="8位 チーム名">
+  <div class="ranking-row">
+    <span>優勝</span>
+    <input id="cupU10Rank1" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>2位</span>
+    <input id="cupU10Rank2" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>3位</span>
+    <input id="cupU10Rank3" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>4位</span>
+    <input id="cupU10Rank4" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>5位</span>
+    <input id="cupU10Rank5" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>6位</span>
+    <input id="cupU10Rank6" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>7位</span>
+    <input id="cupU10Rank7" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>8位</span>
+    <input id="cupU10Rank8" type="text" placeholder="チーム名">
+  </div>
 
   <input id="cupU10ResultTitle" type="hidden">
   <input id="cupU10ResultText" type="hidden">
@@ -501,27 +600,89 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 <div class="field full">
   <label>U-11 大会結果</label>
 
-  <input id="cupU11Rank1" type="text" placeholder="優勝 チーム名">
-  <input id="cupU11Rank2" type="text" placeholder="2位 チーム名">
-  <input id="cupU11Rank3" type="text" placeholder="3位 チーム名">
-  <input id="cupU11Rank4" type="text" placeholder="4位 チーム名">
-  <input id="cupU11Rank5" type="text" placeholder="5位 チーム名">
-  <input id="cupU11Rank6" type="text" placeholder="6位 チーム名">
-  <input id="cupU11Rank7" type="text" placeholder="7位 チーム名">
-  <input id="cupU11Rank8" type="text" placeholder="8位 チーム名">
+  <div class="ranking-row">
+    <span>優勝</span>
+    <input id="cupU11Rank1" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>2位</span>
+    <input id="cupU11Rank2" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>3位</span>
+    <input id="cupU11Rank3" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>4位</span>
+    <input id="cupU11Rank4" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>5位</span>
+    <input id="cupU11Rank5" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>6位</span>
+    <input id="cupU11Rank6" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>7位</span>
+    <input id="cupU11Rank7" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>8位</span>
+    <input id="cupU11Rank8" type="text" placeholder="チーム名">
+  </div>
 </div>
 
 <div class="field full">
   <label>U-9 大会結果</label>
 
-  <input id="cupU9Rank1" type="text" placeholder="優勝 チーム名">
-  <input id="cupU9Rank2" type="text" placeholder="2位 チーム名">
-  <input id="cupU9Rank3" type="text" placeholder="3位 チーム名">
-  <input id="cupU9Rank4" type="text" placeholder="4位 チーム名">
-  <input id="cupU9Rank5" type="text" placeholder="5位 チーム名">
-  <input id="cupU9Rank6" type="text" placeholder="6位 チーム名">
-  <input id="cupU9Rank7" type="text" placeholder="7位 チーム名">
-  <input id="cupU9Rank8" type="text" placeholder="8位 チーム名">
+  <div class="ranking-row">
+    <span>優勝</span>
+    <input id="cupU9Rank1" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>2位</span>
+    <input id="cupU9Rank2" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>3位</span>
+    <input id="cupU9Rank3" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>4位</span>
+    <input id="cupU9Rank4" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>5位</span>
+    <input id="cupU9Rank5" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>6位</span>
+    <input id="cupU9Rank6" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>7位</span>
+    <input id="cupU9Rank7" type="text" placeholder="チーム名">
+  </div>
+
+  <div class="ranking-row">
+    <span>8位</span>
+    <input id="cupU9Rank8" type="text" placeholder="チーム名">
+  </div>
 </div>
 
 <div class="field">
