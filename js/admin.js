@@ -1171,6 +1171,53 @@ $("cupFormat").value = data.format || "";
       $("cupU12ScheduleText").value = data.u12_schedule_text || "";
       $("cupU10ScheduleTitle").value = data.u10_schedule_title || "";
       $("cupU10ScheduleText").value = data.u10_schedule_text || "";
+      $("cupU11ScheduleTitle").value = data.u11_schedule_title || "";
+      $("cupU11ScheduleText").value = data.u11_schedule_text || "";
+      $("cupU9ScheduleTitle").value = data.u9_schedule_title || "";
+      $("cupU9ScheduleText").value = data.u9_schedule_text || "";
+      const restoreSelectWithOther = (selectId, otherId, value) => {
+  const select = $(selectId);
+  const other = $(otherId);
+
+  if (!select) return;
+
+  const options = [...select.options].map(opt => opt.value);
+
+  if (options.includes(value || "")) {
+    select.value = value || "";
+    if (other) other.value = "";
+  } else if (value) {
+    select.value = "その他";
+    if (other) other.value = value;
+  } else {
+    select.value = "";
+    if (other) other.value = "";
+  }
+};
+
+restoreSelectWithOther(
+  "cupU11ScheduleTitleSelect",
+  "cupU11ScheduleTitleOther",
+  data.u11_schedule_title
+);
+
+restoreSelectWithOther(
+  "cupU11ScheduleTextSelect",
+  "cupU11ScheduleTextOther",
+  data.u11_schedule_text
+);
+
+restoreSelectWithOther(
+  "cupU9ScheduleTitleSelect",
+  "cupU9ScheduleTitleOther",
+  data.u9_schedule_title
+);
+
+restoreSelectWithOther(
+  "cupU9ScheduleTextSelect",
+  "cupU9ScheduleTextOther",
+  data.u9_schedule_text
+);
       $("cupU12ResultTitle").value = data.u12_result_title || "";
 　　　　$("cupU12ResultText").value = data.u12_result_text || "";
 　　　　$("cupU10ResultTitle").value = data.u10_result_title || "";
@@ -1205,6 +1252,40 @@ restoreRankingText("U9", data.u9_result_text);
       try {
         saveCupBtn.disabled = true;
         saveCupBtn.textContent = "保存中...";
+const getSelectValueWithOther = (selectId, otherId) => {
+  const select = $(selectId);
+  const other = $(otherId);
+
+  if (!select) return "";
+
+  if (select.value === "その他") {
+    return other?.value.trim() || "";
+  }
+
+  return select.value || "";
+};
+
+// U-11 対戦表
+$("cupU11ScheduleTitle").value = getSelectValueWithOther(
+  "cupU11ScheduleTitleSelect",
+  "cupU11ScheduleTitleOther"
+);
+
+$("cupU11ScheduleText").value = getSelectValueWithOther(
+  "cupU11ScheduleTextSelect",
+  "cupU11ScheduleTextOther"
+);
+
+// U-9 対戦表
+$("cupU9ScheduleTitle").value = getSelectValueWithOther(
+  "cupU9ScheduleTitleSelect",
+  "cupU9ScheduleTitleOther"
+);
+
+$("cupU9ScheduleText").value = getSelectValueWithOther(
+  "cupU9ScheduleTextSelect",
+  "cupU9ScheduleTextOther"
+);        
 // ===== CUP 新入力方式を保存用データに変換 =====
 
 // 大会回数
@@ -1302,6 +1383,10 @@ $("cupU10ResultText").value = u10RankingText;
   u12_schedule_text: $("cupU12ScheduleText").value.trim(),
  u10_schedule_title: $("cupU10ScheduleTitle").value.trim(),
   u10_schedule_text: $("cupU10ScheduleText").value.trim(),
+ u11_schedule_title: $("cupU11ScheduleTitle").value.trim(),
+  u11_schedule_text: $("cupU11ScheduleText").value.trim(),
+  u9_schedule_title: $("cupU9ScheduleTitle").value.trim(),
+   u9_schedule_text: $("cupU9ScheduleText").value.trim(),        
    u12_result_title: $("cupU12ResultTitle").value.trim(),
     u12_result_text: $("cupU12ResultText").value.trim(),
    u10_result_title: $("cupU10ResultTitle").value.trim(),
