@@ -325,35 +325,81 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 
     <div class="grid">
 
-      <div class="field">
-        <label>大会名</label>
-        <input id="cupName" type="text" placeholder="例：古堅南FC CUP">
-      </div>
+    
+       <div class="field">
+  <label>大会回数</label>
+  <select id="cupRound">
+    <option value="">選択してください</option>
+    <option value="1">第1回</option>
+    <option value="2">第2回</option>
+    <option value="3">第3回</option>
+    <option value="4">第4回</option>
+    <option value="5">第5回</option>
+    <option value="6">第6回</option>
+    <option value="7">第7回</option>
+    <option value="8">第8回</option>
+    <option value="9">第9回</option>
+    <option value="10">第10回</option>
+  </select>
+</div>
 
-      <div class="field">
-        <label>開催日</label>
-        <input id="cupDate" type="text" placeholder="例：2026年5月30日（土）・31日（日）">
-      </div>
+<div class="field">
+  <label>大会名</label>
+  <input id="cupName" type="text" value="古堅南FC CUP">
+</div>
 
-      <div class="field">
-        <label>主催</label>
-        <input id="cupOrganizer" type="text" placeholder="例：古堅南FC">
-      </div>
+<div class="field">
+  <label>開催開始日</label>
+  <input id="cupDateStart" type="date">
+</div>
 
-      <div class="field">
-        <label>会場</label>
-        <input id="cupVenue" type="text" placeholder="例：古堅南小学校グランド">
-      </div>
+<div class="field">
+  <label>開催終了日</label>
+  <input id="cupDateEnd" type="date">
+</div>
 
-      <div class="field">
-        <label>対象カテゴリー</label>
-        <input id="cupCategory" type="text" placeholder="例：U-12・U-10">
-      </div>
+<div class="field">
+  <label>主催</label>
+  <input id="cupOrganizer" type="text" value="古堅南FC">
+</div>
 
-      <div class="field">
-        <label>大会形式</label>
-        <input id="cupFormat" type="text" placeholder="例：予選リーグ＋順位決定戦">
-      </div>
+<div class="field">
+  <label>開催地</label>
+  <input id="cupVenue" type="text" placeholder="例：古堅南小学校グランド">
+</div>
+
+<div class="field full">
+  <label>対象カテゴリー</label>
+  <div style="display:flex;gap:18px;flex-wrap:wrap;padding:10px 0;">
+    <label><input type="checkbox" value="U-12" class="cupCategoryCheck"> U-12</label>
+    <label><input type="checkbox" value="U-11" class="cupCategoryCheck"> U-11</label>
+    <label><input type="checkbox" value="U-10" class="cupCategoryCheck"> U-10</label>
+    <label><input type="checkbox" value="U-9" class="cupCategoryCheck"> U-9</label>
+  </div>
+  <input id="cupCategory" type="hidden">
+</div>
+<div class="field">
+  <label>大会形式</label>
+
+  <select id="cupFormatSelect">
+    <option value="">選択してください</option>
+    <option value="予選リーグ＋順位決定戦">予選リーグ＋順位決定戦</option>
+    <option value="予選リーグ＋決勝トーナメント">予選リーグ＋決勝トーナメント</option>
+    <option value="総当たりリーグ">総当たりリーグ</option>
+    <option value="トーナメント">トーナメント</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <input
+    id="cupFormatOther"
+    type="text"
+    placeholder="その他の場合はこちらに入力"
+    style="margin-top:8px;"
+  >
+
+  <input id="cupFormat" type="hidden">
+</div>        
+      
 <div class="field">
   <label>開催年度</label>
   <input id="cupYear" type="text" placeholder="例：2026年度">
@@ -421,25 +467,63 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <label>U-10 対戦表説明</label>
   <input id="cupU10ScheduleText" type="text" placeholder="例：予選リーグ＋順位決定戦">
 </div>
-  <div class="field">
-  <label>U-12 大会結果タイトル</label>
-  <input id="cupU12ResultTitle" type="text" placeholder="例：U-12 大会結果">
+  <div class="field full">
+  <label>U-12 大会結果</label>
+
+  <input id="cupU12Rank1" type="text" placeholder="優勝 チーム名">
+  <input id="cupU12Rank2" type="text" placeholder="2位 チーム名">
+  <input id="cupU12Rank3" type="text" placeholder="3位 チーム名">
+  <input id="cupU12Rank4" type="text" placeholder="4位 チーム名">
+  <input id="cupU12Rank5" type="text" placeholder="5位 チーム名">
+  <input id="cupU12Rank6" type="text" placeholder="6位 チーム名">
+  <input id="cupU12Rank7" type="text" placeholder="7位 チーム名">
+  <input id="cupU12Rank8" type="text" placeholder="8位 チーム名">
+
+  <input id="cupU12ResultTitle" type="hidden">
+  <input id="cupU12ResultText" type="hidden">
 </div>
 
-<div class="field">
-  <label>U-12 大会結果説明</label>
-  <input id="cupU12ResultText" type="text" placeholder="例：大会結果・順位・試合結果を掲載します。">
+<div class="field full">
+  <label>U-10 大会結果</label>
+
+  <input id="cupU10Rank1" type="text" placeholder="優勝 チーム名">
+  <input id="cupU10Rank2" type="text" placeholder="2位 チーム名">
+  <input id="cupU10Rank3" type="text" placeholder="3位 チーム名">
+  <input id="cupU10Rank4" type="text" placeholder="4位 チーム名">
+  <input id="cupU10Rank5" type="text" placeholder="5位 チーム名">
+  <input id="cupU10Rank6" type="text" placeholder="6位 チーム名">
+  <input id="cupU10Rank7" type="text" placeholder="7位 チーム名">
+  <input id="cupU10Rank8" type="text" placeholder="8位 チーム名">
+
+  <input id="cupU10ResultTitle" type="hidden">
+  <input id="cupU10ResultText" type="hidden">
+</div>
+<div class="field full">
+  <label>U-11 大会結果</label>
+
+  <input id="cupU11Rank1" type="text" placeholder="優勝 チーム名">
+  <input id="cupU11Rank2" type="text" placeholder="2位 チーム名">
+  <input id="cupU11Rank3" type="text" placeholder="3位 チーム名">
+  <input id="cupU11Rank4" type="text" placeholder="4位 チーム名">
+  <input id="cupU11Rank5" type="text" placeholder="5位 チーム名">
+  <input id="cupU11Rank6" type="text" placeholder="6位 チーム名">
+  <input id="cupU11Rank7" type="text" placeholder="7位 チーム名">
+  <input id="cupU11Rank8" type="text" placeholder="8位 チーム名">
 </div>
 
-<div class="field">
-  <label>U-10 大会結果タイトル</label>
-  <input id="cupU10ResultTitle" type="text" placeholder="例：U-10 大会結果">
+<div class="field full">
+  <label>U-9 大会結果</label>
+
+  <input id="cupU9Rank1" type="text" placeholder="優勝 チーム名">
+  <input id="cupU9Rank2" type="text" placeholder="2位 チーム名">
+  <input id="cupU9Rank3" type="text" placeholder="3位 チーム名">
+  <input id="cupU9Rank4" type="text" placeholder="4位 チーム名">
+  <input id="cupU9Rank5" type="text" placeholder="5位 チーム名">
+  <input id="cupU9Rank6" type="text" placeholder="6位 チーム名">
+  <input id="cupU9Rank7" type="text" placeholder="7位 チーム名">
+  <input id="cupU9Rank8" type="text" placeholder="8位 チーム名">
 </div>
 
-<div class="field">
-  <label>U-10 大会結果説明</label>
-  <input id="cupU10ResultText" type="text" placeholder="例：大会結果・順位・試合結果を掲載します。">
-</div>
 <div class="field">
   <label>過去大会 年度</label>
   <input id="cupPastYear" type="text" placeholder="例：2026年度">
