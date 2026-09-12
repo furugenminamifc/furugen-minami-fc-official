@@ -1049,7 +1049,68 @@ if(saveGalleryBtn) {
 
   const saveCupBtn = $("saveCupBtn");
   const clearCupBtn = $("clearCupBtn");
+  // ==============================
+// 対象カテゴリーに合わせて
+// 管理画面の入力欄を表示・非表示
+// ==============================
+function updateCupCategoryAdminVisibility() {
 
+  const selectedCategories = new Set(
+    [...document.querySelectorAll(".cupCategoryCheck:checked")]
+      .map(el => el.value)
+  );
+
+  const categories = {
+    "U-12": "U12",
+    "U-11": "U11",
+    "U-10": "U10",
+    "U-9": "U9"
+  };
+
+  Object.entries(categories).forEach(([category, key]) => {
+
+    const show = selectedCategories.has(category);
+
+    const ids = [
+      `cup${key}ScheduleTitleSelect`,
+      `cup${key}ScheduleTitleOther`,
+      `cup${key}ScheduleTitle`,
+      `cup${key}ScheduleTextSelect`,
+      `cup${key}ScheduleTextOther`,
+      `cup${key}ScheduleText`
+    ];
+
+    // 大会結果 1位〜8位
+    for (let i = 1; i <= 8; i++) {
+      ids.push(`cup${key}Rank${i}`);
+    }
+
+    ids.forEach(id => {
+
+      const element = document.getElementById(id);
+
+      if (!element) return;
+
+      const field = element.closest(".field");
+
+      if (field) {
+        field.style.display = show ? "" : "none";
+      }
+
+    });
+
+  });
+}
+
+
+// チェックを変更した瞬間に反映
+document.querySelectorAll(".cupCategoryCheck").forEach(check => {
+
+  check.addEventListener("change", () => {
+    updateCupCategoryAdminVisibility();
+  });
+
+});
   function clearCupForm() {
     $("cupName").value = "";
     $("cupDate").value = "";
