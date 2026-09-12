@@ -412,36 +412,133 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 
 <div class="field">
   <label>試合方式</label>
-  <input id="cupMatchStyle" type="text" placeholder="例：8人制">
+  <select id="cupMatchStyleSelect">
+  <option value="">選択してください</option>
+  <option value="8人制">8人制</option>
+  <option value="11人制">11人制</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupMatchStyleOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupMatchStyle" type="hidden">
 </div>
 
 <div class="field">
   <label>試合時間</label>
-  <input id="cupMatchTime" type="text" placeholder="例：15分-5分-15分">
+ <select id="cupMatchTimeSelect">
+  <option value="">選択してください</option>
+  <option value="20-5-20">20-5-20</option>
+  <option value="15-5-15">15-5-15</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupMatchTimeOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupMatchTime" type="hidden">
 </div>
 <div class="field">
   <label>参加チーム数</label>
-  <input id="cupTeamCount" type="text" placeholder="例：8チーム">
+  <select id="cupTeamCountSelect">
+  <option value="">選択してください</option>
+  <option value="8チーム">8チーム</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupTeamCountOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupTeamCount" type="hidden">
 </div>
 
 <div class="field">
   <label>会場数</label>
-  <input id="cupVenueCount" type="text" placeholder="例：2会場">
+  <select id="cupVenueCountSelect">
+  <option value="">選択してください</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupVenueCountOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupVenueCount" type="hidden">
 </div>
 
 <div class="field">
   <label>コート数</label>
-  <input id="cupCourtCount" type="text" placeholder="例：2コート">
+<select id="cupCourtCountSelect">
+  <option value="">選択してください</option>
+  <option value="1コート">1コート</option>
+  <option value="2コート">2コート</option>
+  <option value="4コート">4コート</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupCourtCountOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupCourtCount" type="hidden">
 </div>
 
 <div class="field">
   <label>予選方式</label>
-  <input id="cupPreliminary" type="text" placeholder="例：4チーム×2グループ">
+<select id="cupPreliminarySelect">
+  <option value="">選択してください</option>
+  <option value="4チーム×2グループ">4チーム×2グループ</option>
+  <option value="4チーム×4グループ">4チーム×4グループ</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupPreliminaryOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupPreliminary" type="hidden">
 </div>
 
 <div class="field">
   <label>順位決定方法</label>
-  <input id="cupRankingRule" type="text" placeholder="例：勝点→得失点差→総得点">
+<select id="cupRankingRuleSelect">
+  <option value="">選択してください</option>
+  <option value="勝点➞得失点➞総得点">勝点➞得失点➞総得点</option>
+  <option value="その他">自由記載</option>
+</select>
+
+<input
+  id="cupRankingRuleOther"
+  type="text"
+  placeholder="自由記載はこちらに入力"
+  style="margin-top:8px;"
+>
+
+<input id="cupRankingRule" type="hidden">
 </div>
 
 <div class="field">
