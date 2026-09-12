@@ -157,6 +157,7 @@
   <div class="join-info-card">
     <h3 id="cupU11ScheduleTitlePublic">U-11 対戦表・組み合わせ</h3>
     <p id="cupU11ScheduleTextPublic">予選リーグ＋順位決定戦</p>
+    <p id="cupU11ScheduleDatePublic">未定</p>
   </div>
 
   <div class="join-info-card">
@@ -168,6 +169,7 @@
   <div class="join-info-card">
     <h3 id="cupU9ScheduleTitlePublic">U-9 対戦表・組み合わせ</h3>
     <p id="cupU9ScheduleTextPublic">予選リーグ＋順位決定戦</p>
+    <p id="cupU9ScheduleDatePublic">未定</p>
   </div>
 
 </div>
@@ -329,7 +331,9 @@ setText("cupU10ScheduleTextPublic", data.u10_schedule_text);
 setText("cupU9ScheduleTitlePublic", `U-9　${data.u9_schedule_title || "未定"}`);
 setText("cupU9ScheduleTextPublic", data.u9_schedule_text);
     setText("cupU12ScheduleDatePublic", data.cup_date);
+    setText("cupU11ScheduleDatePublic", data.cup_date);
     setText("cupU10ScheduleDatePublic", data.cup_date);
+    setText("cupU9ScheduleDatePublic", data.cup_date);
     setText("cupU12ResultTitlePublic", data.u12_result_title);
 setText("cupU12ResultTextPublic", data.u12_result_text);
 
