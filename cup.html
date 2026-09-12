@@ -59,9 +59,9 @@
         </div>
 
         <div class="join-info-card">
-          <h3>対象カテゴリー</h3>
-          <p>U-12・U-10</p>
-        </div>
+  <h3>対象カテゴリー</h3>
+  <p id="cupCategoryPublic">U-12・U-10</p>
+</div>
 
         <div class="join-info-card">
           <h3>大会形式</h3>
@@ -306,7 +306,7 @@
       const el = document.getElementById(id);
       if (el) el.textContent = value || "未定";
     };
-
+    setText("cupCategoryPublic", data.category);
     setText("cupTeamCountPublic", data.team_count);
     setText("cupVenueCountPublic", data.venue_count);
     setText("cupCourtCountPublic", data.court_count);
