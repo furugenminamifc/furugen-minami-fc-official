@@ -1239,6 +1239,7 @@ restoreSelectWithOther(
 
 restoreRankingText("U12", data.u12_result_text);
 restoreRankingText("U11", data.u11_result_text);
+restoreSelectWithOther("cupU10ScheduleTitleSelect","cupU10ScheduleTitleOther",data.u10_schedule_title);      
 restoreRankingText("U10", data.u10_result_text);
 restoreRankingText("U9", data.u9_result_text);
       $("cupPastYear").value = data.past_year || "";
@@ -1268,6 +1269,11 @@ const getSelectValueWithOther = (selectId, otherId) => {
 
   return select.value || "";
 };
+// U-10 対戦表タイトル
+$("cupU10ScheduleTitle").value = getSelectValueWithOther(
+  "cupU10ScheduleTitleSelect",
+  "cupU10ScheduleTitleOther"
+);        
 // U-10 対戦表説明
 $("cupU10ScheduleText").value = getSelectValueWithOther(
   "cupU10ScheduleTextSelect",
