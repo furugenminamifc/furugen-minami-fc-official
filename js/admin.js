@@ -1058,6 +1058,7 @@ if(saveGalleryBtn) {
     $("cupCategory").value = "";
     $("cupFormat").value = "";
     $("cupYear").value = "";
+    $("cupYearDate").value = "";
     $("cupTeams").value = "";
     $("cupMatchStyle").value = "";
     $("cupMatchTime").value = "";
@@ -1156,8 +1157,10 @@ if (formatSelect) {
   }
 }
 
-$("cupFormat").value = data.format || "";
+      $("cupFormat").value = data.format || "";
       $("cupYear").value = data.year || "";
+  const savedYear = String(data.year || "").match(/\d{4}/)?.[0] || "";
+      $("cupYearDate").value = savedYear ? savedYear + "-01-01" : "";
       $("cupTeams").value = data.teams || "";
       $("cupMatchStyle").value = data.match_style || "";
       $("cupMatchTime").value = data.match_time || "";
@@ -1299,7 +1302,10 @@ restoreRankingText("U9", data.u9_result_text);
       try {
         saveCupBtn.disabled = true;
         saveCupBtn.textContent = "保存中...";
-const getSelectValueWithOther = (selectId, otherId) => {
+const yearDate = $("cupYearDate")?.value || "";
+const selectedYear = yearDate ? yearDate.slice(0, 4) : "";
+$("cupYear").value = selectedYear ? selectedYear + "年度" : "";
+  const getSelectValueWithOther = (selectId, otherId) => {
   const select = $(selectId);
   const other = $(otherId);
 
