@@ -316,16 +316,16 @@
 　　　setText("cupTeamsPublic", data.teams);
 　　　setText("cupMatchStylePublic", data.match_style);
 　　　setText("cupMatchTimePublic", data.match_time);
-    setText("cupU12ScheduleTitlePublic", data.u12_schedule_title);
+    setText("cupU12ScheduleTitlePublic", `U-12　${data.u12_schedule_title || "未定"}`);
 setText("cupU12ScheduleTextPublic", data.u12_schedule_text);
 
-setText("cupU11ScheduleTitlePublic", data.u11_schedule_title);
+setText("cupU11ScheduleTitlePublic", `U-11　${data.u11_schedule_title || "未定"}`);
 setText("cupU11ScheduleTextPublic", data.u11_schedule_text);
 
-setText("cupU10ScheduleTitlePublic", data.u10_schedule_title);
+setText("cupU10ScheduleTitlePublic", `U-10　${data.u10_schedule_title || "未定"}`);
 setText("cupU10ScheduleTextPublic", data.u10_schedule_text);
 
-setText("cupU9ScheduleTitlePublic", data.u9_schedule_title);
+setText("cupU9ScheduleTitlePublic", `U-9　${data.u9_schedule_title || "未定"}`);
 setText("cupU9ScheduleTextPublic", data.u9_schedule_text);
     setText("cupU12ScheduleDatePublic", data.cup_date);
     setText("cupU10ScheduleDatePublic", data.cup_date);
