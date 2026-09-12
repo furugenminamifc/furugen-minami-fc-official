@@ -195,22 +195,22 @@
 
   <div class="join-info-grid">
 
-  <div class="join-info-card">
+  <div class="join-info-card" id="cupU12ResultCard">
     <h3 id="cupU12ResultTitlePublic">U-12 大会結果</h3>
     <p id="cupU12ResultTextPublic">大会結果・順位・試合結果を掲載します。</p>
   </div>
 
-  <div class="join-info-card">
+  <div class="join-info-card" id="cupU11ResultCard">
     <h3 id="cupU11ResultTitlePublic">U-11 大会結果</h3>
     <p id="cupU11ResultTextPublic">大会結果・順位・試合結果を掲載します。</p>
   </div>
 
-  <div class="join-info-card">
+  <div class="join-info-card" id="cupU10ResultCard">
     <h3 id="cupU10ResultTitlePublic">U-10 大会結果</h3>
     <p id="cupU10ResultTextPublic">大会結果・順位・試合結果を掲載します。</p>
   </div>
 
-  <div class="join-info-card">
+  <div class="join-info-card" id="cupU9ResultCard">
     <h3 id="cupU9ResultTitlePublic">U-9 大会結果</h3>
     <p id="cupU9ResultTextPublic">大会結果・順位・試合結果を掲載します。</p>
   </div>
@@ -328,6 +328,22 @@ const scheduleCards = {
 };
 
 Object.entries(scheduleCards).forEach(([category, cardId]) => {
+  const card = document.getElementById(cardId);
+
+  if (card) {
+    card.style.display =
+      selectedCategories.includes(category) ? "" : "none";
+  }
+});
+    // 対象カテゴリーに合わせて大会結果カードを表示・非表示
+const resultCards = {
+  "U-12": "cupU12ResultCard",
+  "U-11": "cupU11ResultCard",
+  "U-10": "cupU10ResultCard",
+  "U-9": "cupU9ResultCard"
+};
+
+Object.entries(resultCards).forEach(([category, cardId]) => {
   const card = document.getElementById(cardId);
 
   if (card) {
