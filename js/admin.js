@@ -1194,6 +1194,48 @@ $("cupFormat").value = data.format || "";
     if (other) other.value = "";
   }
 };
+// 大会基本設定：保存済みデータ → プルダウンへ復元
+restoreSelectWithOther(
+  "cupMatchStyleSelect",
+  "cupMatchStyleOther",
+  data.match_style
+);
+
+restoreSelectWithOther(
+  "cupMatchTimeSelect",
+  "cupMatchTimeOther",
+  data.match_time
+);
+
+restoreSelectWithOther(
+  "cupTeamCountSelect",
+  "cupTeamCountOther",
+  data.team_count
+);
+
+restoreSelectWithOther(
+  "cupVenueCountSelect",
+  "cupVenueCountOther",
+  data.venue_count
+);
+
+restoreSelectWithOther(
+  "cupCourtCountSelect",
+  "cupCourtCountOther",
+  data.court_count
+);
+
+restoreSelectWithOther(
+  "cupPreliminarySelect",
+  "cupPreliminaryOther",
+  data.preliminary
+);
+
+restoreSelectWithOther(
+  "cupRankingRuleSelect",
+  "cupRankingRuleOther",
+  data.ranking_rule
+);      
 restoreSelectWithOther(
   "cupU10ScheduleTextSelect",
   "cupU10ScheduleTextOther",
@@ -1269,6 +1311,41 @@ const getSelectValueWithOther = (selectId, otherId) => {
 
   return select.value || "";
 };
+// 大会基本設定：プルダウン → 保存用hiddenへ
+$("cupMatchStyle").value = getSelectValueWithOther(
+  "cupMatchStyleSelect",
+  "cupMatchStyleOther"
+);
+
+$("cupMatchTime").value = getSelectValueWithOther(
+  "cupMatchTimeSelect",
+  "cupMatchTimeOther"
+);
+
+$("cupTeamCount").value = getSelectValueWithOther(
+  "cupTeamCountSelect",
+  "cupTeamCountOther"
+);
+
+$("cupVenueCount").value = getSelectValueWithOther(
+  "cupVenueCountSelect",
+  "cupVenueCountOther"
+);
+
+$("cupCourtCount").value = getSelectValueWithOther(
+  "cupCourtCountSelect",
+  "cupCourtCountOther"
+);
+
+$("cupPreliminary").value = getSelectValueWithOther(
+  "cupPreliminarySelect",
+  "cupPreliminaryOther"
+);
+
+$("cupRankingRule").value = getSelectValueWithOther(
+  "cupRankingRuleSelect",
+  "cupRankingRuleOther"
+);        
  // U-12 対戦表
 $("cupU12ScheduleTitle").value = getSelectValueWithOther(
   "cupU12ScheduleTitleSelect",
