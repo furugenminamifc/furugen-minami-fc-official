@@ -148,25 +148,29 @@
     </div>
 <div class="join-info-grid">
 
-  <div class="join-info-card">
+  <!-- U-12 -->
+<div class="join-info-card" id="cupU12ScheduleCard">
+
     <h3 id="cupU12ScheduleTitlePublic">U-12 対戦表・組み合わせ</h3>
     <p id="cupU12ScheduleTextPublic">予選リーグ＋順位決定戦</p>
     <p id="cupU12ScheduleDatePublic">2026年5月30日（土）・31日（日）</p>
   </div>
 
-  <div class="join-info-card">
+ <!-- U-11 -->
+<div class="join-info-card" id="cupU11ScheduleCard">
     <h3 id="cupU11ScheduleTitlePublic">U-11 対戦表・組み合わせ</h3>
     <p id="cupU11ScheduleTextPublic">予選リーグ＋順位決定戦</p>
     <p id="cupU11ScheduleDatePublic">未定</p>
   </div>
 
-  <div class="join-info-card">
+  <!-- U-10 -->
+<div class="join-info-card" id="cupU10ScheduleCard">
     <h3 id="cupU10ScheduleTitlePublic">U-10 対戦表・組み合わせ</h3>
     <p id="cupU10ScheduleTextPublic">予選リーグ＋順位決定戦</p>
     <p id="cupU10ScheduleDatePublic">2026年5月30日（土）・31日（日）</p>
   </div>
-
-  <div class="join-info-card">
+<!-- U-9 -->
+<div class="join-info-card" id="cupU9ScheduleCard">
     <h3 id="cupU9ScheduleTitlePublic">U-9 対戦表・組み合わせ</h3>
     <p id="cupU9ScheduleTextPublic">予選リーグ＋順位決定戦</p>
     <p id="cupU9ScheduleDatePublic">未定</p>
@@ -310,6 +314,27 @@
     };
     setText("cupDatePublic", data.cup_date);
     setText("cupCategoryPublic", data.category);
+    // 対象カテゴリーに合わせて対戦表カードを表示・非表示
+const selectedCategories = String(data.category || "")
+  .split("・")
+  .map(category => category.trim())
+  .filter(Boolean);
+
+const scheduleCards = {
+  "U-12": "cupU12ScheduleCard",
+  "U-11": "cupU11ScheduleCard",
+  "U-10": "cupU10ScheduleCard",
+  "U-9": "cupU9ScheduleCard"
+};
+
+Object.entries(scheduleCards).forEach(([category, cardId]) => {
+  const card = document.getElementById(cardId);
+
+  if (card) {
+    card.style.display =
+      selectedCategories.includes(category) ? "" : "none";
+  }
+});
     setText("cupTeamCountPublic", data.team_count);
     setText("cupVenueCountPublic", data.venue_count);
     setText("cupCourtCountPublic", data.court_count);
