@@ -50,7 +50,7 @@
 
         <div class="join-info-card">
           <h3>開催日</h3>
-          <p>2026年５月30日（土）・31日(日)</p>
+<p id="cupDatePublic">2026年5月30日（土）・31日（日）</p>
         </div>
 
         <div class="join-info-card">
@@ -306,6 +306,7 @@
       const el = document.getElementById(id);
       if (el) el.textContent = value || "未定";
     };
+    setText("cupDatePublic", data.cup_date);
     setText("cupCategoryPublic", data.category);
     setText("cupTeamCountPublic", data.team_count);
     setText("cupVenueCountPublic", data.venue_count);
