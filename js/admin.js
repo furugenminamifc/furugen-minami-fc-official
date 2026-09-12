@@ -1269,6 +1269,16 @@ const getSelectValueWithOther = (selectId, otherId) => {
 
   return select.value || "";
 };
+ // U-12 対戦表
+$("cupU12ScheduleTitle").value = getSelectValueWithOther(
+  "cupU12ScheduleTitleSelect",
+  "cupU12ScheduleTitleOther"
+);
+
+$("cupU12ScheduleText").value = getSelectValueWithOther(
+  "cupU12ScheduleTextSelect",
+  "cupU12ScheduleTextOther"
+);       
 // U-10 対戦表タイトル
 $("cupU10ScheduleTitle").value = getSelectValueWithOther(
   "cupU10ScheduleTitleSelect",
