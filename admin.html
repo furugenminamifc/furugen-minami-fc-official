@@ -497,7 +497,26 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
 
 <div class="field">
   <label>U-10 対戦表タイトル</label>
-  <input id="cupU10ScheduleTitle" type="text" placeholder="例：U-10 対戦表・組み合わせ">
+
+  <select id="cupU10ScheduleTitleSelect">
+    <option value="">選択してください</option>
+    <option value="予選リーグ">予選リーグ</option>
+    <option value="順位決定戦">順位決定戦</option>
+    <option value="予選リーグ＋順位決定戦">予選リーグ＋順位決定戦</option>
+    <option value="総当たりリーグ">総当たりリーグ</option>
+    <option value="トーナメント">トーナメント</option>
+    <option value="交流戦">交流戦</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <input
+    id="cupU10ScheduleTitleOther"
+    type="text"
+    placeholder="その他の場合はこちらに入力"
+    style="margin-top:8px;"
+  >
+
+  <input id="cupU10ScheduleTitle" type="hidden">
 </div>
 
 <div class="field">
