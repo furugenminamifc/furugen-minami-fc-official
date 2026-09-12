@@ -1194,7 +1194,11 @@ $("cupFormat").value = data.format || "";
     if (other) other.value = "";
   }
 };
-
+restoreSelectWithOther(
+  "cupU10ScheduleTextSelect",
+  "cupU10ScheduleTextOther",
+  data.u10_schedule_text
+);
 restoreSelectWithOther(
   "cupU11ScheduleTitleSelect",
   "cupU11ScheduleTitleOther",
@@ -1264,7 +1268,11 @@ const getSelectValueWithOther = (selectId, otherId) => {
 
   return select.value || "";
 };
-
+// U-10 対戦表説明
+$("cupU10ScheduleText").value = getSelectValueWithOther(
+  "cupU10ScheduleTextSelect",
+  "cupU10ScheduleTextOther"
+);
 // U-11 対戦表
 $("cupU11ScheduleTitle").value = getSelectValueWithOther(
   "cupU11ScheduleTitleSelect",
