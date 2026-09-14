@@ -973,7 +973,52 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
       placeholder="1行に1社ずつ入力してください"
     ></textarea>
   </div>
+  <div class="field">
+  <label>スポンサー詳細編集</label>
+  <select id="supporterSelect">
+    <option value="">スポンサーを選択してください</option>
+  </select>
+</div>
 
+<div class="grid">
+  <div class="field">
+    <label>ホームページURL</label>
+    <input
+      id="supporterWebsite"
+      type="url"
+      placeholder="https://example.com"
+    >
+  </div>
+
+  <div class="field">
+    <label>Instagram URL</label>
+    <input
+      id="supporterInstagram"
+      type="url"
+      placeholder="https://www.instagram.com/..."
+    >
+  </div>
+</div>
+
+<div class="field">
+  <label>スポンサー ロゴ画像</label>
+  <input
+    id="supporterLogoFile"
+    type="file"
+    accept="image/*"
+  >
+  <input id="supporterLogoUrl" type="hidden">
+  <div id="supporterLogoPreview"></div>
+</div>
+
+<div class="actions">
+  <button id="saveSupporterDetailBtn" class="secondary" type="button">
+    スポンサー詳細を保存
+  </button>
+</div>
+
+<div id="supporterDetailOk" class="ok"></div>
+<div id="supporterDetailError" class="error"></div>
   <div class="actions">
     <button id="saveSupportersBtn" class="primary">
       応援団を保存
