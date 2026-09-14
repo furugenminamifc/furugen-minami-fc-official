@@ -156,24 +156,27 @@
       box-sizing:border-box;
     ">
 
-      <iframe
-        src="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/match-schedules/cup-2026-01.pdf"
-        style="
-          width:100%;
-          height:900px;
-          border:none;
-          border-radius:10px;
-        ">
-      </iframe>
+  <iframe
+  id="cupMatchSchedulePdfFrame"
+  src="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/match-schedules/cup-2026-01.pdf"
+  style="
+    width:100%;
+    height:900px;
+    border:none;
+    border-radius:10px;
+  "
+></iframe>
 
-      <p style="text-align:center; margin-top:12px;">
-        <a
-          href="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/match-schedules/cup-2026-01.pdf"
-          target="_blank"
-          rel="noopener">
-          対戦表PDFを大きく開く
-        </a>
-      </p>
+<p style="text-align:center; margin-top:12px;">
+  <a
+    id="cupMatchSchedulePdfLink"
+    href="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/match-schedules/cup-2026-01.pdf"
+    target="_blank"
+    rel="noopener"
+  >
+    対戦表PDFを大きく開く
+  </a>
+</p>
 
     </div>
 
@@ -199,6 +202,7 @@
     ">
 
       <iframe
+       id="cupTournamentResultPdfFrame" 
         src="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/tournament-results/cup-2026-result-01.pdf"
         style="
           width:100%;
@@ -210,6 +214,7 @@
 
       <p style="text-align:center; margin-top:12px;">
         <a
+          id="cupTournamentResultPdfLink"
           href="https://frdohizjmjzutizlswue.supabase.co/storage/v1/object/public/cup-pdfs/tournament-results/cup-2026-result-01.pdf"
           target="_blank"
           rel="noopener">
@@ -392,6 +397,21 @@ setText("cupU9ResultTextPublic", data.u9_result_text);
 if (pastLink && data.past_link) {
   pastLink.href = data.past_link;
 }
+const matchPdfFrame = document.getElementById("cupMatchSchedulePdfFrame");
+const matchPdfLink = document.getElementById("cupMatchSchedulePdfLink");
+
+if (data.match_schedule_pdf_url) {
+  if (matchPdfFrame) matchPdfFrame.src = data.match_schedule_pdf_url;
+  if (matchPdfLink) matchPdfLink.href = data.match_schedule_pdf_url;
+}
+
+const resultPdfFrame = document.getElementById("cupTournamentResultPdfFrame");
+const resultPdfLink = document.getElementById("cupTournamentResultPdfLink");
+
+if (data.tournament_result_pdf_url) {
+  if (resultPdfFrame) resultPdfFrame.src = data.tournament_result_pdf_url;
+  if (resultPdfLink) resultPdfLink.href = data.tournament_result_pdf_url;
+}    
   } catch (error) {
     console.error("CUP情報の読み込みに失敗しました:", error);
   }
