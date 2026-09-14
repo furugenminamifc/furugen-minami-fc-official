@@ -85,6 +85,24 @@
   体験参加・入団について、<br>
   お気軽にお問い合わせください。
 </p></div><div class="cta-actions"><a class="btn maroon" href="join.html">体験・入団案内</a><a class="btn outline" href="contact.html">お問い合わせ</a></div></div></section>
+<section class="section" id="supporters">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">SUPPORTERS</p>
+        <h2>古堅南FC応援団</h2>
+        <p class="muted">古堅南FCを応援していただいている皆さまです。</p>
+      </div>
+    </div>
+
+    <div
+      id="supportersList"
+      style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;"
+    >
+      <p class="muted">応援団を読み込み中...</p>
+    </div>
+  </div>
+</section>  
 </main>
 <footer class="site-footer">
 <div class="wrap footer-inner">
@@ -146,6 +164,60 @@
 
   } catch (error) {
     console.error("ホーム画像読み込みエラー:", error);
+  }
+})();
+</script>
+<script>
+(async () => {
+  const list = document.getElementById("supportersList");
+  if (!list) return;
+
+  try {
+    const cfg = window.FURUGEN_SUPABASE || {};
+
+    if (!window.supabase || !cfg.url || !cfg.anonKey) {
+      throw new Error("Supabase設定が見つかりません");
+    }
+
+    const sbSupporters = window.supabase.createClient(
+      cfg.url,
+      cfg.anonKey
+    );
+
+    const { data, error } = await sbSupporters
+      .from("site_supporters")
+      .select("id,name,sort_order,is_active")
+      .eq("is_active", true)
+      .order("sort_order", { ascending: true });
+
+    if (error) throw error;
+
+    list.innerHTML = "";
+
+    (data || []).forEach(item => {
+      const card = document.createElement("div");
+
+      card.style.background = "#fff";
+      card.style.border = "1px solid #e4e7eb";
+      card.style.borderRadius = "12px";
+      card.style.padding = "16px";
+      card.style.textAlign = "center";
+      card.style.fontWeight = "700";
+
+      card.textContent = item.name;
+
+      list.appendChild(card);
+    });
+
+    if (!data || data.length === 0) {
+      list.innerHTML = '<p class="muted">現在、応援団情報を準備中です。</p>';
+    }
+
+  } catch (error) {
+    console.error("Supporters load error:", error);
+
+    list.innerHTML =
+      '<p class="muted">応援団情報を読み込めませんでした。</p>';
   }
 })();
 </script>  
