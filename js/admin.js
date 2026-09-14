@@ -83,7 +83,7 @@ if(activeTab) activeTab.click();}
       applySession(session);
     });
 
-    sb.auth.getSession().then(({data})=>applySession(data.session));
+
   }
 
   async function applySession(session){
@@ -1089,6 +1089,9 @@ const supporterDetailError = $("supporterDetailError");
       .map(item => item.name)
       .join("\n");
 if (supporterSelect) {
+  // 現在選択しているスポンサーを記憶
+  const previousValue = supporterSelect.value;
+
   supporterSelect.innerHTML =
     '<option value="">スポンサーを選択してください</option>';
 
@@ -1098,6 +1101,16 @@ if (supporterSelect) {
     option.textContent = item.name;
     supporterSelect.appendChild(option);
   });
+
+  // 再読み込みされても選択中のスポンサーを維持
+  if (
+    previousValue &&
+    currentSupporters.some(
+      item => String(item.id) === String(previousValue)
+    )
+  ) {
+    supporterSelect.value = previousValue;
+  }
 }
   } catch (error) {
     console.error("Supporters load error:", error);
