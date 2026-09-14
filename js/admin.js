@@ -99,7 +99,8 @@ await Promise.all([
   loadMatches(),
   loadResults(),
   loadGallery(),
-  loadCupSettings()
+  loadCupSettings(),
+  loadSupporters()
 ]);
     }
   }
@@ -1056,6 +1057,130 @@ if(saveGalleryBtn) {
 
   const saveCupBtn = $("saveCupBtn");
   const clearCupBtn = $("clearCupBtn");
+  const supporterNames = $("supporterNames");
+  const saveSupportersBtn = $("saveSupportersBtn");
+  const supportersError = $("supportersError");
+  const supportersOk = $("supportersOk");
+  let currentSupporters = [];
+  async function loadSupporters() {
+  if (!sb || !supporterNames) return;
+
+  try {
+    const { data, error } = await sb
+      .from("site_supporters")
+      .select("id,name,sort_order,is_active")
+      .eq("is_active", true)
+      .order("sort_order", { ascending: true });
+
+    if (error) throw error;
+    currentSupporters = data || [];
+
+    supporterNames.value = (data || [])
+      .map(item => item.name)
+      .join("\n");
+
+  } catch (error) {
+    console.error("Supporters load error:", error);
+
+    if (supportersError) {
+      supportersError.textContent =
+        "応援団の読み込みに失敗しました: " +
+        (error?.message || String(error));
+      }    
+     }
+  }    
+    if (saveSupportersBtn) {
+  saveSupportersBtn.onclick = async () => {
+    if (!sb || !supporterNames) return;
+
+    if (supportersOk) supportersOk.textContent = "";
+    if (supportersError) supportersError.textContent = "";
+
+    const names = supporterNames.value
+      .split(/\r?\n/)
+      .map(name => name.trim())
+      .filter(Boolean);
+
+    try {
+      saveSupportersBtn.disabled = true;
+      saveSupportersBtn.textContent = "保存中...";
+
+      const commonLength = Math.min(
+        currentSupporters.length,
+        names.length
+      );
+
+      // 既存データを変更
+      for (let i = 0; i < commonLength; i++) {
+        const { error } = await sb
+          .from("site_supporters")
+          .update({
+            name: names[i],
+            sort_order: i + 1,
+            is_active: true,
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", currentSupporters[i].id);
+
+        if (error) throw error;
+      }
+
+      // 新しく追加されたスポンサー
+      if (names.length > currentSupporters.length) {
+        const newRows = names
+          .slice(currentSupporters.length)
+          .map((name, index) => ({
+            name,
+            sort_order: currentSupporters.length + index + 1,
+            is_active: true
+          }));
+
+        const { error } = await sb
+          .from("site_supporters")
+          .insert(newRows);
+
+        if (error) throw error;
+      }
+
+      // 行を削除した場合
+      if (names.length < currentSupporters.length) {
+        const deleteIds = currentSupporters
+          .slice(names.length)
+          .map(item => item.id);
+
+        if (deleteIds.length) {
+          const { error } = await sb
+            .from("site_supporters")
+            .delete()
+            .in("id", deleteIds);
+
+          if (error) throw error;
+        }
+      }
+
+      await loadSupporters();
+
+      if (supportersOk) {
+        supportersOk.textContent = "古堅南FC応援団を保存しました ✅";
+      }
+
+    } catch (error) {
+      console.error("Supporters save error:", error);
+
+      if (supportersError) {
+        supportersError.textContent =
+          "応援団の保存に失敗しました: " +
+          (error?.message || String(error));
+      }
+
+    } finally {
+      saveSupportersBtn.disabled = false;
+      saveSupportersBtn.textContent = "応援団を保存";
+    }
+  };
+
+  }
+
   // ==============================
 // 対象カテゴリーに合わせて
 // 管理画面の入力欄を表示・非表示
