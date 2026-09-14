@@ -93,7 +93,14 @@ if(activeTab) activeTab.click();}
 
     if(loggedIn){
       show("loginOk", `ログイン中：${session.user.email || ""}`);
-  await Promise.all([loadPlayers(), loadStaff(), loadMatches(), loadResults(), loadGallery()]);
+await Promise.all([
+  loadPlayers(),
+  loadStaff(),
+  loadMatches(),
+  loadResults(),
+  loadGallery(),
+  loadCupSettings()
+]);
     }
   }
 
@@ -1603,6 +1610,6 @@ tournament_result_pdf_url: $("cupTournamentResultPdfUrl").value.trim(),
     clearCupBtn.onclick = clearCupForm;
   }
 
-  loadCupSettings();  
+   
   init();
 })();
