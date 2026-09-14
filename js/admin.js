@@ -44,7 +44,8 @@ const panels = {
   matches: $("matchesTab"),
   resultManager: $("resultManager"),
   gallery: $("galleryTab"),
-  cup: $("cupTab")
+      cup: $("cupTab"),
+supporters: $("supportersTab")
 };
 
   tabs.forEach(tab => {
