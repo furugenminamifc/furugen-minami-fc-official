@@ -1062,6 +1062,15 @@ if(saveGalleryBtn) {
   const saveSupportersBtn = $("saveSupportersBtn");
   const supportersError = $("supportersError");
   const supportersOk = $("supportersOk");
+  const supporterSelect = $("supporterSelect");
+const supporterWebsite = $("supporterWebsite");
+const supporterInstagram = $("supporterInstagram");
+const supporterLogoFile = $("supporterLogoFile");
+const supporterLogoUrl = $("supporterLogoUrl");
+const supporterLogoPreview = $("supporterLogoPreview");
+const saveSupporterDetailBtn = $("saveSupporterDetailBtn");
+const supporterDetailOk = $("supporterDetailOk");
+const supporterDetailError = $("supporterDetailError");
   let currentSupporters = [];
   async function loadSupporters() {
   if (!sb || !supporterNames) return;
@@ -1069,7 +1078,7 @@ if(saveGalleryBtn) {
   try {
     const { data, error } = await sb
       .from("site_supporters")
-      .select("id,name,sort_order,is_active")
+      .select("id,name,sort_order,is_active,website_url,instagram_url,logo_url")
       .eq("is_active", true)
       .order("sort_order", { ascending: true });
 
@@ -1079,7 +1088,17 @@ if(saveGalleryBtn) {
     supporterNames.value = (data || [])
       .map(item => item.name)
       .join("\n");
+if (supporterSelect) {
+  supporterSelect.innerHTML =
+    '<option value="">スポンサーを選択してください</option>';
 
+  currentSupporters.forEach(item => {
+    const option = document.createElement("option");
+    option.value = String(item.id);
+    option.textContent = item.name;
+    supporterSelect.appendChild(option);
+  });
+}
   } catch (error) {
     console.error("Supporters load error:", error);
 
@@ -1089,8 +1108,167 @@ if(saveGalleryBtn) {
         (error?.message || String(error));
       }    
      }
-  }    
-    if (saveSupportersBtn) {
+  }
+  if (supporterSelect) {
+  supporterSelect.onchange = () => {
+    const selected = currentSupporters.find(
+      item => String(item.id) === supporterSelect.value
+    );
+
+    if (!selected) {
+      if (supporterWebsite) supporterWebsite.value = "";
+      if (supporterInstagram) supporterInstagram.value = "";
+      if (supporterLogoUrl) supporterLogoUrl.value = "";
+      if (supporterLogoFile) supporterLogoFile.value = "";
+      if (supporterLogoPreview) supporterLogoPreview.innerHTML = "";
+      return;
+    }
+
+    if (supporterWebsite) {
+      supporterWebsite.value = selected.website_url || "";
+    }
+
+    if (supporterInstagram) {
+      supporterInstagram.value = selected.instagram_url || "";
+    }
+
+    if (supporterLogoUrl) {
+      supporterLogoUrl.value = selected.logo_url || "";
+    }
+
+    if (supporterLogoFile) {
+      supporterLogoFile.value = "";
+    }
+
+    if (supporterLogoPreview) {
+      supporterLogoPreview.innerHTML = "";
+
+      if (selected.logo_url) {
+        const img = document.createElement("img");
+        img.src = selected.logo_url;
+        img.alt = selected.name + " ロゴ";
+        img.style.maxWidth = "180px";
+        img.style.maxHeight = "120px";
+        img.style.objectFit = "contain";
+        img.style.marginTop = "10px";
+
+        supporterLogoPreview.appendChild(img);
+      }
+    }
+
+    if (supporterDetailOk) supporterDetailOk.textContent = "";
+    if (supporterDetailError) supporterDetailError.textContent = "";
+  };
+}
+ if (saveSupporterDetailBtn) {
+  saveSupporterDetailBtn.onclick = async () => {
+    if (!sb || !supporterSelect) return;
+
+    if (supporterDetailOk) supporterDetailOk.textContent = "";
+    if (supporterDetailError) supporterDetailError.textContent = "";
+
+    const supporterId = supporterSelect.value;
+
+    if (!supporterId) {
+      if (supporterDetailError) {
+        supporterDetailError.textContent =
+          "スポンサーを選択してください。";
+      }
+      return;
+    }
+
+    try {
+      saveSupporterDetailBtn.disabled = true;
+      saveSupporterDetailBtn.textContent = "保存中...";
+
+      let logoUrl = supporterLogoUrl
+        ? supporterLogoUrl.value
+        : "";
+
+      const file = supporterLogoFile?.files?.[0];
+
+      if (file) {
+        const ext =
+          file.name.split(".").pop()?.toLowerCase() || "png";
+
+        const filePath =
+          `${supporterId}/${Date.now()}.${ext}`;
+
+        const { error: uploadError } = await sb.storage
+          .from("supporter-logos")
+          .upload(filePath, file, {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: file.type
+          });
+
+        if (uploadError) throw uploadError;
+
+        const { data: publicData } = sb.storage
+          .from("supporter-logos")
+          .getPublicUrl(filePath);
+
+        logoUrl = publicData.publicUrl;
+      }
+
+      const updates = {
+        website_url: supporterWebsite?.value.trim() || null,
+        instagram_url: supporterInstagram?.value.trim() || null,
+        logo_url: logoUrl || null,
+        updated_at: new Date().toISOString()
+      };
+
+      const { error: updateError } = await sb
+        .from("site_supporters")
+        .update(updates)
+        .eq("id", supporterId);
+
+      if (updateError) throw updateError;
+
+      const selected = currentSupporters.find(
+        item => String(item.id) === String(supporterId)
+      );
+
+      if (selected) {
+        selected.website_url = updates.website_url;
+        selected.instagram_url = updates.instagram_url;
+        selected.logo_url = updates.logo_url;
+      }
+
+      if (supporterLogoUrl) {
+        supporterLogoUrl.value = logoUrl || "";
+      }
+
+      if (supporterLogoFile) {
+        supporterLogoFile.value = "";
+      }
+
+      if (supporterSelect.onchange) {
+        supporterSelect.onchange();
+      }
+
+      if (supporterDetailOk) {
+        supporterDetailOk.textContent =
+          "スポンサー詳細を保存しました ✅";
+      }
+
+    } catch (error) {
+      console.error("Supporter detail save error:", error);
+
+      if (supporterDetailError) {
+        supporterDetailError.textContent =
+          "スポンサー詳細の保存に失敗しました: " +
+          (error?.message || String(error));
+      }
+
+    } finally {
+      saveSupporterDetailBtn.disabled = false;
+      saveSupporterDetailBtn.textContent =
+        "スポンサー詳細を保存";
+    }
+  };
+}  
+  if (saveSupportersBtn) {
   saveSupportersBtn.onclick = async () => {
     if (!sb || !supporterNames) return;
 
