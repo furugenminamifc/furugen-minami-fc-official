@@ -1367,12 +1367,62 @@ restoreRankingText("U9", data.u9_result_text);
       console.error("CUP load error:", error);
     }
   }
+async function uploadCupPdf(file, folder) {
+  if (!file) return "";
 
+  const isPdf =
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf");
+
+  if (!isPdf) {
+    throw new Error("PDFファイルを選択してください");
+  }
+
+  const fileName = `cup-${Date.now()}.pdf`;
+  const filePath = `${folder}/${fileName}`;
+
+  const { error } = await sb.storage
+    .from("cup-pdfs")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false
+    });
+
+  if (error) throw error;
+
+  const { data } = sb.storage
+    .from("cup-pdfs")
+    .getPublicUrl(filePath);
+
+  return data.publicUrl;
+}
   if (saveCupBtn) {
     saveCupBtn.onclick = async () => {
       try {
         saveCupBtn.disabled = true;
         saveCupBtn.textContent = "保存中...";
+const matchPdfFile = $("cupMatchSchedulePdfFile")?.files?.[0];
+const resultPdfFile = $("cupTournamentResultPdfFile")?.files?.[0];
+
+if (matchPdfFile) {
+  saveCupBtn.textContent = "対戦表PDFをアップロード中...";
+  const matchPdfUrl = await uploadCupPdf(
+    matchPdfFile,
+    "match-schedules"
+  );
+  $("cupMatchSchedulePdfUrl").value = matchPdfUrl;
+}
+
+if (resultPdfFile) {
+  saveCupBtn.textContent = "大会結果PDFをアップロード中...";
+  const resultPdfUrl = await uploadCupPdf(
+    resultPdfFile,
+    "tournament-results"
+  );
+  $("cupTournamentResultPdfUrl").value = resultPdfUrl;
+}
+
+saveCupBtn.textContent = "保存中...";        
 const yearDate = $("cupYearDate")?.value || "";
 const selectedYear = yearDate ? yearDate.slice(0, 4) : "";
 $("cupYear").value = selectedYear ? selectedYear + "年度" : "";
