@@ -932,14 +932,34 @@ button{border:0;border-radius:10px;padding:11px 16px;font-weight:900;cursor:poin
   <input id="cupPastLink" type="text" placeholder="例：cup-2026.html">
 </div> 
 <div class="field">
-  <label>対戦表PDF URL</label>
-  <input id="cupMatchSchedulePdfUrl" type="text" placeholder="対戦表PDFのURL">
+  <label>対戦表PDF</label>
+  <input
+    id="cupMatchSchedulePdfFile"
+    type="file"
+    accept="application/pdf,.pdf"
+  >
+  <input
+    id="cupMatchSchedulePdfUrl"
+    type="text"
+    placeholder="アップロード後にURLが自動で入ります"
+    readonly
+  >
 </div>
 
 <div class="field">
-  <label>大会結果PDF URL</label>
-  <input id="cupTournamentResultPdfUrl" type="text" placeholder="大会結果PDFのURL">
-</div>      
+  <label>大会結果PDF</label>
+  <input
+    id="cupTournamentResultPdfFile"
+    type="file"
+    accept="application/pdf,.pdf"
+  >
+  <input
+    id="cupTournamentResultPdfUrl"
+    type="text"
+    placeholder="アップロード後にURLが自動で入ります"
+    readonly
+  >
+</div>     
   <div class="actions">
   <button id="saveCupBtn" class="primary">CUP情報を保存</button>
   <button id="clearCupBtn" class="secondary">入力をクリア</button>
