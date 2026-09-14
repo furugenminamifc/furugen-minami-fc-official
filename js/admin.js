@@ -1141,6 +1141,8 @@ document.querySelectorAll(".cupCategoryCheck").forEach(check => {
     $("cupPastTitle").value = "";
     $("cupPastDate").value = "";
     $("cupPastLink").value = "";
+    $("cupMatchSchedulePdfUrl").value = "";
+    $("cupTournamentResultPdfUrl").value = "";
   }
 
   async function loadCupSettings() {
@@ -1352,7 +1354,8 @@ restoreRankingText("U9", data.u9_result_text);
       $("cupPastTitle").value = data.past_title || "";
       $("cupPastDate").value = data.past_date || "";
       $("cupPastLink").value = data.past_link || "";
-
+      $("cupMatchSchedulePdfUrl").value = data.match_schedule_pdf_url || "";
+      $("cupTournamentResultPdfUrl").value = data.tournament_result_pdf_url || "";
     } catch (error) {
       console.error("CUP load error:", error);
     }
@@ -1567,6 +1570,8 @@ $("cupU10ResultText").value = u10RankingText;
          past_title: $("cupPastTitle").value.trim(),
           past_date: $("cupPastDate").value.trim(),
           past_link: $("cupPastLink").value.trim(),          
+          match_schedule_pdf_url: $("cupMatchSchedulePdfUrl").value.trim(),
+tournament_result_pdf_url: $("cupTournamentResultPdfUrl").value.trim(),
           updated_at: new Date().toISOString()
         };
 
