@@ -300,6 +300,7 @@ async function loadCurrentPhotoPreviews() {
     : "通常ギャラリーへ"}</button>
 <button class="secondary" data-gallery-up="${esc(item.id)}">↑ 上へ</button>
 <button class="secondary" data-gallery-down="${esc(item.id)}">↓ 下へ</button>
+<button class="secondary" data-gallery-edit="${esc(item.id)}">編集</button>
 <button class="danger" data-gallery-delete="${esc(item.id)}">削除</button>
       </div>
     `;
@@ -308,6 +309,36 @@ async function loadCurrentPhotoPreviews() {
   });
 }
 document.addEventListener("click", async (event) => {
+  const editBtn = event.target.closest("[data-gallery-edit]");
+
+if (editBtn) {
+  const id = editBtn.dataset.galleryEdit;
+
+  const { data: item, error } = await sb
+    .from("gallery")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    alert("写真情報の読み込みに失敗しました：" + error.message);
+    return;
+  }
+
+  editingGalleryId = id;
+
+  if ($("gYear")) $("gYear").value = item.year ?? "";
+  if ($("gTitle")) $("gTitle").value = item.title ?? "";
+  if ($("gPhoto")) $("gPhoto").value = "";
+  if ($("gPublished")) $("gPublished").value = item.published ? "true" : "false";
+  if ($("gPhotoType")) $("gPhotoType").value = item.photo_type || "gallery";
+
+  if (saveGalleryBtn) saveGalleryBtn.textContent = "変更を保存";
+
+  $("gYear")?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  return;
+}
   const btn = event.target.closest("[data-gallery-delete]");
   if (!btn) return;
 
@@ -991,12 +1022,14 @@ if (resultFilterButtons) {
 }
   const saveGalleryBtn = $("saveGalleryBtn");
 const clearGalleryBtn = $("clearGalleryBtn");
-
+let editingGalleryId = null;
 function clearGalleryForm(){
   if ($("gTitle")) $("gTitle").value = "";
   if ($("gPhoto")) $("gPhoto").value = "";
   if ($("gPublished")) $("gPublished").value = "true";
   if ($("gPhotoType")) $("gPhotoType").value = "gallery";
+  editingGalleryId = null;
+if (saveGalleryBtn) saveGalleryBtn.textContent = "写真を登録";
 }
 
 if(saveGalleryBtn) {
@@ -1008,7 +1041,7 @@ if(saveGalleryBtn) {
       const published = $("gPublished")?.value === "true";
       const photoType = $("gPhotoType")?.value || "gallery";
       
-      if (!year || !title || !file) {
+      if (!year || !title || (!editingGalleryId && !file)) {
         show("galleryError", "年度・タイトル・写真を入力してください。");
         return;
       }
@@ -1019,22 +1052,49 @@ if(saveGalleryBtn) {
       saveGalleryBtn.disabled = true;
       saveGalleryBtn.textContent = "登録中...";
 
-      const photoUrl = await uploadPhoto(file, "gallery");
+      let error = null;
 
-      const { error } = await sb
-        .from("gallery")
-        .insert({
-          year: Number(year),
-          title: title,
-          photo_url: photoUrl,
-          published: published,
-          photo_type: photoType
-          
-        });
+if (editingGalleryId) {
+  const updateData = {
+    year: Number(year),
+    title: title,
+    published: published,
+    photo_type: photoType
+  };
+
+  if (file) {
+    updateData.photo_url = await uploadPhoto(file, "gallery");
+  }
+
+  const result = await sb
+    .from("gallery")
+    .update(updateData)
+    .eq("id", editingGalleryId);
+
+  error = result.error;
+
+} else {
+  const photoUrl = await uploadPhoto(file, "gallery");
+
+  const result = await sb
+    .from("gallery")
+    .insert({
+      year: Number(year),
+      title: title,
+      photo_url: photoUrl,
+      published: published,
+      photo_type: photoType
+    });
+
+  error = result.error;
+}
 
       if (error) throw error;
 
-      show("galleryOk", "写真を登録しました ✅");
+     show(
+  "galleryOk",
+  editingGalleryId ? "写真情報を更新しました ✅" : "写真を登録しました ✅"
+);
       clearGalleryForm();
 
     } catch (error) {
