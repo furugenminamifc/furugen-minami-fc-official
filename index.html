@@ -231,7 +231,22 @@
   const name = document.createElement("div");
   name.textContent = item.name;
   card.appendChild(name);
+if (item.instagram_url) {
+  const instagram = document.createElement("span");
+  instagram.textContent = "Instagram";
+  instagram.style.fontSize = "12px";
+  instagram.style.color = "#E1306C";
+  instagram.style.textDecoration = "underline";
+  instagram.style.cursor = "pointer";
 
+  instagram.onclick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open(item.instagram_url, "_blank", "noopener,noreferrer");
+  };
+
+  card.appendChild(instagram);
+}
   list.appendChild(card);
 });
 
