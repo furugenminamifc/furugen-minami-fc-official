@@ -187,7 +187,7 @@
 
     const { data, error } = await sbSupporters
       .from("site_supporters")
-      .select("id,name,sort_order,is_active")
+      .select("id,name,sort_order,is_active,website_url,instagram_url,logo_url")
       .eq("is_active", true)
       .order("sort_order", { ascending: true });
 
@@ -195,20 +195,45 @@
 
     list.innerHTML = "";
 
-    (data || []).forEach(item => {
-      const card = document.createElement("div");
+   (data || []).forEach(item => {
+  const card = document.createElement(item.website_url ? "a" : "div");
 
-      card.style.background = "#fff";
-      card.style.border = "1px solid #e4e7eb";
-      card.style.borderRadius = "12px";
-      card.style.padding = "16px";
-      card.style.textAlign = "center";
-      card.style.fontWeight = "700";
+  card.style.background = "#fff";
+  card.style.border = "1px solid #e4e7eb";
+  card.style.borderRadius = "12px";
+  card.style.padding = "16px";
+  card.style.textAlign = "center";
+  card.style.fontWeight = "700";
+  card.style.color = "inherit";
+  card.style.textDecoration = "none";
+  card.style.display = "flex";
+  card.style.flexDirection = "column";
+  card.style.alignItems = "center";
+  card.style.justifyContent = "center";
+  card.style.gap = "10px";
 
-      card.textContent = item.name;
+  if (item.website_url) {
+    card.href = item.website_url;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+  }
 
-      list.appendChild(card);
-    });
+  if (item.logo_url) {
+    const img = document.createElement("img");
+    img.src = item.logo_url;
+    img.alt = item.name + " ロゴ";
+    img.style.maxWidth = "140px";
+    img.style.maxHeight = "80px";
+    img.style.objectFit = "contain";
+    card.appendChild(img);
+  }
+
+  const name = document.createElement("div");
+  name.textContent = item.name;
+  card.appendChild(name);
+
+  list.appendChild(card);
+});
 
     if (!data || data.length === 0) {
       list.innerHTML = '<p class="muted">現在、応援団情報を準備中です。</p>';
