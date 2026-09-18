@@ -1562,7 +1562,6 @@ bottom: 6px !important;
   color:#666;
   line-height:1.6;
 }
-/* ギャラリー：空のTEAM PHOTO枠を非表示 */
-.empty-gallery:empty {
+#teamPhoto5 {
   display: none;
 }
