@@ -1562,6 +1562,6 @@ bottom: 6px !important;
   color:#666;
   line-height:1.6;
 }
-#teamPhoto5 {
+figure:has(#teamPhoto5) {
   display: none;
 }
