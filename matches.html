@@ -83,15 +83,32 @@ today.setHours(0, 0, 0, 0);
 
 const pastMatches = data
   .filter(m => new Date(m.match_date) < today)
-  .sort((a, b) => new Date(b.match_date) - new Date(a.match_date))
+  .sort((a, b) => {
+    const dateA = new Date(`${a.match_date}T${a.kickoff_time || "00:00"}`);
+    const dateB = new Date(`${b.match_date}T${b.kickoff_time || "00:00"}`);
+
+    if (dateB.getTime() !== dateA.getTime()) {
+      return dateB - dateA;
+    }
+
+    return dateA - dateB;
+  })
   .slice(0, 3);
 
 const futureMatches = data
   .filter(m => new Date(m.match_date) >= today)
-  .sort((a, b) => new Date(a.match_date) - new Date(b.match_date));
+  .sort((a, b) => {
+    const dateA = new Date(`${a.match_date}T${a.kickoff_time || "00:00"}`);
+    const dateB = new Date(`${b.match_date}T${b.kickoff_time || "00:00"}`);
 
-const displayMatches = [...pastMatches.reverse(), ...futureMatches];
+    if (dateB.getTime() !== dateA.getTime()) {
+      return dateB - dateA;
+    }
 
+    return dateA - dateB;
+  });
+
+const displayMatches = [...futureMatches, ...pastMatches];
 function renderByCategory(category) {
   const filtered = category === "all"
     ? displayMatches
